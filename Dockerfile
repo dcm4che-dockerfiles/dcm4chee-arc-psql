@@ -20,7 +20,7 @@ RUN cd $JBOSS_HOME \
     && tar xf dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151209.205115-1.tar.gz \
     && rm *.tar.gz \
     && cd standalone/deployments \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/5.0.1-SNAPSHOT/dcm4chee-arc-ear-5.0.1-20151209.225111-1-psql.ear
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/5.0.1-SNAPSHOT/dcm4chee-arc-ear-5.0.1-20151210.004245-3-psql.ear
 
  # Expose the ports we're interested in
 EXPOSE 11112 2575
