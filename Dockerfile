@@ -32,4 +32,4 @@ EXPOSE 11112 2575
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
-CMD ["/opt/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-c", "dcm4chee-arc.xml"]
+CMD ["/opt/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml"]
