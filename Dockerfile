@@ -1,5 +1,10 @@
 FROM dcm4che/wildfly
 
+ENV DCM4CHE_JBOSS_MODULES_TAR_GZ=dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151211.055107-2.tar.gz \
+    DCM4CHE_VERSION=5.0.1-dcm4chee-arc-light-SNAPSHOT \
+    DCM4CHEE_ARC_VERSION=5.0.1-SNAPSHOT \
+    DCM4CHEE_ARC_EAR=dcm4chee-arc-ear-5.0.1-20151210.004245-3-psql.ear
+
 RUN cd $JBOSS_HOME \
     && curl -O http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz \
     && curl -O http://www.dcm4che.org/maven2/org/dcm4che/querydsl-jboss-modules/4.0.3-noguava/querydsl-jboss-modules-4.0.3-noguava.tar.gz \
@@ -16,11 +21,11 @@ RUN cd $JBOSS_HOME \
 COPY configuration $JBOSS_HOME/standalone/configuration
 
 RUN cd $JBOSS_HOME \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/5.0.1-dcm4chee-arc-light-SNAPSHOT/dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151209.205115-1.tar.gz \
-    && tar xf dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151209.205115-1.tar.gz \
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/$DCM4CHE_JBOSS_MODULES_TAR_GZ \
+    && tar xf $DCM4CHE_JBOSS_MODULES_TAR_GZ \
     && rm *.tar.gz \
     && cd standalone/deployments \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/5.0.1-SNAPSHOT/dcm4chee-arc-ear-5.0.1-20151210.004245-3-psql.ear
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/$DCM4CHEE_ARC_VERSION/$DCM4CHEE_ARC_EAR
 
  # Expose the ports we're interested in
 EXPOSE 11112 2575

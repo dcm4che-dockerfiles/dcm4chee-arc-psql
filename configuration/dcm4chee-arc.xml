@@ -87,12 +87,6 @@
 
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:3.0">
-            <console-handler name="CONSOLE">
-                <level name="INFO"/>
-                <formatter>
-                    <named-formatter name="COLOR-PATTERN"/>
-                </formatter>
-            </console-handler>
             <periodic-rotating-file-handler name="FILE" autoflush="true">
                 <formatter>
                     <named-formatter name="PATTERN"/>
@@ -122,7 +116,6 @@
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
-                    <handler name="CONSOLE"/>
                     <handler name="FILE"/>
                 </handlers>
             </root-logger>
@@ -154,11 +147,11 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" enabled="true">
-                    <connection-url>jdbc:postgresql://pacsdb:5432/pacsdb</connection-url>
+                    <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <security>
-                        <user-name>pacs</user-name>
-                        <password>pacs</password>
+                        <user-name>${env.DB_ENV_POSTGRES_USER}</user-name>
+                        <password>${env.DB_ENV_POSTGRES_PASSWORD}</password>
                     </security>
                 </datasource>
                 <drivers>
