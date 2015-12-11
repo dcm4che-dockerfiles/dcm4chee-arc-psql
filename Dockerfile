@@ -1,6 +1,6 @@
 FROM dcm4che/wildfly
 
-ENV DCM4CHE_JBOSS_MODULES_TAR_GZ=dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151211.055107-2.tar.gz \
+ENV DCM4CHE_JBOSS_MODULES_TAR_GZ=dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151211.093437-3.tar.gz \
     DCM4CHE_VERSION=5.0.1-dcm4chee-arc-light-SNAPSHOT \
     DCM4CHEE_ARC_VERSION=5.0.1-SNAPSHOT \
     DCM4CHEE_ARC_EAR=dcm4chee-arc-ear-5.0.1-20151210.004245-3-psql.ear
