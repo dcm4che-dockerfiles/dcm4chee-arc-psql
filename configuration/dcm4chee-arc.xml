@@ -32,6 +32,8 @@
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
         <extension module="org.wildfly.iiop-openjdk"/>
+        <extension module="org.keycloak.keycloak-server-subsystem"/>
+        <extension module="org.keycloak.keycloak-adapter-subsystem"/>
     </extensions>
 
     <system-properties>
@@ -149,8 +151,16 @@
                         <password>sa</password>
                     </security>
                 </datasource>
+                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE</connection-url>
+                    <driver>h2</driver>
+                    <security>
+                        <user-name>sa</user-name>
+                        <password>sa</password>
+                    </security>
+                </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" enabled="true">
-                    <connection-url>jdbc:postgresql://${env.DB_PORT_5432_TCP_ADDR}:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
+                    <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <security>
                         <user-name>${env.DB_ENV_POSTGRES_USER}</user-name>
@@ -271,6 +281,12 @@
                     <expiration max-idle="100000"/>
                 </local-cache>
                 <local-cache name="timestamps"/>
+            </cache-container>
+            <cache-container name="keycloak" jndi-name="infinispan/Keycloak">
+                <local-cache name="realms"/>
+                <local-cache name="users"/>
+                <local-cache name="sessions"/>
+                <local-cache name="loginFailures"/>
             </cache-container>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:iiop-openjdk:1.0">
@@ -450,6 +466,11 @@
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
                 </security-domain>
+                <security-domain name="keycloak">
+                    <authentication>
+                        <login-module code="org.keycloak.adapters.jboss.KeycloakLoginModule" flag="required"/>
+                    </authentication>
+                </security-domain>
             </security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:transactions:3.0">
@@ -493,6 +514,27 @@
             <client-config name="Standard-Client-Config"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:2.0"/>
+        <subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">
+            <web-context>auth</web-context>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
+            <secure-deployment name="dcm4chee-arc-ui-5.0.1-SNAPSHOT-secure.war">
+                <realm>dcm4che</realm>
+                <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi7pTdyuxp8xOPOGdV3sUEiseETHhqhCDpdBNUMkRueaxsMe6MzbV+uOOgR/MAaNFDln5RCdC5W5yvLMlo1kmXGrA5YbXc3KMKRyaxb3YRyIJ5faTRWYkKHDDi0XmaG32rdX/kpj1p3KMb3HwAupnYJ4Z9BeL97qczdDTbC3jZLa5dekSX7uu8fMEwmlhqONTlT62+QYWro9i4HxNkN/LwxFVL76xLINk6E0ZsJNevNaCTyFrM+KiujRSzC2UV+oEi9j40k1aZLBMz75jYAjEhr7GmQiUhZfriv3WKV9wgSKJVelsOJYwemfk0j0DWMTQ6OZ9k97oQR42k8SixFbeVQIDAQAB</realm-public-key>
+                <auth-server-url>/auth</auth-server-url>
+                <ssl-required>EXTERNAL</ssl-required>
+                <resource>dcm4chee-arc-ui</resource>
+                <credential name="secret">91ad9161-5073-4406-93cb-9c0247f69ade</credential>
+            </secure-deployment>
+            <secure-deployment name="dcm4chee-arc-war-5.0.1-SNAPSHOT-secure.war">
+                <realm>dcm4che</realm>
+                <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi7pTdyuxp8xOPOGdV3sUEiseETHhqhCDpdBNUMkRueaxsMe6MzbV+uOOgR/MAaNFDln5RCdC5W5yvLMlo1kmXGrA5YbXc3KMKRyaxb3YRyIJ5faTRWYkKHDDi0XmaG32rdX/kpj1p3KMb3HwAupnYJ4Z9BeL97qczdDTbC3jZLa5dekSX7uu8fMEwmlhqONTlT62+QYWro9i4HxNkN/LwxFVL76xLINk6E0ZsJNevNaCTyFrM+KiujRSzC2UV+oEi9j40k1aZLBMz75jYAjEhr7GmQiUhZfriv3WKV9wgSKJVelsOJYwemfk0j0DWMTQ6OZ9k97oQR42k8SixFbeVQIDAQAB</realm-public-key>
+                <auth-server-url>/auth</auth-server-url>
+                <ssl-required>EXTERNAL</ssl-required>
+                <resource>dcm4chee-arc-rs</resource>
+                <credential name="secret">132a5b23-51e2-439d-8bea-b6e0e099b938</credential>
+            </secure-deployment>
+        </subsystem>
     </profile>
 
     <interfaces>
