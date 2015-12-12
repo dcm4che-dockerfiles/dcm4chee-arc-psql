@@ -3,7 +3,7 @@ FROM dcm4che/wildfly
 ENV DCM4CHE_JBOSS_MODULES_TAR_GZ=dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151211.093437-3.tar.gz \
     DCM4CHE_VERSION=5.0.1-dcm4chee-arc-light-SNAPSHOT \
     DCM4CHEE_ARC_VERSION=5.0.1-SNAPSHOT \
-    DCM4CHEE_ARC_EAR=dcm4chee-arc-ear-5.0.1-20151212.181353-5-psql-secure.ear
+    DCM4CHEE_ARC_EAR=dcm4chee-arc-ear-5.0.1-20151211.201423-4-psql-secure-ui.ear
 
 RUN cd $JBOSS_HOME \
     && curl -O http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz \
