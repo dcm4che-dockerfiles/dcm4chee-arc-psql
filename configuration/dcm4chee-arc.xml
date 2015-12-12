@@ -150,7 +150,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" enabled="true">
-                    <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
+                    <connection-url>jdbc:postgresql://${env.DB_PORT_5432_TCP_ADDR}:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <security>
                         <user-name>${env.DB_ENV_POSTGRES_USER}</user-name>
