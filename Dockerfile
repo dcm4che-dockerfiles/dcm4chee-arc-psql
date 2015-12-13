@@ -1,26 +1,18 @@
-FROM dcm4che/wildfly
+FROM dcm4che/wildfly:9.0.2
 
-ENV DCM4CHE_JBOSS_MODULES_TAR_GZ=dcm4che-jboss-modules-5.0.1-dcm4chee-arc-light-20151211.093437-3.tar.gz \
-    DCM4CHE_VERSION=5.0.1-dcm4chee-arc-light-SNAPSHOT \
-    DCM4CHEE_ARC_VERSION=5.0.1-SNAPSHOT \
-    DCM4CHEE_ARC_EAR=dcm4chee-arc-ear-5.0.1-20151210.004245-3-psql.ear
+ENV DCM4CHEE_ARC_VERSION 5.0.1.Alpha1
+ENV DCM4CHE_VERSION dcm4chee-arc-light-${DCM4CHEE_ARC_VERSION}
 
 RUN cd $JBOSS_HOME \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/querydsl-jboss-modules/4.0.3-noguava/querydsl-jboss-modules-4.0.3-noguava.tar.gz \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/1.9.1-noguava/jclouds-jboss-modules-1.9.1-noguava.tar.gz \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/$DCM4CHE_JBOSS_MODULES_TAR_GZ \
-    && tar xf jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz \
-    && tar xf querydsl-jboss-modules-4.0.3-noguava.tar.gz \
-    && tar xf jclouds-jboss-modules-1.9.1-noguava.tar.gz \
-    && tar xf jdbc-jboss-modules-1.0.0-psql.tar.gz \
-    && tar xf $DCM4CHE_JBOSS_MODULES_TAR_GZ \
-    && rm *.tar.gz \
+    && curl http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
+    && curl http://www.dcm4che.org/maven2/org/dcm4che/querydsl-jboss-modules/4.0.3-noguava/querydsl-jboss-modules-4.0.3-noguava.tar.gz | tar xz \
+    && curl http://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/1.9.1-noguava/jclouds-jboss-modules-1.9.1-noguava.tar.gz | tar xz \
+    && curl http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
+    && curl http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
     && curl -O https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
     && cd $JBOSS_HOME/standalone/deployments \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/$DCM4CHEE_ARC_VERSION/$DCM4CHEE_ARC_EAR
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear
 
 COPY configuration $JBOSS_HOME/standalone/configuration
 
