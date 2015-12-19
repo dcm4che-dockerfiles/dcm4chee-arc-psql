@@ -111,8 +111,8 @@ and starting them by
 
 ## Web Service URLs
 
-- Archive UI: [http://localhost:8080/dcm4chee-arc/ui]() - if secured, login with Username: `user`, Password: `user`.
-- Keycloak Administration Console: [http://localhost:8080/auth](), login with Username: `admin`, Password: `admin`.
-- Wildfly Administration Console: [http://localhost:9990](), login with Username: `admin`, Password: `admin`.
-- DICOM WADO-URI: [http://localhost:8080/dcm4chee-arc/aets/MYPACS/wado]()
-- DICOM QIDO-RS Base URL: [http://localhost:8080/dcm4chee-arc/aets/MYPACS/rs]()
+- Archive UI: <http://localhost:8080/dcm4chee-arc/ui> - if secured, login with Username: `user`, Password: `user`.
+- Keycloak Administration Console: <http://localhost:8080/auth>, login with Username: `admin`, Password: `admin`.
+- Wildfly Administration Console: <http://localhost:9990>, login with Username: `admin`, Password: `admin`.
+- DICOM WADO-URI: <http://localhost:8080/dcm4chee-arc/aets/MYPACS/wado>
+- DICOM QIDO-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/MYPACS/rs>
