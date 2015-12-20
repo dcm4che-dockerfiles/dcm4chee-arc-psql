@@ -1,4 +1,4 @@
-# dcm4chee-arc-psql Docker image
+### dcm4chee-arc-psql Docker image
 
 This is a Dockerfile with the DICOM Archive [dcm4chee-arc-light](https://github.com/dcm4che/dcm4chee-arc-light/wiki)
 for use with Postgres SQL as database. Beside Postgres SQL - provided by Docker image
@@ -11,7 +11,7 @@ You may choose between
 - a version with secured UI and secured RESTful services (Tag Name: `5.0.1-secure`) and
 - a version with secured UI, but not secured RESTful services (Tag Name: `5.0.1-secure-ui`).
 
-## Usage
+#### Usage
 
 Before starting the Archive container, you have to start a container providing the LDAP server, e.g:
 
@@ -31,7 +31,7 @@ Before starting the Archive container, you have to start a container providing t
                -v ./slapd.d:/etc/ldap/slapd.d \
                -d dcm4che/slapd-dcm4chee:5.0.1
 
-and another containing proving the database:
+and another container providing the database:
 
     docker run --name db \
                -p 15432:5432 \
@@ -109,7 +109,7 @@ and starting them by
 
     docker-composite up
 
-## Web Service URLs
+#### Web Service URLs
 
 - Archive UI: <http://localhost:8080/dcm4chee-arc/ui> - if secured, login with Username: `user`, Password: `user`.
 - Keycloak Administration Console: <http://localhost:8080/auth>, login with Username: `admin`, Password: `admin`.
