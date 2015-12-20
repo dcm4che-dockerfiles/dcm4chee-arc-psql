@@ -26,9 +26,9 @@ Before starting the Archive container, you have to start a container providing t
                -e DICOM_HOST=localhost \
                -e DICOM_PORT=11112 \
                -e HL7_PORT=2575 \
-               -e STORAGE_DIR=/var/lib/mypacs \
-               -v ./ldap:/var/lib/ldap \
-               -v ./slapd.d:/etc/ldap/slapd.d \
+               -e STORAGE_DIR=/var/local/mypacs/storage \
+               -v /var/local/mypacs/ldap:/var/lib/ldap \
+               -v /var/local/mypacs/slapd.d:/etc/ldap/slapd.d \
                -d dcm4che/slapd-dcm4chee:5.0.1
 
 and another container providing the database:
@@ -38,7 +38,7 @@ and another container providing the database:
                -e POSTGRES_DB=pacsdb \
                -e POSTGRES_USER=pacs \
                -e POSTGRES_PASSWORD=pacsword \
-               -v ./db:/var/lib/postgresql/data \
+               -v /var/local/mypacs/db:/var/lib/postgresql/data \
                -d dcm4che/postgres-dcm4chee:5.0.1
 
 After that you can start the archive container, linked with the `ldap` and the `db` container:
@@ -48,8 +48,8 @@ After that you can start the archive container, linked with the `ldap` and the `
                -p 9990:9990 \
                -p 11112:11112 \
                -p 2575:2575 \
-               -v ./storage:/var/lib/mypacs \
-               -v ./log:/opt/wildfly/standalone/log \
+               -v /var/local/mypacs/storage:/var/local/mypacs/storage \
+               -v /var/local/mypacs/log:/opt/wildfly/standalone/log \
                -v /tmp:/opt/wildfly/standalone/tmp \
                --link ldap:ldap \
                --link db:db \
@@ -75,10 +75,10 @@ ldap:
     DICOM_HOST: localhost
     DICOM_PORT: 11112
     HL7_PORT: 2575
-    STORAGE_DIR: /var/lib/mypacs
+    STORAGE_DIR: /var/local/mypacs/storage
   volumes:
-    - ./ldap:/var/lib/ldap
-    - ./slapd.d:/etc/ldap/slapd.d
+    - /var/local/mypacs/ldap:/var/lib/ldap
+    - /var/local/mypacs/slapd.d:/etc/ldap/slapd.d
 db:
   image: dcm4che/postgres-dcm4chee:5.0.1
   ports:
@@ -88,7 +88,7 @@ db:
     POSTGRES_USER: pacs
     POSTGRES_PASSWORD: pacsword
   volumes:
-    - ./db:/var/lib/postgresql/data
+    - /var/local/mypacs/db:/var/lib/postgresql/data
 mypacs:
   image: dcm4che/dcm4chee-arc-psql:5.0.1-secure-ui
   ports:
@@ -100,8 +100,8 @@ mypacs:
     - ldap:ldap
     - db:db
   volumes:
-    - ./storage:/var/lib/mypacs
-    - ./log:/opt/wildfly/standalone/log
+    - /var/local/mypacs/storage:/var/local/mypacs/storage
+    - /var/local/mypacs/log:/opt/wildfly/standalone/log
     - /tmp:/opt/wildfly/standalone/tmp
 ````
 
