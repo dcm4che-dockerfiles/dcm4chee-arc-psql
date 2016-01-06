@@ -107,7 +107,7 @@ mypacs:
 
 and starting them by
 
-    docker-composite up
+    docker-compose up
 
 #### Web Service URLs
 
