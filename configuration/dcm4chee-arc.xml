@@ -118,6 +118,27 @@
             <logger category="jacorb.config">
                 <level name="ERROR"/>
             </logger>
+            <logger category="org.hibernate.SQL">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.hibernate.type">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4chee.arc">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.net.Association">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.net.Dimse">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.net.Timeout">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.net.imageio">
+                <level name="INFO"/>
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
@@ -143,25 +164,12 @@
         <subsystem xmlns="urn:jboss:domain:bean-validation:1.0"/>
         <subsystem xmlns="urn:jboss:domain:datasources:3.0">
             <datasources>
-                <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
-                    </security>
-                </datasource>
-                <datasource jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
-                    </security>
-                </datasource>
-                <datasource jndi-name="java:/PacsDS" pool-name="pacsds" enabled="true">
+                <datasource jndi-name="java:/PacsDS" pool-name="pacsds" enabled="true" statistics-enabled="true">
                     <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
+                    <pool>
+                        <max-pool-size>50</max-pool-size>
+                    </pool>
                     <security>
                         <user-name>${env.DB_ENV_POSTGRES_USER}</user-name>
                         <password>${env.DB_ENV_POSTGRES_PASSWORD}</password>
@@ -188,7 +196,7 @@
                     <managed-thread-factory name="default" jndi-name="java:jboss/ee/concurrency/factory/default" context-service="default"/>
                 </managed-thread-factories>
                 <managed-executor-services>
-                    <managed-executor-service name="default" jndi-name="java:jboss/ee/concurrency/executor/default" context-service="default" hung-task-threshold="60000" core-threads="5" max-threads="25" keepalive-time="5000"/>
+                    <managed-executor-service name="default" jndi-name="java:jboss/ee/concurrency/executor/default" context-service="default" hung-task-threshold="60000" core-threads="5" max-threads="100" keepalive-time="5000"/>
                 </managed-executor-services>
                 <managed-scheduled-executor-services>
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" hung-task-threshold="60000" core-threads="2" keepalive-time="3000"/>
