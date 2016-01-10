@@ -65,7 +65,7 @@ starting and linking the 3 containers, by defining the services in
 (e.g.):
 
 ````yaml
-sldap:
+slapd:
   image: dcm4che/slapd-dcm4chee:5.0.1
   ports:
     - "389:389"
