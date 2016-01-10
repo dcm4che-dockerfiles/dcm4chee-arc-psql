@@ -124,9 +124,6 @@
             <logger category="org.hibernate.type">
                 <level name="INFO"/>
             </logger>
-            <logger category="org.dcm4chee.arc">
-                <level name="INFO"/>
-            </logger>
             <logger category="org.dcm4che3.net.Association">
                 <level name="INFO"/>
             </logger>
@@ -137,6 +134,9 @@
                 <level name="INFO"/>
             </logger>
             <logger category="org.dcm4che3.net.imageio">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4chee.arc">
                 <level name="INFO"/>
             </logger>
             <root-logger>
