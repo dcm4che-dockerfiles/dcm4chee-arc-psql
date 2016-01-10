@@ -14,46 +14,50 @@ You may choose between
 #### Usage
 
 Before starting the Archive container, you have to start a container providing the LDAP server, e.g:
-
-    docker run --name ldap \
-               -p 1389:389 \
-               -e LDAP_BASE_DN=dc=mycorp,dc=com \
-               -e LDAP_ORGANISATION="My Mega Corporation" \
-               -e LDAP_ROOTPASS=mysecret \
-               -e LDAP_CONFIGPASS=myconfigsecret \
-               -e DEVICE_NAME=my-pacs \
-               -e AE_TITLE=MYPACS \
-               -e DICOM_HOST=localhost \
-               -e DICOM_PORT=11112 \
-               -e HL7_PORT=2575 \
-               -e STORAGE_DIR=/var/local/mypacs/storage \
-               -v /var/local/mypacs/ldap:/var/lib/ldap \
-               -v /var/local/mypacs/slapd.d:/etc/ldap/slapd.d \
-               -d dcm4che/slapd-dcm4chee:5.0.1
+```bash
+> $docker run --name slapd \
+           -p 389:389 \
+           -e LDAP_BASE_DN=dc=dcm4che,dc=org \
+           -e LDAP_ORGANISATION=dcm4che.org \
+           -e LDAP_ROOTPASS=secret \
+           -e LDAP_CONFIGPASS=secret \
+           -e DEVICE_NAME=dcm4chee-arc \
+           -e AE_TITLE=DCM4CHEE \
+           -e DICOM_HOST=dockerhost \
+           -e DICOM_PORT=11112 \
+           -e HL7_PORT=2575 \
+           -e STORAGE_DIR=/storage/fs1 \
+           -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
+           -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
+           -d dcm4che/slapd-dcm4chee:5.0.1
+````
 
 and another container providing the database:
+```bash
+> $docker run --name postgres \
+           -p 5432:5432 \
+           -e POSTGRES_DB=pacsdb \
+           -e POSTGRES_USER=pacs \
+           -e POSTGRES_PASSWORD=pacs \
+           -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
+           -d dcm4che/postgres-dcm4chee:5.0.1
+````
 
-    docker run --name db \
-               -p 15432:5432 \
-               -e POSTGRES_DB=pacsdb \
-               -e POSTGRES_USER=pacs \
-               -e POSTGRES_PASSWORD=pacsword \
-               -v /var/local/mypacs/db:/var/lib/postgresql/data \
-               -d dcm4che/postgres-dcm4chee:5.0.1
-
-After that you can start the archive container, linked with the `ldap` and the `db` container:
-
-    docker run --name mypacs \
-               -p 8080:8080 \
-               -p 9990:9990 \
-               -p 11112:11112 \
-               -p 2575:2575 \
-               -v /var/local/mypacs/storage:/var/local/mypacs/storage \
-               -v /var/local/mypacs/log:/opt/wildfly/standalone/log \
-               -v /tmp:/opt/wildfly/standalone/tmp \
-               --link ldap:ldap \
-               --link db:db \
-               -d dcm4che/dcm4chee-arc-psql:5.0.1-secure-ui
+After that you can start the archive container, linked with the _OpenLDAP_ (alias:`ldap`) and
+the _PostgreSQL_ (alias:`db`) container::
+```bash
+> $docker run --name dcm4chee-arc \
+           -p 8080:8080 \
+           -p 9990:9990 \
+           -p 11112:11112 \
+           -p 2575:2575 \
+           -v /var/local/dcm4chee-arc/storage:/storage \
+           -v /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log \
+           -v /tmp:/opt/wildfly/standalone/tmp \
+           --link slapd:ldap \
+           --link postgres:db \
+           -d dcm4che/dcm4chee-arc-psql:5.0.1-secure-ui
+```
 
 Alternatively you may use [Docker Composite](https://docs.docker.com/compose/) to take care for
 starting and linking the 3 containers, by defining the services in
@@ -61,35 +65,35 @@ starting and linking the 3 containers, by defining the services in
 (e.g.):
 
 ````yaml
-ldap:
+sldap:
   image: dcm4che/slapd-dcm4chee:5.0.1
   ports:
-    - "1389:389"
+    - "389:389"
   environment:
-    LDAP_BASE_DN: dc=mycorp,dc=com
-    LDAP_ORGANISATION: My Mega Corporation
-    LDAP_ROOTPASS: mysecret
-    LDAP_CONFIGPASS: myconfigsecret
-    DEVICE_NAME: my-pacs
-    AE_TITLE: MYPACS
-    DICOM_HOST: localhost
+    LDAP_BASE_DN: dc=dcm4che,dc=org
+    LDAP_ORGANISATION: dcm4che.org
+    LDAP_ROOTPASS: secret
+    LDAP_CONFIGPASS: secret
+    DEVICE_NAME: dcm4chee-arc
+    AE_TITLE: DCM4CHEE
+    DICOM_HOST: dockerhost
     DICOM_PORT: 11112
     HL7_PORT: 2575
-    STORAGE_DIR: /var/local/mypacs/storage
+    STORAGE_DIR: /storage/fs1
   volumes:
-    - /var/local/mypacs/ldap:/var/lib/ldap
-    - /var/local/mypacs/slapd.d:/etc/ldap/slapd.d
-db:
+    - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
+    - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
+postgres:
   image: dcm4che/postgres-dcm4chee:5.0.1
   ports:
-    - "15432:5432"
+    - "5432:5432"
   environment:
     POSTGRES_DB: pacsdb
     POSTGRES_USER: pacs
-    POSTGRES_PASSWORD: pacsword
+    POSTGRES_PASSWORD: pacs
   volumes:
-    - /var/local/mypacs/db:/var/lib/postgresql/data
-mypacs:
+    - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+dcm4chee-arc:
   image: dcm4che/dcm4chee-arc-psql:5.0.1-secure-ui
   ports:
     - "8080:8080"
@@ -97,17 +101,18 @@ mypacs:
     - "11112:11112"
     - "2575:2575"
   links:
-    - ldap:ldap
-    - db:db
+    - slapd:ldap
+    - postgres:db
   volumes:
-    - /var/local/mypacs/storage:/var/local/mypacs/storage
-    - /var/local/mypacs/log:/opt/wildfly/standalone/log
+    - /var/local/dcm4chee-arc/storage:/storage
+    - /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log
     - /tmp:/opt/wildfly/standalone/tmp
 ````
 
 and starting them by
-
-    docker-compose up
+```bash
+> $docker-compose up -d
+````
 
 #### Web Service URLs
 

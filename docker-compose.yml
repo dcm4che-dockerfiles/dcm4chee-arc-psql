@@ -1,32 +1,32 @@
-ldap:
+sldap:
   image: dcm4che/slapd-dcm4chee:5.0.1
   ports:
-    - "1389:389"
+    - "389:389"
   environment:
-    LDAP_BASE_DN: dc=mycorp,dc=com
-    LDAP_ORGANISATION: My Mega Corporation
-    LDAP_ROOTPASS: mysecret
-    LDAP_CONFIGPASS: myconfigsecret
-    DEVICE_NAME: my-pacs
-    AE_TITLE: MYPACS
-    DICOM_HOST: localhost
+    LDAP_BASE_DN: dc=dcm4che,dc=org
+    LDAP_ORGANISATION: dcm4che.org
+    LDAP_ROOTPASS: secret
+    LDAP_CONFIGPASS: secret
+    DEVICE_NAME: dcm4chee-arc
+    AE_TITLE: DCM4CHEE
+    DICOM_HOST: dockerhost
     DICOM_PORT: 11112
     HL7_PORT: 2575
-    STORAGE_DIR: /var/local/mypacs/storage
+    STORAGE_DIR: /storage/fs1
   volumes:
-    - /var/local/mypacs/ldap:/var/lib/ldap
-    - /var/local/mypacs/slapd.d:/etc/ldap/slapd.d
-db:
+    - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
+    - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
+postgres:
   image: dcm4che/postgres-dcm4chee:5.0.1
   ports:
-    - "15432:5432"
+    - "5432:5432"
   environment:
     POSTGRES_DB: pacsdb
     POSTGRES_USER: pacs
-    POSTGRES_PASSWORD: pacsword
+    POSTGRES_PASSWORD: pacs
   volumes:
-    - /var/local/mypacs/db:/var/lib/postgresql/data
-mypacs:
+    - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+dcm4chee-arc:
   image: dcm4che/dcm4chee-arc-psql:5.0.1-secure-ui
   ports:
     - "8080:8080"
@@ -34,9 +34,9 @@ mypacs:
     - "11112:11112"
     - "2575:2575"
   links:
-    - ldap:ldap
-    - db:db
+    - slapd:ldap
+    - postgres:db
   volumes:
-    - /var/local/mypacs/storage:/var/local/mypacs/storage
-    - /var/local/mypacs/log:/opt/wildfly/standalone/log
+    - /var/local/dcm4chee-arc/storage:/storage
+    - /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log
     - /tmp:/opt/wildfly/standalone/tmp
