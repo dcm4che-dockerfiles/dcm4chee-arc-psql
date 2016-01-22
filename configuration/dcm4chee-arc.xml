@@ -542,7 +542,7 @@
             <web-context>auth</web-context>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui-5.0.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui-5.1.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi7pTdyuxp8xOPOGdV3sUEiseETHhqhCDpdBNUMkRueaxsMe6MzbV+uOOgR/MAaNFDln5RCdC5W5yvLMlo1kmXGrA5YbXc3KMKRyaxb3YRyIJ5faTRWYkKHDDi0XmaG32rdX/kpj1p3KMb3HwAupnYJ4Z9BeL97qczdDTbC3jZLa5dekSX7uu8fMEwmlhqONTlT62+QYWro9i4HxNkN/LwxFVL76xLINk6E0ZsJNevNaCTyFrM+KiujRSzC2UV+oEi9j40k1aZLBMz75jYAjEhr7GmQiUhZfriv3WKV9wgSKJVelsOJYwemfk0j0DWMTQ6OZ9k97oQR42k8SixFbeVQIDAQAB</realm-public-key>
                 <auth-server-url>/auth</auth-server-url>
@@ -550,7 +550,7 @@
                 <resource>dcm4chee-arc-ui</resource>
                 <credential name="secret">91ad9161-5073-4406-93cb-9c0247f69ade</credential>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.0.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.1.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAi7pTdyuxp8xOPOGdV3sUEiseETHhqhCDpdBNUMkRueaxsMe6MzbV+uOOgR/MAaNFDln5RCdC5W5yvLMlo1kmXGrA5YbXc3KMKRyaxb3YRyIJ5faTRWYkKHDDi0XmaG32rdX/kpj1p3KMb3HwAupnYJ4Z9BeL97qczdDTbC3jZLa5dekSX7uu8fMEwmlhqONTlT62+QYWro9i4HxNkN/LwxFVL76xLINk6E0ZsJNevNaCTyFrM+KiujRSzC2UV+oEi9j40k1aZLBMz75jYAjEhr7GmQiUhZfriv3WKV9wgSKJVelsOJYwemfk0j0DWMTQ6OZ9k97oQR42k8SixFbeVQIDAQAB</realm-public-key>
                 <auth-server-url>/auth</auth-server-url>
