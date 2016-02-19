@@ -9,9 +9,11 @@ slapd:
     LDAP_CONFIGPASS: secret
     DEVICE_NAME: dcm4chee-arc
     AE_TITLE: DCM4CHEE
-    DICOM_HOST: dockerhost
+    DICOM_HOST: archive-host
     DICOM_PORT: 11112
     HL7_PORT: 2575
+    SYSLOG_HOST: syslog-host
+    SYSLOG_PORT: 10514
     STORAGE_DIR: /storage/fs1
   volumes:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
@@ -27,7 +29,7 @@ postgres:
   volumes:
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.1.0-secure-ui
+  image: dcm4che/dcm4chee-arc-psql:5.1.0
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -39,3 +41,6 @@ dcm4chee-arc:
   volumes:
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
+  extra_hosts:
+   - "archive-host:192.168.2.159"
+   - "syslog-host:192.168.2.159"
