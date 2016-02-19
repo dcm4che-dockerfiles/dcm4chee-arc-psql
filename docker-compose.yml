@@ -12,7 +12,7 @@ slapd:
     DICOM_HOST: archive-host
     DICOM_PORT: 11112
     HL7_PORT: 2575
-    SYSLOG_HOST: syslog-host
+    SYSLOG_HOST: logstash
     SYSLOG_PORT: 10514
     STORAGE_DIR: /storage/fs1
   volumes:
@@ -28,8 +28,28 @@ postgres:
     POSTGRES_PASSWORD: pacs
   volumes:
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+elasticsearch:
+  image: elasticsearch:2.2
+  ports:
+    - "9200:9200"
+    - "9300:9300"
+  volumes:
+    - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
+kibana:
+  image: kibana:4.4
+  ports:
+    - "5601:5601"
+  links:
+    - elasticsearch:elasticsearch
+logstash:
+  image: dcm4che/logstash-dcm4chee:5.1.0
+  ports:
+    - "8000:8000"
+    - "10514:10514/udp"
+  links:
+    - elasticsearch:elasticsearch
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.1.0
+  image: dcm4che/dcm4chee-arc-psql:5.1.0-logstash-secure-ui
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -38,9 +58,9 @@ dcm4chee-arc:
   links:
     - slapd:ldap
     - postgres:db
+    - logstash:logstash
   volumes:
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
   extra_hosts:
    - "archive-host:192.168.2.159"
-   - "syslog-host:192.168.2.159"
