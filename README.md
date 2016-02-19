@@ -52,8 +52,7 @@ the _PostgreSQL_ (alias:`db`) container::
            -p 11112:11112 \
            -p 2575:2575 \
            -v /var/local/dcm4chee-arc/storage:/storage \
-           -v /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log \
-           -v /tmp:/opt/wildfly/standalone/tmp \
+           -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
            --link slapd:ldap \
            --link postgres:db \
            -d dcm4che/dcm4chee-arc-psql:5.1.0-secure-ui
@@ -105,8 +104,7 @@ dcm4chee-arc:
     - postgres:db
   volumes:
     - /var/local/dcm4chee-arc/storage:/storage
-    - /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log
-    - /tmp:/opt/wildfly/standalone/tmp
+    - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
 ````
 
 and starting them by

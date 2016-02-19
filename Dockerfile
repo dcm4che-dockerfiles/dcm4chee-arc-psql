@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:9.0.2
+FROM dcm4che/wildfly:9.0.2-Final
 
 ENV DCM4CHEE_ARC_VERSION 5.1.0
 ENV DCM4CHE_VERSION dcm4chee-arc-light-${DCM4CHEE_ARC_VERSION}
@@ -11,11 +11,10 @@ RUN cd $JBOSS_HOME \
     && curl http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
     && curl -O https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
-    && cd $JBOSS_HOME/standalone/deployments \
+    && mkdir -p /tmp/standalone/deployments \
+    && cd /tmp/standalone/deployments \
     && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear
 
-COPY configuration $JBOSS_HOME/standalone/configuration
+COPY configuration /tmp/standalone/configuration
 
- # Set the default command to run on boot
- # This will boot WildFly in the standalone mode and bind to all interface
-CMD ["/opt/wildfly/bin/standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml"]
+CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml"]

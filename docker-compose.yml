@@ -38,5 +38,4 @@ dcm4chee-arc:
     - postgres:db
   volumes:
     - /var/local/dcm4chee-arc/storage:/storage
-    - /var/local/dcm4chee-arc/log:/opt/wildfly/standalone/log
-    - /tmp:/opt/wildfly/standalone/tmp
+    - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
