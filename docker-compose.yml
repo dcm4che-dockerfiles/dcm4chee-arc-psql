@@ -13,7 +13,7 @@ slapd:
     DICOM_PORT: 11112
     HL7_PORT: 2575
     SYSLOG_HOST: logstash
-    SYSLOG_PORT: 10514
+    SYSLOG_PORT: 8514
     STORAGE_DIR: /storage/fs1
   volumes:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
@@ -45,11 +45,13 @@ logstash:
   image: dcm4che/logstash-dcm4chee:5.1.0
   ports:
     - "8000:8000"
-    - "10514:10514/udp"
+    - "8514:8514/udp"
   links:
     - elasticsearch:elasticsearch
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.1.0-logstash-secure-ui
+  image: dcm4che/dcm4chee-arc-psql:5.1.0-logstash
+  environment:
+    CHOWN_WILDFLY: /storage
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -63,4 +65,4 @@ dcm4chee-arc:
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
   extra_hosts:
-   - "archive-host:192.168.2.159"
+   - "archive-host:192.168.0.17"
