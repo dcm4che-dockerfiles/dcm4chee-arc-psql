@@ -101,6 +101,7 @@
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <custom-handler name="LOGSTASH" class="org.jboss.logmanager.ext.handlers.SocketHandler" module="org.jboss.logmanager.ext">
+                <level name="WARN"/>
                 <formatter>
                     <named-formatter name="logstash"/>
                 </formatter>
