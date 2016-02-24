@@ -51,7 +51,7 @@ logstash:
 dcm4chee-arc:
   image: dcm4che/dcm4chee-arc-psql:5.1.0-logstash
   environment:
-    CHOWN_WILDFLY: /storage
+    WILDFLY_CHOWN: "/opt/wildfly/standalone /storage"
   ports:
     - "8080:8080"
     - "9990:9990"
