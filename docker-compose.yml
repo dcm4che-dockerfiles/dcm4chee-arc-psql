@@ -44,7 +44,7 @@ kibana:
 logstash:
   image: dcm4che/logstash-dcm4chee:5.1.0
   ports:
-    - "8000:8000"
+    - "12201:12201/udp"
     - "8514:8514/udp"
   links:
     - elasticsearch:elasticsearch
