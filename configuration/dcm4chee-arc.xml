@@ -99,7 +99,7 @@
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <custom-handler name="LOGSTASH" class="biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler" module="biz.paluch.logging">
-                <level name="INFO" />
+                <level name="WARN" />
                 <properties>
                     <property name="host" value="logstash" />
                     <property name="facility" value="dcm4chee-arc" />
