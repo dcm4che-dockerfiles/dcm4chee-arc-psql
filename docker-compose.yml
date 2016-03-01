@@ -14,6 +14,7 @@ slapd:
     HL7_PORT: 2575
     SYSLOG_HOST: logstash
     SYSLOG_PORT: 8514
+    SYSLOG_PROTOCOL: TLS
     STORAGE_DIR: /storage/fs1
   volumes:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
@@ -45,7 +46,7 @@ logstash:
   image: dcm4che/logstash-dcm4chee:5.1.0
   ports:
     - "12201:12201/udp"
-    - "8514:8514/udp"
+    - "8514:8514"
   links:
     - elasticsearch:elasticsearch
 dcm4chee-arc:
