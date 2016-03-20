@@ -1,5 +1,5 @@
 slapd:
-  image: dcm4che/slapd-dcm4chee:5.1.0
+  image: dcm4che/slapd-dcm4chee:5.2.0
   ports:
     - "389:389"
   environment:
@@ -9,7 +9,7 @@ slapd:
     LDAP_CONFIGPASS: secret
     DEVICE_NAME: dcm4chee-arc
     AE_TITLE: DCM4CHEE
-    DICOM_HOST: archive-host
+    DICOM_HOST: localhost
     DICOM_PORT: 11112
     HL7_PORT: 2575
     SYSLOG_HOST: logstash
@@ -20,7 +20,7 @@ slapd:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
-  image: dcm4che/postgres-dcm4chee:5.1.0
+  image: dcm4che/postgres-dcm4chee:5.2.0
   ports:
     - "5432:5432"
   environment:
@@ -43,16 +43,16 @@ kibana:
   links:
     - elasticsearch:elasticsearch
 logstash:
-  image: dcm4che/logstash-dcm4chee:5.1.0
+  image: dcm4che/logstash-dcm4chee:5.2.0
   ports:
     - "12201:12201/udp"
     - "8514:8514"
   links:
     - elasticsearch:elasticsearch
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.1.0-logstash-secure
+  image: dcm4che/dcm4chee-arc-psql:5.2.0-logstash-secure
   environment:
-    WILDFLY_CHOWN: "/opt/wildfly/standalone /storage"
+    WILDFLY_CHOWN: /opt/wildfly/standalone /storage
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -65,5 +65,3 @@ dcm4chee-arc:
   volumes:
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
-  extra_hosts:
-   - "archive-host:192.168.0.17"
