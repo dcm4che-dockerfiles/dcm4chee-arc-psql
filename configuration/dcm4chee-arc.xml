@@ -179,7 +179,7 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:/PacsDS" pool-name="pacsds">
+                <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true">
                     <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <pool>
