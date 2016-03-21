@@ -17,6 +17,8 @@ slapd:
     SYSLOG_PROTOCOL: TLS
     STORAGE_DIR: /storage/fs1
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
@@ -28,6 +30,8 @@ postgres:
     POSTGRES_USER: pacs
     POSTGRES_PASSWORD: pacs
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 elasticsearch:
   image: elasticsearch:2.2
@@ -35,6 +39,8 @@ elasticsearch:
     - "9200:9200"
     - "9300:9300"
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
 kibana:
   image: kibana:4.4
@@ -42,6 +48,9 @@ kibana:
     - "5601:5601"
   links:
     - elasticsearch:elasticsearch
+  volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
 logstash:
   image: dcm4che/logstash-dcm4chee:5.2.0
   ports:
@@ -49,6 +58,9 @@ logstash:
     - "8514:8514"
   links:
     - elasticsearch:elasticsearch
+  volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
 dcm4chee-arc:
   image: dcm4che/dcm4chee-arc-psql:5.2.0-logstash
   environment:
@@ -63,5 +75,7 @@ dcm4chee-arc:
     - postgres:db
     - logstash:logstash
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
