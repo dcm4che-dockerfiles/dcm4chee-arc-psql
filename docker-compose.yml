@@ -16,6 +16,8 @@ slapd:
     SYSLOG_PORT: 8514
     STORAGE_DIR: /storage/fs1
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
@@ -27,6 +29,8 @@ postgres:
     POSTGRES_USER: pacs
     POSTGRES_PASSWORD: pacs
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 dcm4chee-arc:
   image: dcm4che/dcm4chee-arc-psql:5.2.0-secure-ui
@@ -41,5 +45,7 @@ dcm4chee-arc:
     - slapd:ldap
     - postgres:db
   volumes:
+    - /etc/timezone:/etc/timezone
+    - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/storage:/storage
     - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
