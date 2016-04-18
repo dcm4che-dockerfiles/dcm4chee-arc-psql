@@ -1,0 +1,81 @@
+{
+    "providers": [
+        "classpath:${jboss.home.dir}/providers/*",
+		"module:org.dcm4che.audit-keycloak"
+    ],
+
+    "admin": {
+        "realm": "master"
+    },
+
+    "eventsStore": {
+        "provider": "jpa",
+        "jpa": {
+            "exclude-events": [ "REFRESH_TOKEN" ]
+        }
+    },
+	"eventsListener": {
+        "dcm4che-rest": {
+            "includes": [ "LOGIN", "LOGOUT", "LOGIN_ERROR", "LOGOUT_ERROR" ]
+        }
+    },
+    "realm": {
+        "provider": "jpa"
+    },
+
+    "user": {
+        "provider": "jpa"
+    },
+
+    "userCache": {
+        "default" : {
+            "enabled": true
+        }
+    },
+
+    "userSessionPersister": {
+        "provider": "jpa"
+    },
+
+    "timer": {
+        "provider": "basic"
+    },
+
+    "theme": {
+        "staticMaxAge": 2592000,
+        "cacheTemplates": true,
+        "cacheThemes": true,
+        "folder": {
+          "dir": "${jboss.home.dir}/themes"
+        }
+    },
+
+    "scheduled": {
+        "interval": 900
+    },
+
+    "connectionsHttpClient": {
+        "default": {}
+    },
+
+    "connectionsJpa": {
+        "default": {
+            "dataSource": "java:jboss/datasources/KeycloakDS",
+            "databaseSchema": "update"
+        }
+    },
+
+    "realmCache": {
+        "provider": "default",
+        "default" : {
+            "enabled": true
+        }
+    },
+
+    "connectionsInfinispan": {
+        "provider": "default",
+        "default": {
+            "cacheContainer" : "java:comp/env/infinispan/Keycloak"
+        }
+    }
+}
