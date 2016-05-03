@@ -7,9 +7,9 @@ on a LDAP server - provided by Docker image
 [dcm4che/slapd-dcm4che](https://hub.docker.com/r/dcm4che/slapd-dcm4chee/).
 
 You may choose between
-- a not secured version (Tag Name: `5.1.0`),
-- a version with secured UI and secured RESTful services (Tag Name: `5.1.0-secure`) and
-- a version with secured UI, but not secured RESTful services (Tag Name: `5.1.0-secure-ui`).
+- a not secured version (Tag Name: `5.2.0`),
+- a version with secured UI and secured RESTful services (Tag Name: `5.2.0-secure`) and
+- a version with secured UI, but not secured RESTful services (Tag Name: `5.2.0-secure-ui`).
 
 #### Usage
 
@@ -29,7 +29,7 @@ Before starting the Archive container, you have to start a container providing t
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:5.1.0
+           -d dcm4che/slapd-dcm4chee:5.2.0
 ````
 
 and another container providing the database:
@@ -40,7 +40,7 @@ and another container providing the database:
            -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
            -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
-           -d dcm4che/postgres-dcm4chee:5.1.0
+           -d dcm4che/postgres-dcm4chee:5.2.0
 ````
 
 After that you can start the archive container, linked with the _OpenLDAP_ (alias:`ldap`) and
@@ -55,7 +55,7 @@ the _PostgreSQL_ (alias:`db`) container::
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
            --link slapd:ldap \
            --link postgres:db \
-           -d dcm4che/dcm4chee-arc-psql:5.1.0-secure-ui
+           -d dcm4che/dcm4chee-arc-psql:5.2.0-secure-ui
 ```
 
 Alternatively you may use [Docker Composite](https://docs.docker.com/compose/) to take care for
@@ -65,7 +65,7 @@ starting and linking the 3 containers, by defining the services in
 
 ````yaml
 slapd:
-  image: dcm4che/slapd-dcm4chee:5.1.0
+  image: dcm4che/slapd-dcm4chee:5.2.0
   ports:
     - "389:389"
   environment:
@@ -83,7 +83,7 @@ slapd:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
-  image: dcm4che/postgres-dcm4chee:5.1.0
+  image: dcm4che/postgres-dcm4chee:5.2.0
   ports:
     - "5432:5432"
   environment:
@@ -93,7 +93,7 @@ postgres:
   volumes:
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.1.0-secure-ui
+  image: dcm4che/dcm4chee-arc-psql:5.2.0-secure-ui
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -113,9 +113,16 @@ and starting them by
 ````
 
 #### Web Service URLs
+- Archive UI: <http://localhost:8080/dcm4chee-arc/ui> - if secured, login with
 
-- Archive UI: <http://localhost:8080/dcm4chee-arc/ui> - if secured, login with Username: `user`, Password: `user`.
+    Username | Password | Role
+    --- | --- | ---
+    `user` | `user` | `user`
+    `admin` | `admin` | `user` + `admin`
 - Keycloak Administration Console: <http://localhost:8080/auth>, login with Username: `admin`, Password: `admin`.
 - Wildfly Administration Console: <http://localhost:9990>, login with Username: `admin`, Password: `admin`.
-- DICOM WADO-URI: <http://localhost:8080/dcm4chee-arc/aets/MYPACS/wado>
-- DICOM QIDO-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/MYPACS/rs>
+- Kibana UI: <http://localhost:5601>
+- DICOM QIDO-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs>
+- DICOM STOW-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs>
+- DICOM WADO-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs>
+- DICOM WADO-URI: <http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/wado>
