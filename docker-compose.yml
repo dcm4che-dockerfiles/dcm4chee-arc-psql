@@ -1,5 +1,5 @@
 slapd:
-  image: dcm4che/slapd-dcm4chee:5.2.0
+  image: dcm4che/slapd-dcm4chee:5.2.1
   ports:
     - "389:389"
   environment:
@@ -22,7 +22,7 @@ slapd:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
-  image: dcm4che/postgres-dcm4chee:5.2.0
+  image: dcm4che/postgres-dcm4chee:5.2
   ports:
     - "5432:5432"
   environment:
@@ -34,7 +34,7 @@ postgres:
     - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 elasticsearch:
-  image: elasticsearch:2.2
+  image: elasticsearch:2.3
   ports:
     - "9200:9200"
     - "9300:9300"
@@ -43,7 +43,7 @@ elasticsearch:
     - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
 kibana:
-  image: kibana:4.4
+  image: kibana:4.5
   ports:
     - "5601:5601"
   links:
@@ -52,7 +52,7 @@ kibana:
     - /etc/timezone:/etc/timezone
     - /etc/localtime:/etc/localtime
 logstash:
-  image: dcm4che/logstash-dcm4chee:5.2.0
+  image: dcm4che/logstash-dcm4chee:5.2.1
   ports:
     - "12201:12201/udp"
     - "8514:8514"
@@ -62,14 +62,15 @@ logstash:
     - /etc/timezone:/etc/timezone
     - /etc/localtime:/etc/localtime
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.2.0-logstash-secure
-  environment:
-    WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+  image: dcm4che/dcm4chee-arc-psql:5.2.1-logstash-secure
   ports:
     - "8080:8080"
     - "9990:9990"
     - "11112:11112"
     - "2575:2575"
+  environment:
+    WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+    WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
   links:
     - slapd:ldap
     - postgres:db
