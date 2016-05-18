@@ -1,5 +1,5 @@
 slapd:
-  image: dcm4che/slapd-dcm4chee:5.2.0
+  image: dcm4che/slapd-dcm4chee:5.2.1
   ports:
     - "389:389"
   environment:
@@ -21,7 +21,7 @@ slapd:
     - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
     - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
 postgres:
-  image: dcm4che/postgres-dcm4chee:5.2.0
+  image: dcm4che/postgres-dcm4chee:5.2
   ports:
     - "5432:5432"
   environment:
@@ -33,7 +33,7 @@ postgres:
     - /etc/localtime:/etc/localtime
     - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
 dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.2.0-secure-ui
+  image: dcm4che/dcm4chee-arc-psql:5.2.1-secure-ui
   ports:
     - "8080:8080"
     - "9990:9990"
@@ -41,6 +41,7 @@ dcm4chee-arc:
     - "2575:2575"
   environment:
     WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+    WILDFLY_WAIT_FOR: ldap:389 db:5432
   links:
     - slapd:ldap
     - postgres:db
