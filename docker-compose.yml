@@ -1,52 +1,40 @@
-slapd:
-  image: dcm4che/slapd-dcm4chee:5.2.1
-  ports:
-    - "389:389"
-  environment:
-    LDAP_BASE_DN: dc=dcm4che,dc=org
-    LDAP_ORGANISATION: dcm4che.org
-    LDAP_ROOTPASS: secret
-    LDAP_CONFIGPASS: secret
-    DEVICE_NAME: dcm4chee-arc
-    AE_TITLE: DCM4CHEE
-    DICOM_HOST: localhost
-    DICOM_PORT: 11112
-    HL7_PORT: 2575
-    SYSLOG_HOST: localhost
-    SYSLOG_PORT: 8514
-    STORAGE_DIR: /storage/fs1
-  volumes:
-    - /etc/timezone:/etc/timezone
-    - /etc/localtime:/etc/localtime
-    - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
-    - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
-postgres:
-  image: dcm4che/postgres-dcm4chee:5.2
-  ports:
-    - "5432:5432"
-  environment:
-    POSTGRES_DB: pacsdb
-    POSTGRES_USER: pacs
-    POSTGRES_PASSWORD: pacs
-  volumes:
-    - /etc/timezone:/etc/timezone
-    - /etc/localtime:/etc/localtime
-    - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
-dcm4chee-arc:
-  image: dcm4che/dcm4chee-arc-psql:5.2.1
-  ports:
-    - "8080:8080"
-    - "9990:9990"
-    - "11112:11112"
-    - "2575:2575"
-  environment:
-    WILDFLY_CHOWN: /opt/wildfly/standalone /storage
-    WILDFLY_WAIT_FOR: ldap:389 db:5432
-  links:
-    - slapd:ldap
-    - postgres:db
-  volumes:
-    - /etc/timezone:/etc/timezone
-    - /etc/localtime:/etc/localtime
-    - /var/local/dcm4chee-arc/storage:/storage
-    - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
+version: "2"
+services:
+  slapd:
+    image: dcm4che/slapd-dcm4chee:5.2.1
+    ports:
+      - "389:389"
+    env_file: docker-compose.env
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
+      - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
+  postgres:
+    image: dcm4che/postgres-dcm4chee:5.2
+    ports:
+      - "5432:5432"
+    env_file: docker-compose.env
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+  dcm4chee-arc:
+    image: dcm4che/dcm4chee-arc-psql:5.2.1
+    ports:
+      - "8080:8080"
+      - "9990:9990"
+      - "11112:11112"
+      - "2575:2575"
+    env_file: docker-compose.env
+    environment:
+      WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+      WILDFLY_WAIT_FOR: ldap:389 db:5432
+    links:
+      - slapd:ldap
+      - postgres:db
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /var/local/dcm4chee-arc/storage:/storage
+      - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
