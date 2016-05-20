@@ -35,7 +35,7 @@
     </extensions>
 
     <system-properties>
-        <property name="dcm4chee-arc.DeviceName" value="${env.LDAP_ENV_DEVICE_NAME}"/>
+        <property name="dcm4chee-arc.DeviceName" value="${env.DEVICE_NAME}"/>
     </system-properties>
 
     <management>
@@ -178,14 +178,14 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true">
-                    <connection-url>jdbc:postgresql://db:5432/${env.DB_ENV_POSTGRES_DB}</connection-url>
+                    <connection-url>jdbc:postgresql://db:5432/${env.POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <pool>
                         <max-pool-size>50</max-pool-size>
                     </pool>
                     <security>
-                        <user-name>${env.DB_ENV_POSTGRES_USER}</user-name>
-                        <password>${env.DB_ENV_POSTGRES_PASSWORD}</password>
+                        <user-name>${env.POSTGRES_USER}</user-name>
+                        <password>${env.POSTGRES_PASSWORD}</password>
                     </security>
                 </datasource>
                 <drivers>
