@@ -187,6 +187,11 @@
                         <user-name>${env.POSTGRES_USER}</user-name>
                         <password>${env.POSTGRES_PASSWORD}</password>
                     </security>
+                    <validation>
+                        <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
+                        <exception-sorter class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLExceptionSorter"/>
+                        <background-validation-millis>10000</background-validation-millis>
+                    </validation>
                 </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
