@@ -1,7 +1,7 @@
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:5.5.1
+    image: dcm4che/slapd-dcm4chee:5.5.2
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -48,7 +48,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.5.1-logstash
+    image: dcm4che/dcm4chee-arc-psql:5.5.2-logstash
     ports:
       - "8080:8080"
       - "9990:9990"
