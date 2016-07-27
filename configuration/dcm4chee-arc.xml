@@ -397,6 +397,7 @@
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
                 <jms-queue name="Export2" entries="java:/jms/queue/Export2"/>
                 <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
+                <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" transaction="xa" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm"/>
