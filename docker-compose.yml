@@ -1,7 +1,7 @@
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:5.5.3
+    image: dcm4che/slapd-dcm4chee:5.6.0
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -11,7 +11,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
-    image: dcm4che/postgres-dcm4chee:5.5
+    image: dcm4che/postgres-dcm4chee:5.6
     ports:
       - "5432:5432"
     env_file: docker-compose.env
@@ -38,7 +38,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.5
+    image: dcm4che/logstash-dcm4chee:5.6
     ports:
       - "12201:12201/udp"
       - "8514:8514"
@@ -48,7 +48,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.5.3-logstash-secure
+    image: dcm4che/dcm4chee-arc-psql:5.6.0-logstash-secure
     ports:
       - "8080:8080"
       - "9990:9990"
