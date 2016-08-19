@@ -16,6 +16,21 @@ RUN cd $JBOSS_HOME \
 
 COPY configuration /docker-entrypoint.d/configuration
 
+# Default configuration: can be overridden at the docker command line
+ENV LDAP_HOST=ldap \
+    LDAP_PORT=389 \
+    LDAP_BASE_DN=dc=dcm4che,dc=org \
+    LDAP_ROOTPASS=secret \
+    POSTGRES_HOST=db \
+    POSTGRES_PORT=5432 \
+    POSTGRES_DB=pacsdb \
+    POSTGRES_USER=pacs \
+    POSTGRES_PASSWORD=pacs \
+    LOGSTASH=logstash \
+    GELF_FACILITY=dcm4chee-arc \
+    DEVICE_NAME=dcm4chee-arc \
+    AUTH_SERVER_URL=/auth
+
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
 CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml", \
