@@ -1,7 +1,7 @@
 {
     "providers": [
         "classpath:${jboss.home.dir}/providers/*",
-		"module:org.dcm4che.audit-keycloak"
+        "module:org.dcm4che.audit-keycloak"
     ],
 
     "admin": {
@@ -14,7 +14,7 @@
             "exclude-events": [ "REFRESH_TOKEN" ]
         }
     },
-	"eventsListener": {
+    "eventsListener": {
         "dcm4che-rest": {
             "includes": [ "LOGIN", "LOGOUT", "LOGIN_ERROR", "LOGOUT_ERROR" ]
         }
@@ -34,6 +34,10 @@
     },
 
     "userSessionPersister": {
+        "provider": "jpa"
+    },
+
+    "authorizationPersister": {
         "provider": "jpa"
     },
 
