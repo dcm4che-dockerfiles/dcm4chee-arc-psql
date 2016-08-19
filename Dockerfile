@@ -26,8 +26,6 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
-    LOGSTASH=logstash \
-    GELF_FACILITY=dcm4chee-arc \
     DEVICE_NAME=dcm4chee-arc \
     AUTH_SERVER_URL=/auth
 
