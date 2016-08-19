@@ -38,6 +38,7 @@
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.DEVICE_NAME}"/>
+        <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
     </system-properties>
 
     <management>
@@ -180,7 +181,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true">
-                    <connection-url>jdbc:postgresql://db:5432/${env.POSTGRES_DB}</connection-url>
+                    <connection-url>jdbc:postgresql://${env.POSTGRES_HOST}:${env.POSTGRES_PORT}/${env.POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <pool>
                         <max-pool-size>50</max-pool-size>
@@ -315,13 +316,15 @@
             </cache-container>
             <cache-container name="keycloak" jndi-name="infinispan/Keycloak">
                 <local-cache name="realms"/>
-                <local-cache name="users"/>
+                <local-cache name="users">
+                    <eviction strategy="LRU" max-entries="10000"/>
+                </local-cache>
                 <local-cache name="sessions"/>
                 <local-cache name="offlineSessions"/>
                 <local-cache name="loginFailures"/>
                 <local-cache name="work"/>
-                <local-cache name="realmVersions">
-                    <transaction locking="PESSIMISTIC" mode="BATCH"/>
+                <local-cache name="authorization">
+                    <eviction strategy="LRU" max-entries="100"/>
                 </local-cache>
             </cache-container>
         </subsystem>
@@ -498,7 +501,7 @@
             <secure-deployment name="dcm4chee-arc-ui-5.6.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgTmYYbFAfUYKcu3JcEAs+smvn6dFVXUSi8b/dTY1JkEed8XCi8H1bylyRrwP8DmlE1KepP5BJLhBNUZFFqwfQBPF0yeVT6wcu6xZAkr5zaHJoq6VJaF1o9IK9yUh8TfDWelyX/tGEbFPtVh2Y8V+iLvQhRoJEWhjHyQx/ijIoYskYpAy44O6YsxPEuPqcZIMJnAHF6EpM4abTGsDzqEFcgWvrg8HIApmvMGxk5ZmJeJNyXcvJpX/7kU8jnlOp3xICIAnA5K5LjTeYq/47BW7SWBcdut5SYEOvKJXJz5kgn3cjRwHkgDamztH81CWnPY1BaJqLSQPLyMs08odH577QIDAQAB</realm-public-key>
-                <auth-server-url>/auth</auth-server-url>
+                <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
                 <ssl-required>EXTERNAL</ssl-required>
                 <resource>dcm4chee-arc-ui</resource>
@@ -506,7 +509,7 @@
             <secure-deployment name="dcm4chee-arc-war-5.6.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgTmYYbFAfUYKcu3JcEAs+smvn6dFVXUSi8b/dTY1JkEed8XCi8H1bylyRrwP8DmlE1KepP5BJLhBNUZFFqwfQBPF0yeVT6wcu6xZAkr5zaHJoq6VJaF1o9IK9yUh8TfDWelyX/tGEbFPtVh2Y8V+iLvQhRoJEWhjHyQx/ijIoYskYpAy44O6YsxPEuPqcZIMJnAHF6EpM4abTGsDzqEFcgWvrg8HIApmvMGxk5ZmJeJNyXcvJpX/7kU8jnlOp3xICIAnA5K5LjTeYq/47BW7SWBcdut5SYEOvKJXJz5kgn3cjRwHkgDamztH81CWnPY1BaJqLSQPLyMs08odH577QIDAQAB</realm-public-key>
-                <auth-server-url>/auth</auth-server-url>
+                <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
                 <ssl-required>EXTERNAL</ssl-required>
                 <resource>dcm4chee-arc-rs</resource>
