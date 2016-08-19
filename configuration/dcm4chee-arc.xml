@@ -101,8 +101,8 @@
             <custom-handler name="LOGSTASH" class="biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler" module="biz.paluch.logging">
                 <level name="WARN" />
                 <properties>
-                    <property name="host" value="logstash" />
-                    <property name="facility" value="dcm4chee-arc" />
+                    <property name="host" value="${env.SYSLOG_HOST}" />
+                    <property name="facility" value="${env.GELF_FACILITY}" />
                 </properties>
             </custom-handler>
             <logger category="com.arjuna">
