@@ -20,7 +20,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   elasticsearch:
-    image: elasticsearch:2.3
+    image: elasticsearch:2.4
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -29,7 +29,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:4.5
+    image: kibana:4.6
     ports:
       - "5601:5601"
     links:
