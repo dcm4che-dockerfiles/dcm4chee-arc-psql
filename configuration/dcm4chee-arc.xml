@@ -35,7 +35,7 @@
     </extensions>
 
     <system-properties>
-        <property name="dcm4chee-arc.DeviceName" value="${env.DEVICE_NAME}"/>
+        <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
     </system-properties>
 
     <management>
