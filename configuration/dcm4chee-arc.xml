@@ -37,7 +37,7 @@
     </extensions>
 
     <system-properties>
-        <property name="dcm4chee-arc.DeviceName" value="${env.DEVICE_NAME}"/>
+        <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
         <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
     </system-properties>
 
