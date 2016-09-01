@@ -16,6 +16,8 @@ RUN cd $JBOSS_HOME \
 
 COPY configuration /docker-entrypoint.d/configuration
 
+ENV WILDFLY_INIT $JBOSS_HOME/standalone/configuration/adjust-dcm4che-realm.sh
+
 # Default configuration: can be overridden at the docker command line
 ENV LDAP_HOST=ldap \
     LDAP_PORT=389 \
