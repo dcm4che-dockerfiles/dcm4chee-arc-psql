@@ -28,7 +28,7 @@ ENV LDAP_HOST=ldap \
     POSTGRES_PASSWORD=pacs \
     SYSLOG_HOST=logstash \
     GELF_FACILITY=dcm4chee-arc \
-    DEVICE_NAME=dcm4chee-arc \
+    ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     AUTH_SERVER_URL=/auth
 
  # Set the default command to run on boot
