@@ -26,7 +26,7 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
-    DEVICE_NAME=dcm4chee-arc
+    ARCHIVE_DEVICE_NAME=dcm4chee-arc
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
