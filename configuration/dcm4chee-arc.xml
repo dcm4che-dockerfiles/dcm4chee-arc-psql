@@ -363,6 +363,7 @@
                 <jms-queue name="ExpiryQueue" entries="java:/jms/queue/ExpiryQueue"/>
                 <jms-queue name="DLQ" entries="java:/jms/queue/DLQ"/>
                 <jms-queue name="StgCmtSCP" entries="java:/jms/queue/StgCmtSCP"/>
+                <jms-queue name="StgCmtSCU" entries="java:/jms/queue/StgCmtSCU"/>
                 <jms-queue name="MPPSSCU" entries="java:/jms/queue/MPPSSCU"/>
                 <jms-queue name="IANSCU" entries="java:/jms/queue/IANSCU"/>
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
