@@ -22,7 +22,6 @@ services:
   dcm4chee-arc:
     image: dcm4che/dcm4chee-arc-psql:5.7.0
     ports:
-      - "8080:8080"
       - "9990:9990"
       - "11112:11112"
       - "2575:2575"
@@ -38,3 +37,20 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/storage:/storage
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
+  tserver:
+    image: dcm4che/trafficserver:6.2
+    ports:
+      - "8080:8080"
+    env_file: docker-compose.env
+    environment:
+      TS_MAP_TARGET: http://localhost:8080
+      TS_MAP_REPLACEMENT: http://dcm4chee-arc:8080
+      TS_STORAGE: var/trafficserver 256M
+    links:
+      - dcm4chee-arc:dcm4chee-arc
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /var/local/dcm4chee-arc/tserver-config:/opt/ats/etc/trafficserver
+      - /var/local/dcm4chee-arc/tserver-storage:/opt/ats/var/trafficserver
+      - /var/local/dcm4chee-arc/tserver-log:/opt/ats/var/log/trafficserver
