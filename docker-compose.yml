@@ -52,6 +52,7 @@ services:
     image: dcm4che/dcm4chee-arc-psql:5.7.0-logstash-secure-ui
     ports:
       - "8080:8080"
+      - "8443:8443"
       - "9990:9990"
       - "11112:11112"
       - "2575:2575"
