@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:10.0.0.Final
+FROM dcm4che/wildfly:10.1.0.Final
 
 ENV DCM4CHEE_ARC_VERSION 5.7.0
 ENV DCM4CHE_VERSION dcm4chee-arc-light-${DCM4CHEE_ARC_VERSION}
