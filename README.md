@@ -36,7 +36,7 @@ Before running the Archive container, you have to start a container providing th
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:5.7.0
+           -d dcm4che/slapd-dcm4chee:2.4.40-7.0
 ````
 
 and a container providing the database server, e.g:
@@ -47,7 +47,7 @@ and a container providing the database server, e.g:
            -e POSTGRES_USER=pacs\
            -e POSTGRES_PASSWORD=pacs \
            -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
-           -d dcm4che/postgres-dcm4chee:5.7
+           -d dcm4che/postgres-dcm4chee:9.6-7
 ````
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
@@ -136,7 +136,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:5.7.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-7.0
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -146,7 +146,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
-    image: dcm4che/postgres-dcm4chee:5.7
+    image: dcm4che/postgres-dcm4chee:9.6-7
     ports:
       - "5432:5432"
     env_file: docker-compose.env
