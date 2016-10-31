@@ -129,6 +129,15 @@
             <logger category="org.hibernate.type">
                 <level name="INFO"/>
             </logger>
+            <logger category="org.jclouds">
+                <level name="INFO"/>
+            </logger>
+            <logger category="jclouds.headers">
+                <level name="INFO"/>
+            </logger>
+            <logger category="com.emc.object">
+                <level name="INFO"/>
+            </logger>
             <logger category="org.dcm4che3.net.Association">
                 <level name="INFO"/>
             </logger>
