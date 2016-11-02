@@ -7,15 +7,15 @@ on a LDAP server - provided by Docker image
 [dcm4che/slapd-dcm4che](https://hub.docker.com/r/dcm4che/slapd-dcm4chee/).
 
 You may choose between
-- a not secured version (Tag Name: `5.7.0`),
-- a version with secured UI and secured RESTful services (Tag Name: `5.7.0-secure`),
-- a version with secured UI, but not secured RESTful services (Tag Name: `5.7.0-secure-ui`),
+- a not secured version (Tag Name: `5.7.2`),
+- a version with secured UI and secured RESTful services (Tag Name: `5.7.2-secure`),
+- a version with secured UI, but not secured RESTful services (Tag Name: `5.7.2-secure-ui`),
 - a not secured version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html)
-  to emit System logs to Logstash (Tag Name: `5.7.0-logstash`),
+  to emit System logs to Logstash (Tag Name: `5.7.2-logstash`),
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI
-  and secured RESTful services (Tag Name: `5.7.0-logstash-secure`) and
+  and secured RESTful services (Tag Name: `5.7.2-logstash-secure`) and
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI,
-  but not secured RESTful services (Tag Name: `5.7.0-logstash-secure-ui`).
+  but not secured RESTful services (Tag Name: `5.7.2-logstash-secure-ui`).
 
 Before running the Archive container, you have to start a container providing the LDAP server, e.g:
 ```bash
@@ -98,7 +98,7 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
            --link postgres:db \
-           -d dcm4che/dcm4chee-arc-psql:5.7.0-secure-ui
+           -d dcm4che/dcm4chee-arc-psql:5.7.2-secure-ui
 ```
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in
@@ -124,7 +124,7 @@ with the _Logstash_ (alias:`logstash`) container:
            --link slapd:ldap \
            --link postgres:db \
            --link logstash:logstash \
-           -d dcm4che/dcm4chee-arc-psql:5.7.0-logstash-secure-ui
+           -d dcm4che/dcm4chee-arc-psql:5.7.2-logstash-secure-ui
 ```
 
 #### Use Docker Compose
@@ -184,7 +184,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.7.0-logstash-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.7.2-logstash-secure-ui
     ports:
       - "8080:8080"
       - "9990:9990"
