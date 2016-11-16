@@ -39,7 +39,7 @@ services:
       - /var/local/dcm4chee-arc/storage:/storage
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
   tserver:
-    image: dcm4che/trafficserver:6.2
+    image: dcm4che/trafficserver:7.0
     ports:
       - "8080:8080"
     env_file: docker-compose.env
