@@ -7,15 +7,15 @@ on a LDAP server - provided by Docker image
 [dcm4che/slapd-dcm4che](https://hub.docker.com/r/dcm4che/slapd-dcm4chee/).
 
 You may choose between
-- a not secured version (Tag Name: `5.7.2`),
-- a version with secured UI and secured RESTful services (Tag Name: `5.7.2-secure`),
-- a version with secured UI, but not secured RESTful services (Tag Name: `5.7.2-secure-ui`),
+- a not secured version (Tag Name: `5.8.0`),
+- a version with secured UI and secured RESTful services (Tag Name: `5.8.0-secure`),
+- a version with secured UI, but not secured RESTful services (Tag Name: `5.8.0-secure-ui`),
 - a not secured version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html)
-  to emit System logs to Logstash (Tag Name: `5.7.2-logstash`),
+  to emit System logs to Logstash (Tag Name: `5.8.0-logstash`),
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI
-  and secured RESTful services (Tag Name: `5.7.2-logstash-secure`) and
+  and secured RESTful services (Tag Name: `5.8.0-logstash-secure`) and
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI,
-  but not secured RESTful services (Tag Name: `5.7.2-logstash-secure-ui`).
+  but not secured RESTful services (Tag Name: `5.8.0-logstash-secure-ui`).
 
 Before running the Archive container, you have to start a container providing the LDAP server, e.g:
 ```bash
@@ -36,7 +36,7 @@ Before running the Archive container, you have to start a container providing th
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-7.0
+           -d dcm4che/slapd-dcm4chee:2.4.40-8.0
 ````
 
 and a container providing the database server, e.g:
@@ -47,7 +47,7 @@ and a container providing the database server, e.g:
            -e POSTGRES_USER=pacs\
            -e POSTGRES_PASSWORD=pacs \
            -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
-           -d dcm4che/postgres-dcm4chee:9.6-7
+           -d dcm4che/postgres-dcm4chee:9.6-8
 ````
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
@@ -98,7 +98,7 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
            --link postgres:db \
-           -d dcm4che/dcm4chee-arc-psql:5.7.2-secure-ui
+           -d dcm4che/dcm4chee-arc-psql:5.8.0-secure-ui
 ```
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in
@@ -124,7 +124,7 @@ with the _Logstash_ (alias:`logstash`) container:
            --link slapd:ldap \
            --link postgres:db \
            --link logstash:logstash \
-           -d dcm4che/dcm4chee-arc-psql:5.7.2-logstash-secure-ui
+           -d dcm4che/dcm4chee-arc-psql:5.8.0-logstash-secure-ui
 ```
 
 #### Use Docker Compose
@@ -136,7 +136,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-7.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-8.0
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -146,7 +146,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
-    image: dcm4che/postgres-dcm4chee:9.6-7
+    image: dcm4che/postgres-dcm4chee:9.6-8
     ports:
       - "5432:5432"
     env_file: docker-compose.env
@@ -184,7 +184,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.7.2-logstash-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.8.0-logstash-secure-ui
     ports:
       - "8080:8080"
       - "9990:9990"
