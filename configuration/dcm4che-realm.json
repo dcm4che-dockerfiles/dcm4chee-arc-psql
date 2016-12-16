@@ -1011,7 +1011,7 @@
       "searchScope" : "1",
       "useTruststoreSpi" : "ldapsOnly",
       "connectionPooling" : "true",
-      "usersDn" : "ou=users,dc=dcm4che,dc=org",
+      "usersDn" : "ou=dcm4che,ou=realms,dc=dcm4che,dc=org",
       "userAccountControlsAfterPasswordUpdate" : "true",
       "useKerberosForPasswordAuthentication" : "false",
       "userObjectClasses" : "inetOrgPerson, organizationalPerson",
@@ -1053,7 +1053,7 @@
     "config" : {
       "mode" : "LDAP_ONLY",
       "membership.attribute.type" : "DN",
-      "roles.dn" : "ou=users,dc=dcm4che,dc=org",
+      "roles.dn" : "ou=dcm4che,ou=realms,dc=dcm4che,dc=org",
       "user.roles.retrieve.strategy" : "LOAD_ROLES_BY_MEMBER_ATTRIBUTE",
       "membership.ldap.attribute" : "member",
       "role.name.ldap.attribute" : "cn",
