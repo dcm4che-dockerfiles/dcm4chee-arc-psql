@@ -940,7 +940,7 @@
       "editMode" : "WRITABLE",
       "uuidLDAPAttribute" : "entryUUID",
       "allowKerberosAuthentication" : "false",
-      "connectionUrl" : "ldap://localhost:389",
+      "connectionUrl" : "ldap://ldap:389",
       "syncRegistrations" : "true",
       "authType" : "simple",
       "batchSizeForSync" : "1000"
