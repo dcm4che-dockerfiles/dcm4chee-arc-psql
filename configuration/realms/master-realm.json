@@ -239,30 +239,6 @@
   "otpPolicyDigits" : 6,
   "otpPolicyLookAheadWindow" : 1,
   "otpPolicyPeriod" : 30,
-  "users" : [ {
-    "id" : "59e60e44-f4f2-4907-a96d-812870e1ad3e",
-    "createdTimestamp" : 1482143518189,
-    "username" : "admin",
-    "enabled" : true,
-    "totp" : false,
-    "emailVerified" : false,
-    "firstName" : "",
-    "lastName" : "",
-    "federationLink" : "a5d5ca8c-d0ae-420a-8c53-834ad5d0e67e",
-    "attributes" : {
-      "LDAP_ENTRY_DN" : [ "uid=admin,ou=master,ou=realms,dc=dcm4che,dc=org" ],
-      "LDAP_ID" : [ "0fbb7f67-3473-4ed6-a122-edb0008ab604" ],
-      "createTimestamp" : [ "20161219102814Z" ],
-      "modifyTimestamp" : [ "20161219103222Z" ]
-    },
-    "credentials" : [ ],
-    "requiredActions" : [ ],
-    "realmRoles" : [ "admin", "offline_access" ],
-    "clientRoles" : {
-      "account" : [ "manage-account", "view-profile" ]
-    },
-    "groups" : [ ]
-  } ],
   "scopeMappings" : [ {
     "client" : "admin-cli",
     "roles" : [ "admin" ]
