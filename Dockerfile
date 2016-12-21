@@ -37,4 +37,5 @@ ENV LDAP_HOST=ldap \
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
 CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml", \
-     "-Dkeycloak.migration.action=import -Dkeycloak.migration.provider=dir -Dkeycloak.migration.dir=/opt/wildfly/standalone/configuration/realms -Dkeycloak.migration.strategy=OVERWRITE_EXISTING"]
+     "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=dir", "-Dkeycloak.migration.dir=/opt/wildfly/standalone/configuration/realms", \
+	 "-Dkeycloak.migration.strategy=OVERWRITE_EXISTING"]
