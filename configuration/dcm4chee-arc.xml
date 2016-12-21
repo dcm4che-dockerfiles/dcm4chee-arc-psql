@@ -341,6 +341,10 @@
                 <local-cache name="authorization">
                     <eviction strategy="LRU" max-entries="100"/>
                 </local-cache>
+                <local-cache name="keys">
+                    <eviction strategy="LRU" max-entries="1000"/>
+                    <expiration max-idle="3600000"/>
+                </local-cache>
             </cache-container>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:iiop-openjdk:1.0">
