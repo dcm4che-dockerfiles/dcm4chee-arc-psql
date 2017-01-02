@@ -29,6 +29,7 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
+    WILDFLY_ADMIN_USER=admin \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     AUTH_SERVER_URL=/auth
 

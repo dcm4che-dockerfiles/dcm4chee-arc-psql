@@ -225,6 +225,8 @@ STORAGE_DIR=/storage/fs1
 POSTGRES_DB=pacsdb
 POSTGRES_USER=pacs
 POSTGRES_PASSWORD=pacs
+KEYCLOAK_ADMIN_USER=admin
+KEYCLOAK_ADMIN_PASSWORD=admin
 ````
 
 and starting them by
