@@ -154,6 +154,15 @@
             <logger category="org.dcm4chee.arc">
                 <level name="INFO"/>
             </logger>
+            <logger category="org.dcm4chee.arc.query">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4chee.arc.retrieve">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4chee.arc.procedure">
+                <level name="INFO"/>
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
