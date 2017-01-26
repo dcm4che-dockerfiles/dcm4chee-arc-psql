@@ -507,6 +507,14 @@
                     <filter-ref name="x-powered-by-header"/>
                 </host>
             </server>
+            <server name="kibana-server">
+                <http-listener name="config-listener" socket-binding="kibana"/>
+                <host name="kibana" alias="localhost">
+                    <location name="/" handler="welcome-content"/>
+                    <filter-ref name="server-header"/>
+                    <filter-ref name="x-powered-by-header"/>
+                </host>
+            </server>
             <servlet-container name="default">
                 <jsp-config/>
                 <websockets/>
@@ -660,6 +668,7 @@
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>
         <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
+        <socket-binding name="kibana" port="5601"/>
         <socket-binding name="https" port="${jboss.https.port:8443}"/>
         <socket-binding name="iiop" interface="unsecure" port="3528"/>
         <socket-binding name="iiop-ssl" interface="unsecure" port="3529"/>
