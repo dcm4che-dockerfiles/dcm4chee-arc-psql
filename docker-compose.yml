@@ -64,6 +64,7 @@ services:
       - slapd:ldap
       - postgres:db
       - logstash:logstash
+      - kibana:kibana
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime

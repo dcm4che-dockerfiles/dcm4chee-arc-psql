@@ -13,7 +13,8 @@ RUN cd $JBOSS_HOME \
     && cd modules/org/postgresql/main \
     && curl -O https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
     && cd /docker-entrypoint.d/deployments \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear \
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arr-proxy/${DCM4CHEE_ARC_VERSION}/dcm4chee-arr-proxy-${DCM4CHEE_ARC_VERSION}.war
 
 COPY configuration /docker-entrypoint.d/configuration
 
