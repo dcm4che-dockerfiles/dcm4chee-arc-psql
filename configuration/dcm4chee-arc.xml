@@ -642,14 +642,6 @@
                 <ssl-required>EXTERNAL</ssl-required>
                 <resource>dcm4chee-arc-rs</resource>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-ui-arr-5.9.0-secure.war">
-                <realm>dcm4che</realm>
-                <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgTmYYbFAfUYKcu3JcEAs+smvn6dFVXUSi8b/dTY1JkEed8XCi8H1bylyRrwP8DmlE1KepP5BJLhBNUZFFqwfQBPF0yeVT6wcu6xZAkr5zaHJoq6VJaF1o9IK9yUh8TfDWelyX/tGEbFPtVh2Y8V+iLvQhRoJEWhjHyQx/ijIoYskYpAy44O6YsxPEuPqcZIMJnAHF6EpM4abTGsDzqEFcgWvrg8HIApmvMGxk5ZmJeJNyXcvJpX/7kU8jnlOp3xICIAnA5K5LjTeYq/47BW7SWBcdut5SYEOvKJXJz5kgn3cjRwHkgDamztH81CWnPY1BaJqLSQPLyMs08odH577QIDAQAB</realm-public-key>
-                <auth-server-url>${auth-server-url}</auth-server-url>
-                <public-client>true</public-client>
-                <ssl-required>EXTERNAL</ssl-required>
-                <resource>dcm4chee-arc-ui-arr</resource>
-            </secure-deployment>
         </subsystem>
     </profile>
     <interfaces>
