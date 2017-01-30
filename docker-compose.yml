@@ -60,11 +60,12 @@ services:
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
-      AUTH_SERVER_URL: /auth
+      AUTH_SERVER_URL: http://localhost:8080/auth
     links:
       - slapd:ldap
       - postgres:db
       - logstash:logstash
+      - kibana:kibana
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
