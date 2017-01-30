@@ -514,6 +514,11 @@
                     <filter-ref name="server-header"/>
                     <filter-ref name="x-powered-by-header"/>
                 </host>
+                <host name="kibana">
+                    <location name="/" handler="welcome-content"/>
+                    <filter-ref name="server-header"/>
+                    <filter-ref name="x-powered-by-header"/>
+                </host>
             </server>
             <servlet-container name="default">
                 <jsp-config/>
@@ -641,6 +646,13 @@
                 <public-client>true</public-client>
                 <ssl-required>EXTERNAL</ssl-required>
                 <resource>dcm4chee-arc-rs</resource>
+            </secure-deployment>
+            <secure-deployment name="dcm4chee-arr-proxy-5.9.0-secure.war">
+                <realm>dcm4che</realm>
+                <auth-server-url>${auth-server-url}</auth-server-url>
+                <public-client>true</public-client>
+                <ssl-required>EXTERNAL</ssl-required>
+                <resource>dcm4chee-arr-proxy</resource>
             </secure-deployment>
         </subsystem>
     </profile>
