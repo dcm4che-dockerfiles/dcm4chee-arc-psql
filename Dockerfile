@@ -34,7 +34,9 @@ ENV LDAP_HOST=ldap \
     SYSLOG_HOST=logstash \
     GELF_FACILITY=dcm4chee-arc \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-    AUTH_SERVER_URL=/auth
+    ARR_PROXY_HOST=kibana \
+    ARR_PROXY_URL=http://kibana:8080 \
+    AUTH_SERVER_URL=http://localhost:8080/auth
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
