@@ -481,7 +481,7 @@
                     <filter-ref name="server-header"/>
                     <filter-ref name="x-powered-by-header"/>
                 </host>
-                <host name="kibana">
+                <host name="arr-proxy" alias="${env.ARR_PROXY_HOST}">
                     <location name="/" handler="welcome-content"/>
                     <filter-ref name="server-header"/>
                     <filter-ref name="x-powered-by-header"/>

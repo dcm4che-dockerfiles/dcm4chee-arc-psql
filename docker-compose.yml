@@ -60,6 +60,7 @@ services:
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
+      ARR_PROXY_HOST: kibana
     links:
       - slapd:ldap
       - postgres:db

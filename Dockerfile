@@ -14,7 +14,7 @@ RUN cd $JBOSS_HOME \
     && curl -O https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
     && cd /docker-entrypoint.d/deployments \
     && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arr-proxy/${DCM4CHEE_ARC_VERSION}/dcm4chee-arr-proxy-${DCM4CHEE_ARC_VERSION}.war
+    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arr-proxy/${DCM4CHEE_ARC_VERSION}/dcm4chee-arr-proxy-${DCM4CHEE_ARC_VERSION}-unsecure.war
 
 COPY configuration /docker-entrypoint.d/configuration
 
@@ -31,7 +31,8 @@ ENV LDAP_HOST=ldap \
     WILDFLY_ADMIN_USER=admin \
     SYSLOG_HOST=logstash \
     GELF_FACILITY=dcm4chee-arc \
-    ARCHIVE_DEVICE_NAME=dcm4chee-arc
+    ARCHIVE_DEVICE_NAME=dcm4chee-arc \
+    ARR_PROXY_HOST=kibana
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
