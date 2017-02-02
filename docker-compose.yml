@@ -1,7 +1,7 @@
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-9.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-9.1
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -20,7 +20,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.9.0-secure
+    image: dcm4che/dcm4chee-arc-psql:5.9.1-secure
     ports:
       - "8080:8080"
       - "8443:8443"
