@@ -428,6 +428,7 @@
                 <jms-queue name="Export2" entries="java:/jms/queue/Export2"/>
                 <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
                 <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
+                <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" connectors="http-connector" entries="java:jboss/exported/jms/RemoteConnectionFactory"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
@@ -618,7 +619,7 @@
             </spi>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui-5.9.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui-5.9.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgTmYYbFAfUYKcu3JcEAs+smvn6dFVXUSi8b/dTY1JkEed8XCi8H1bylyRrwP8DmlE1KepP5BJLhBNUZFFqwfQBPF0yeVT6wcu6xZAkr5zaHJoq6VJaF1o9IK9yUh8TfDWelyX/tGEbFPtVh2Y8V+iLvQhRoJEWhjHyQx/ijIoYskYpAy44O6YsxPEuPqcZIMJnAHF6EpM4abTGsDzqEFcgWvrg8HIApmvMGxk5ZmJeJNyXcvJpX/7kU8jnlOp3xICIAnA5K5LjTeYq/47BW7SWBcdut5SYEOvKJXJz5kgn3cjRwHkgDamztH81CWnPY1BaJqLSQPLyMs08odH577QIDAQAB</realm-public-key>
                 <auth-server-url>${auth-server-url}</auth-server-url>
@@ -626,7 +627,7 @@
                 <ssl-required>EXTERNAL</ssl-required>
                 <resource>dcm4chee-arc-ui</resource>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.9.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.9.0-secure.war">
                 <realm>dcm4che</realm>
                 <realm-public-key>MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmgTmYYbFAfUYKcu3JcEAs+smvn6dFVXUSi8b/dTY1JkEed8XCi8H1bylyRrwP8DmlE1KepP5BJLhBNUZFFqwfQBPF0yeVT6wcu6xZAkr5zaHJoq6VJaF1o9IK9yUh8TfDWelyX/tGEbFPtVh2Y8V+iLvQhRoJEWhjHyQx/ijIoYskYpAy44O6YsxPEuPqcZIMJnAHF6EpM4abTGsDzqEFcgWvrg8HIApmvMGxk5ZmJeJNyXcvJpX/7kU8jnlOp3xICIAnA5K5LjTeYq/47BW7SWBcdut5SYEOvKJXJz5kgn3cjRwHkgDamztH81CWnPY1BaJqLSQPLyMs08odH577QIDAQAB</realm-public-key>
                 <auth-server-url>${auth-server-url}</auth-server-url>
