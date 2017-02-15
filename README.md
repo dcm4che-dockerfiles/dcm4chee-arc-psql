@@ -36,7 +36,7 @@ Before running the Archive container, you have to start a container providing th
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-9.0
+           -d dcm4che/slapd-dcm4chee:2.4.40-9.2
 ````
 
 and a container providing the database server, e.g:
@@ -136,7 +136,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-9.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-9.2
     ports:
       - "389:389"
     env_file: docker-compose.env
