@@ -38,6 +38,7 @@ ENV LDAP_HOST=ldap \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     ARR_PROXY_HOST=kibana \
     ARR_PROXY_URL=http://kibana:8080 \
+    SSL_REQUIRED=external \
     AUTH_SERVER_URL=http://localhost:8080/auth
 
  # Set the default command to run on boot

@@ -62,6 +62,7 @@ services:
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
       ARR_PROXY_HOST: kibana
       ARR_PROXY_URL: http://kibana:8080
+      SSL_REQUIRED: external
       AUTH_SERVER_URL: http://localhost:8080/auth
     links:
       - slapd:ldap
