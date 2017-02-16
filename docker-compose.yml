@@ -49,7 +49,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.9.1-logstash-secure
+    image: dcm4che/dcm4chee-arc-psql:5.9.2-logstash-secure
     ports:
       - "8080:8080"
       - "8443:8443"
