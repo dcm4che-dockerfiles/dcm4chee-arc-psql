@@ -28,6 +28,8 @@ ENV LDAP_HOST=ldap \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
     WILDFLY_ADMIN_USER=admin \
+    WILDFLY_EXECUTER_MAX_THREADS=100 \
+    WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc
 
  # Set the default command to run on boot

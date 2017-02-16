@@ -199,7 +199,7 @@
                     <connection-url>jdbc:postgresql://db:5432/${env.POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <pool>
-                        <max-pool-size>50</max-pool-size>
+                        <max-pool-size>${env.WILDFLY_PACSDS_MAX_POOL_SIZE}</max-pool-size>
                     </pool>
                     <security>
                         <user-name>${env.POSTGRES_USER}</user-name>
@@ -232,7 +232,7 @@
                     <managed-thread-factory name="default" jndi-name="java:jboss/ee/concurrency/factory/default" context-service="default"/>
                 </managed-thread-factories>
                 <managed-executor-services>
-                    <managed-executor-service name="default" jndi-name="java:jboss/ee/concurrency/executor/default" context-service="default" long-running-tasks="true" core-threads="2" max-threads="100" keepalive-time="5000" queue-length="0"/>
+                    <managed-executor-service name="default" jndi-name="java:jboss/ee/concurrency/executor/default" context-service="default" long-running-tasks="true" core-threads="2" max-threads="{env.WILDFLY_EXECUTER_MAX_THREADS}" keepalive-time="5000" queue-length="0"/>
                 </managed-executor-services>
                 <managed-scheduled-executor-services>
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" hung-task-threshold="60000" keepalive-time="3000"/>
