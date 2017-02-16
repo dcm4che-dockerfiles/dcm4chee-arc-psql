@@ -33,6 +33,7 @@ ENV LDAP_HOST=ldap \
     WILDFLY_EXECUTER_MAX_THREADS=100 \
     WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
+    SSL_REQUIRED=external \
     AUTH_SERVER_URL=/auth
 
  # Set the default command to run on boot
