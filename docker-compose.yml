@@ -31,6 +31,7 @@ services:
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432
+      SSL_REQUIRED: external
       AUTH_SERVER_URL: /auth
     links:
       - slapd:ldap
