@@ -631,6 +631,16 @@
                     </properties>
                 </provider>
             </spi>
+            <spi name="truststore">
+                <provider name="file" enabled="true">
+                    <properties>
+                        <property name="file" value="${jboss.server.config.dir}/dcm4chee-arc/key.jks"/>
+                        <property name="password" value="secret"/>
+                        <property name="hostname-verification-policy" value="ANY"/>
+                        <property name="disabled" value="false"/>
+                    </properties>
+                </provider>
+            </spi>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
             <secure-deployment name="dcm4chee-arc-ui-5.9.2-secure.war">
@@ -640,6 +650,9 @@
                 <public-client>true</public-client>
                 <ssl-required>${ssl-required}</ssl-required>
                 <resource>dcm4chee-arc-ui</resource>
+                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
+                <truststore-password>secret</truststore-password>
+                <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.9.2-secure.war">
                 <realm>dcm4che</realm>
@@ -648,6 +661,9 @@
                 <public-client>true</public-client>
                 <ssl-required>${ssl-required}</ssl-required>
                 <resource>dcm4chee-arc-rs</resource>
+                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
+                <truststore-password>secret</truststore-password>
+                <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arr-proxy-5.9.0-secure.war">
                 <realm>dcm4che</realm>
