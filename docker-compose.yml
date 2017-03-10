@@ -20,7 +20,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   elasticsearch:
-    image: elasticsearch:5.1.2
+    image: elasticsearch:5.2.2
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -29,7 +29,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:5.1.2
+    image: kibana:5.2.2
     ports:
       - "5601:5601"
     links:
@@ -38,7 +38,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.1.2-0
+    image: dcm4che/logstash-dcm4chee:5.2.2-0
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
