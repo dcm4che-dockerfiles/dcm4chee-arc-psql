@@ -36,7 +36,7 @@ Before running the Archive container, you have to start a container providing th
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-9.2
+           -d dcm4che/slapd-dcm4chee:2.4.40-9.3
 ````
 
 and a container providing the database server, e.g:
@@ -58,7 +58,7 @@ you have to also start containers providing [Elasticsearch, Logstash and Kibana]
            -p 9200:9200 \
            -p 9300:9300 \
            -v /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data \
-           -d elasticsearch:2.4
+           -d elasticsearch:5.2.2
 ```
 
 ```bash
@@ -68,14 +68,14 @@ you have to also start containers providing [Elasticsearch, Logstash and Kibana]
            -p 8514:8514 \
            -v /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data \
            --link elasticsearch:elasticsearch \
-           -d dcm4che/logstash-dcm4chee:2.4-0
+           -d dcm4che/logstash-dcm4chee:5.2.2-0
 ```
 
 ```bash
 > $docker run --name kibana \
            -p 5601:5601 \
            --link elasticsearch:elasticsearch \
-           -d kibana:4.6
+           -d kibana:5.2.2
 ```
 
 You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and the _PostgreSQL_ (alias:`db`) container:
@@ -136,7 +136,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-9.2
+    image: dcm4che/slapd-dcm4chee:2.4.40-9.3
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -155,7 +155,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   elasticsearch:
-    image: elasticsearch:2.4
+    image: elasticsearch:5.2.2
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -164,7 +164,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:4.6
+    image: kibana:5.2.2
     ports:
       - "5601:5601"
     links:
@@ -173,7 +173,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:2.4-0
+    image: dcm4che/logstash-dcm4chee:5.2.2-0
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
