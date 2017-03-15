@@ -669,6 +669,9 @@
                 <public-client>true</public-client>
                 <ssl-required>${ssl-required}</ssl-required>
                 <resource>dcm4chee-arr-proxy</resource>
+                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
+                <truststore-password>secret</truststore-password>
+                <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
         </subsystem>
     </profile>
