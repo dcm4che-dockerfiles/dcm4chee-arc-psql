@@ -653,6 +653,16 @@
                 <truststore-password>secret</truststore-password>
                 <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
+            <secure-deployment name="dcm4chee-arc-ui2-5.10.0-secure.war">
+                <realm>dcm4che</realm>
+                <auth-server-url>${auth-server-url}</auth-server-url>
+                <public-client>true</public-client>
+                <ssl-required>${ssl-required}</ssl-required>
+                <resource>dcm4chee-arc-ui2</resource>
+                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
+                <truststore-password>secret</truststore-password>
+                <allow-any-hostname>true</allow-any-hostname>
+            </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.10.0-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
