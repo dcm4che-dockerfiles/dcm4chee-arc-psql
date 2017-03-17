@@ -38,7 +38,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.2.2-0
+    image: dcm4che/logstash-dcm4chee:5.2.2-1
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
