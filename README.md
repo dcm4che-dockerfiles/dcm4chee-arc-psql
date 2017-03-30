@@ -68,7 +68,7 @@ you have to also start containers providing [Elasticsearch, Logstash and Kibana]
            -p 8514:8514 \
            -v /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data \
            --link elasticsearch:elasticsearch \
-           -d dcm4che/logstash-dcm4chee:5.2.2-1
+           -d dcm4che/logstash-dcm4chee:5.2.2-2
 ```
 
 ```bash
@@ -173,7 +173,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.2.2-1
+    image: dcm4che/logstash-dcm4chee:5.2.2-2
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
@@ -235,7 +235,7 @@ and starting them by
 ````
 
 #### Web Service URLs
-- Archive UI: <http://localhost:8080/dcm4chee-arc/ui> - if secured, login with
+- Archive UI: <http://localhost:8080/dcm4chee-arc/ui2> - if secured, login with
 
     Username | Password | Role
     --- | --- | ---
