@@ -643,7 +643,7 @@
             </spi>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui-5.10.0-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui-5.10.1-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
@@ -653,7 +653,7 @@
                 <truststore-password>secret</truststore-password>
                 <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-ui2-5.10.0-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui2-5.10.1-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
@@ -663,7 +663,7 @@
                 <truststore-password>secret</truststore-password>
                 <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.10.0-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.10.1-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
@@ -673,7 +673,7 @@
                 <truststore-password>secret</truststore-password>
                 <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arr-proxy-5.10.0-secure.war">
+            <secure-deployment name="dcm4chee-arr-proxy-5.10.1-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
