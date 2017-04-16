@@ -20,7 +20,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   dcm4chee-arc:
-    image: dcm4che/dcm4chee-arc-psql:5.10.0
+    image: dcm4che/dcm4chee-arc-psql:5.10.1
     ports:
       - "9990:9990"
       - "11112:11112"
