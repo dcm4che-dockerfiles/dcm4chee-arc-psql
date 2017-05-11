@@ -107,7 +107,7 @@
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <custom-handler name="LOGSTASH" class="biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler" module="biz.paluch.logging">
-                <level name="WARN" />
+                <level name="${env.GELF_LEVEL}" />
                 <properties>
                     <property name="host" value="${env.SYSLOG_HOST}" />
                     <property name="facility" value="${env.GELF_FACILITY}" />

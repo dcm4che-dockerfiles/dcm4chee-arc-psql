@@ -33,6 +33,7 @@ ENV LDAP_HOST=ldap \
     WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
     SYSLOG_HOST=logstash \
     GELF_FACILITY=dcm4chee-arc \
+    GELF_LEVEL=WARN \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     ARR_PROXY_HOST=kibana
 
