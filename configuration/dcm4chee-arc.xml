@@ -630,7 +630,7 @@
             </spi>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui2-5.10.3-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui2-5.10.4-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
@@ -640,7 +640,7 @@
                 <truststore-password>secret</truststore-password>
                 <allow-any-hostname>true</allow-any-hostname>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.10.3-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.10.4-secure.war">
                 <realm>dcm4che</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
