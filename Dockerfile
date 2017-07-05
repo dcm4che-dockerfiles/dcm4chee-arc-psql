@@ -4,16 +4,16 @@ ENV DCM4CHEE_ARC_VERSION 5.10.4
 ENV DCM4CHE_VERSION dcm4chee-arc-light-${DCM4CHEE_ARC_VERSION}
 
 RUN cd $JBOSS_HOME \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/querydsl-jboss-modules/4.1.4-noguava/querydsl-jboss-modules-4.1.4-noguava.tar.gz | tar xz \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/1.9.2-noguava/jclouds-jboss-modules-1.9.2-noguava.tar.gz | tar xz \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/ecs-object-client-jboss-modules/3.0.0/ecs-object-client-jboss-modules-3.0.0.tar.gz | tar xz \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
-    && curl http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/querydsl-jboss-modules/4.1.4-noguava/querydsl-jboss-modules-4.1.4-noguava.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/1.9.2-noguava/jclouds-jboss-modules-1.9.2-noguava.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/ecs-object-client-jboss-modules/3.0.0/ecs-object-client-jboss-modules-3.0.0.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
+    && curl -f http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
-    && curl -O https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
+    && curl -fO https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
     && cd /docker-entrypoint.d/deployments \
-    && curl -O http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear
+    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear
 
 COPY configuration /docker-entrypoint.d/configuration
 
