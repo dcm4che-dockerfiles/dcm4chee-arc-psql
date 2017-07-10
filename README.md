@@ -117,6 +117,10 @@ with the _Logstash_ (alias:`logstash`) container:
            -e POSTGRES_DB=pacsdb \
            -e POSTGRES_USER=pacs\
            -e POSTGRES_PASSWORD=pacs \
+           -e KEYCLOAK_ADMIN_USER=admin \
+           -e KEYCLOAK_ADMIN_PASSWORD=admin \
+           -e SSL_REQUIRED=external \
+           -e AUTH_SERVER_URL=/auth \
            -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
            -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
@@ -227,6 +231,8 @@ POSTGRES_USER=pacs
 POSTGRES_PASSWORD=pacs
 KEYCLOAK_ADMIN_USER=admin
 KEYCLOAK_ADMIN_PASSWORD=admin
+SSL_REQUIRED=external
+AUTH_SERVER_URL=/auth
 ````
 
 and starting them by
