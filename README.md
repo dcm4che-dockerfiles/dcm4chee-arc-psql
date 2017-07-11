@@ -17,32 +17,7 @@ You may choose between
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI,
   but not secured RESTful services (Tag Name: `5.10.5-logstash-secure-ui`).
 
-Before running the Archive container, you have to start a container providing the LDAP server, e.g:
-```bash
-> $docker run --name slapd \
-           -p 389:389 \
-           -e LDAP_BASE_DN=dc=dcm4che,dc=org \
-           -e LDAP_ORGANISATION=dcm4che.org \
-           -e LDAP_ROOTPASS=secret \
-           -e LDAP_CONFIGPASS=secret \
-           -e ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-           -e AE_TITLE=DCM4CHEE \
-           -e DICOM_HOST=dockerhost \
-           -e DICOM_PORT=11112 \
-           -e HL7_PORT=2575 \
-           -e SYSLOG_DEVICE_NAME=logstash \
-           -e SYSLOG_HOST=127.0.0.1 \
-           -e SYSLOG_PORT=8514 \
-           -e SYSLOG_PROTOCOL=UDP \
-           -e KEYCLOAK_DEVICE_NAME=keycloak \
-           -e UNKNOWN_DEVICE_NAME=unknown \
-           -e UNKNOWN_AE_TITLE=UNKNOWN \
-           -e STORAGE_DIR=/storage/fs1 \
-           -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
-           -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-10.5
-````
-
+Before running the Archive container, you have to start a container providing the [LDAP server](https://github.com/dcm4che-dockerfiles/slapd-dcm4chee#how-to-use-this-image)
 and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image), 
 
 
@@ -171,8 +146,8 @@ This should match with the value used during startup of `postgres` container.
 ##### `KEYCLOAK_ADMIN_USER`
 
 This environment variable used in conjunction with `KEYCLOAK_ADMIN_PASSWORD` is the user with superuser power and its password
-for Keycloak which is used in secured versions of archive for authentication purposes. In the above example, it is being 
-set to "admin". This can be set as per one's application needs. 
+for Keycloak Master realm which is used in for debugging purposes, should something go wrong with secured version of archive. 
+In the above example, it is being set to "admin". This can be set as per one's application needs. 
 
 ##### `KEYCLOAK_ADMIN_PASSWORD`
 
