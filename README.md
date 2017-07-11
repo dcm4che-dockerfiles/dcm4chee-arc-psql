@@ -32,7 +32,7 @@ Before running the Archive container, you have to start a container providing th
            -e HL7_PORT=2575 \
            -e SYSLOG_DEVICE_NAME=logstash \
            -e SYSLOG_HOST=127.0.0.1 \
-           -e SYSLOG_PORT=514 \
+           -e SYSLOG_PORT=8514 \
            -e SYSLOG_PROTOCOL=UDP \
            -e KEYCLOAK_DEVICE_NAME=keycloak \
            -e UNKNOWN_DEVICE_NAME=unknown \
@@ -40,19 +40,11 @@ Before running the Archive container, you have to start a container providing th
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-10.0
+           -d dcm4che/slapd-dcm4chee:2.4.40-10.5
 ````
 
-and a container providing the database server, e.g:
-```bash
-> $docker run --name postgres \
-           -p 5432:5432 \
-           -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs \
-           -e POSTGRES_PASSWORD=pacs \
-           -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
-           -d dcm4che/postgres-dcm4chee:9.6-10
-````
+and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image), 
+
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 you have to also start containers providing [Elasticsearch, Logstash and Kibana](https://www.elastic.co/products):
@@ -96,6 +88,10 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -e POSTGRES_DB=pacsdb \
            -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
+           -e KEYCLOAK_ADMIN_USER=admin \
+           -e KEYCLOAK_ADMIN_PASSWORD=admin \
+           -e SSL_REQUIRED=external \
+           -e AUTH_SERVER_URL=/auth \           
            -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
            -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
@@ -211,7 +207,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-10.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-10.5
     ports:
       - "389:389"
     env_file: docker-compose.env
