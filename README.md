@@ -17,38 +17,8 @@ You may choose between
 - a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI,
   but not secured RESTful services (Tag Name: `5.10.5-logstash-secure-ui`).
 
-Before running the Archive container, you have to start a container providing the LDAP server, e.g:
-```bash
-> $docker run --name slapd \
-           -p 389:389 \
-           -e LDAP_BASE_DN=dc=dcm4che,dc=org \
-           -e LDAP_ORGANISATION=dcm4che.org \
-           -e LDAP_ROOTPASS=secret \
-           -e LDAP_CONFIGPASS=secret \
-           -e DEVICE_NAME=dcm4chee-arc \
-           -e AE_TITLE=DCM4CHEE \
-           -e DICOM_HOST=dockerhost \
-           -e DICOM_PORT=11112 \
-           -e HL7_PORT=2575 \
-           -e SYSLOG_HOST=logstash \
-           -e SYSLOG_PORT=8512 \
-           -e SYSLOG_PROTOCOL=UDP \
-           -e STORAGE_DIR=/storage/fs1 \
-           -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
-           -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
-           -d dcm4che/slapd-dcm4chee:2.4.40-10.0
-````
-
-and a container providing the database server, e.g:
-```bash
-> $docker run --name postgres \
-           -p 5432:5432 \
-           -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs \
-           -e POSTGRES_PASSWORD=pacs \
-           -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
-           -d dcm4che/postgres-dcm4chee:9.6-10
-````
+Before running the Archive container, you have to start a container providing the [LDAP server](https://github.com/dcm4che-dockerfiles/slapd-dcm4chee#how-to-use-this-image)
+and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image).
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 you have to also start containers providing [Elasticsearch, Logstash and Kibana](https://www.elastic.co/products):
@@ -92,6 +62,10 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -e POSTGRES_DB=pacsdb \
            -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
+           -e KEYCLOAK_ADMIN_USER=admin \
+           -e KEYCLOAK_ADMIN_PASSWORD=admin \
+           -e SSL_REQUIRED=external \
+           -e AUTH_SERVER_URL=/auth \           
            -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
            -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
@@ -171,8 +145,8 @@ This should match with the value used during startup of `postgres` container.
 ##### `KEYCLOAK_ADMIN_USER`
 
 This environment variable used in conjunction with `KEYCLOAK_ADMIN_PASSWORD` is the user with superuser power and its password
-for Keycloak which is used in secured versions of archive for authentication purposes. In the above example, it is being 
-set to "admin". This can be set as per one's application needs. 
+for Keycloak Master realm which is used in for debugging purposes, should something go wrong with secured version of archive. 
+In the above example, it is being set to "admin". This can be set as per one's application needs. 
 
 ##### `KEYCLOAK_ADMIN_PASSWORD`
 
@@ -207,7 +181,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-10.0
+    image: dcm4che/slapd-dcm4chee:2.4.40-10.5
     ports:
       - "389:389"
     env_file: docker-compose.env
