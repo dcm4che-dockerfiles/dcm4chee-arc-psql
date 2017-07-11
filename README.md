@@ -44,7 +44,7 @@ and a container providing the database server, e.g:
 > $docker run --name postgres \
            -p 5432:5432 \
            -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs\
+           -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
            -v /var/local/dcm4chee-arc/db:/var/lib/postgresql/data \
            -d dcm4che/postgres-dcm4chee:9.6-10
@@ -90,7 +90,7 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -e LDAP_CONFIGPASS=secret \
            -e ARCHIVE_DEVICE_NAME=dcm4chee-arc \
            -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs\
+           -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
            -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
            -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
@@ -115,7 +115,7 @@ with the _Logstash_ (alias:`logstash`) container:
            -e LDAP_CONFIGPASS=secret \
            -e ARCHIVE_DEVICE_NAME=dcm4chee-arc \
            -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs\
+           -e POSTGRES_USER=pacs \
            -e POSTGRES_PASSWORD=pacs \
            -e KEYCLOAK_ADMIN_USER=admin \
            -e KEYCLOAK_ADMIN_PASSWORD=admin \
