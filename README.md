@@ -30,9 +30,13 @@ Before running the Archive container, you have to start a container providing th
            -e DICOM_HOST=dockerhost \
            -e DICOM_PORT=11112 \
            -e HL7_PORT=2575 \
-           -e SYSLOG_HOST=logstash \
-           -e SYSLOG_PORT=8512 \
+           -e SYSLOG_DEVICE_NAME=logstash \
+           -e SYSLOG_HOST=127.0.0.1 \
+           -e SYSLOG_PORT=514 \
            -e SYSLOG_PROTOCOL=UDP \
+           -e KEYCLOAK_DEVICE_NAME=keycloak \
+           -e UNKNOWN_DEVICE_NAME=unknown \
+           -e UNKNOWN_AE_TITLE=UNKNOWN \
            -e STORAGE_DIR=/storage/fs1 \
            -v /var/local/dcm4chee-arc/ldap:/var/lib/ldap \
            -v /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d \
