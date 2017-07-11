@@ -131,6 +131,73 @@ with the _Logstash_ (alias:`logstash`) container:
            -d dcm4che/dcm4chee-arc-psql:5.10.5-logstash-secure-ui
 ```
 
+#### Environment Variables 
+
+##### `LDAP_BASE_DN`
+
+This environment variable sets the base domain name for LDAP. In the above example, it is being set to "dc=dcm4che,dc=org".
+This should match with the value used during startup of `slapd` container.
+
+##### `LDAP_ROOTPASS`
+
+This environment variable sets the root password for LDAP. In the above example, it is being set to "secret". This should 
+match with the value used during startup of `slapd` container.
+
+##### `LDAP_CONFIGPASS`
+
+This environment variable sets the password for users who wish to change the schema configuration in LDAP. In the above 
+example, it is being set to "secret". This should match with the value used during startup of `slapd` container.
+
+##### `ARCHIVE_DEVICE_NAME`
+
+This is the name of archive device which can be set per one's application. In the above example, it is being set to 
+"dcm4chee-arc". This should match with the value used during startup of `slapd` container.
+
+##### `POSTGRES_DB`
+
+This environment variable defines the name for the default database that is created when the postgres image was started.
+In the above example, it is being set to "pacsdb". This should match with the value used during startup of `postgres` container.
+
+##### `POSTGRES_USER`
+
+This environment variable used in conjunction with `POSTGRES_PASSWORD` is the user with superuser power and its password. 
+In the above example, it is being set to "pacs". This should match with the value used during startup of `postgres` container.
+
+##### `POSTGRES_PASSWORD`
+
+This environment variable is the superuser password for PostgreSQL. In the above example, it is being set to "pacs". 
+This should match with the value used during startup of `postgres` container.
+
+##### `KEYCLOAK_ADMIN_USER`
+
+This environment variable used in conjunction with `KEYCLOAK_ADMIN_PASSWORD` is the user with superuser power and its password
+for Keycloak which is used in secured versions of archive for authentication purposes. In the above example, it is being 
+set to "admin". This can be set as per one's application needs. 
+
+##### `KEYCLOAK_ADMIN_PASSWORD`
+
+This environment variable is the superuser password for Keycloak. In the above example, it is being set to "admin". 
+This can be set as per one's application needs.
+
+##### `SSL_REQUIRED`
+
+This environment variable is used to indicate the type of SSL authentication required for Keycloak.
+Keycloak can run out of the box without SSL so long as one sticks to private IP addresses like localhost, 127.0.0.1, 
+10.0.x.x, 192.168.x.x, and 172..16.x.x. If one doesn’t have SSL/HTTPS configured on the server or one tries to access 
+Keycloak over HTTP from a non-private IP address then one will get an error.
+
+##### `AUTH_SERVER_URL`
+
+This environment variable is used to match `auth-server-url` used in the wildfly configuration for Keycloak. 
+
+##### `JAVA_OPTS`
+
+This environment variable is used to set the JAVA_OPTS during archive startup.
+
+##### `WILDFLY_CHOWN`
+
+This environment variable is used to set the ownership to the storage directory. 
+
 #### Use Docker Compose
 
 Alternatively you may use [Docker Compose](https://docs.docker.com/compose/) to take care for starting and linking
