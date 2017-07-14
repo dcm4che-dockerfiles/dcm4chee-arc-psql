@@ -55,19 +55,6 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -p 9990:9990 \
            -p 11112:11112 \
            -p 2575:2575 \
-           -e LDAP_BASE_DN=dc=dcm4che,dc=org \
-           -e LDAP_ROOTPASS=secret \
-           -e LDAP_CONFIGPASS=secret \
-           -e ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-           -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs \
-           -e POSTGRES_PASSWORD=pacs \
-           -e KEYCLOAK_ADMIN_USER=admin \
-           -e KEYCLOAK_ADMIN_PASSWORD=admin \
-           -e SSL_REQUIRED=external \
-           -e AUTH_SERVER_URL=/auth \
-           -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
-           -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
@@ -84,19 +71,6 @@ with the _Logstash_ (alias:`logstash`) container:
            -p 9990:9990 \
            -p 11112:11112 \
            -p 2575:2575 \
-           -e LDAP_BASE_DN=dc=dcm4che,dc=org \
-           -e LDAP_ROOTPASS=secret \
-           -e LDAP_CONFIGPASS=secret \
-           -e ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-           -e POSTGRES_DB=pacsdb \
-           -e POSTGRES_USER=pacs \
-           -e POSTGRES_PASSWORD=pacs \
-           -e KEYCLOAK_ADMIN_USER=admin \
-           -e KEYCLOAK_ADMIN_PASSWORD=admin \
-           -e SSL_REQUIRED=external \
-           -e AUTH_SERVER_URL=/auth \
-           -e JAVA_OPTS="-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true" \
-           -e WILDFLY_CHOWN="/opt/wildfly/standalone /storage" \
            -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
@@ -107,70 +81,76 @@ with the _Logstash_ (alias:`logstash`) container:
 
 #### Environment Variables 
 
+Below explained environment variables can be set as per one's application to override the default values if need be.
+An example of how one can set an env variable in `docker run` command is shown below :
+
+    -e LDAP_ROOTPASS=mypass
+
+_**Note**_ : If default values of any environment variables were overridden in startup of `slapd` or `postgres` containers, 
+then ensure that the same values are also used for overriding the defaults during startup of archive container. 
+
 ##### `LDAP_BASE_DN`
 
-This environment variable sets the base domain name for LDAP. In the above example, it is being set to "dc=dcm4che,dc=org".
-This should match with the value used during startup of `slapd` container.
+This environment variable sets the base domain name for LDAP. Default value is _**dc=dcm4che,dc=org**_.
 
 ##### `LDAP_ROOTPASS`
 
-This environment variable sets the root password for LDAP. In the above example, it is being set to "secret". This should 
-match with the value used during startup of `slapd` container.
+This environment variable sets the root password for LDAP. Default value is _**secret**_. 
 
 ##### `LDAP_CONFIGPASS`
 
-This environment variable sets the password for users who wish to change the schema configuration in LDAP. In the above 
-example, it is being set to "secret". This should match with the value used during startup of `slapd` container.
+This environment variable sets the password for users who wish to change the schema configuration in LDAP. 
+Default value is _**secret**_. 
 
 ##### `ARCHIVE_DEVICE_NAME`
 
-This is the name of archive device which can be set per one's application. In the above example, it is being set to 
-"dcm4chee-arc". This should match with the value used during startup of `slapd` container.
+This is the name of archive device which can be set per one's application. Default value is _**dcm4chee-arc**_. 
 
 ##### `POSTGRES_DB`
 
 This environment variable defines the name for the default database that is created when the postgres image was started.
-In the above example, it is being set to "pacsdb". This should match with the value used during startup of `postgres` container.
+Default value is _**pacsdb**_. 
 
 ##### `POSTGRES_USER`
 
 This environment variable used in conjunction with `POSTGRES_PASSWORD` is the user with superuser power and its password. 
-In the above example, it is being set to "pacs". This should match with the value used during startup of `postgres` container.
+Default value is _**pacs**_. 
 
 ##### `POSTGRES_PASSWORD`
 
-This environment variable is the superuser password for PostgreSQL. In the above example, it is being set to "pacs". 
-This should match with the value used during startup of `postgres` container.
+This environment variable is the superuser password for PostgreSQL. Default value is _**pacs**_. 
 
 ##### `KEYCLOAK_ADMIN_USER`
 
 This environment variable used in conjunction with `KEYCLOAK_ADMIN_PASSWORD` is the user with superuser power and its password
 for Keycloak Master realm which is used in for debugging purposes, should something go wrong with secured version of archive. 
-In the above example, it is being set to "admin". This can be set as per one's application needs.
+Default value is _**admin**_. 
 
 ##### `KEYCLOAK_ADMIN_PASSWORD`
 
-This environment variable is the superuser password for Keycloak. In the above example, it is being set to "admin". 
-This can be set as per one's application needs.
+This environment variable is the superuser password for Keycloak. Default value is _**admin**_. 
 
 ##### `SSL_REQUIRED`
 
 This environment variable is used to indicate the type of SSL authentication required for Keycloak.
 Keycloak can run out of the box without SSL so long as one sticks to private IP addresses like localhost, 127.0.0.1, 
 10.0.x.x, 192.168.x.x, and 172..16.x.x. If one doesn’t have SSL/HTTPS configured on the server or one tries to access 
-Keycloak over HTTP from a non-private IP address then one will get an error.
+Keycloak over HTTP from a non-private IP address then one will get an error. Default value is _**external**_.
 
 ##### `AUTH_SERVER_URL`
 
 This environment variable is used to match `auth-server-url` used in the wildfly configuration for Keycloak. 
+Default value is _**/auth**_. 
 
 ##### `JAVA_OPTS`
 
-This environment variable is used to set the JAVA_OPTS during archive startup.
+This environment variable is used to set the JAVA_OPTS during archive startup. Default value is 
+_**"-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"**_
 
 ##### `WILDFLY_CHOWN`
 
-This environment variable is used to set the ownership to the storage directory. 
+This environment variable is used to set the ownership to the storage directory. Default value is 
+_**"/opt/wildfly/standalone /storage"**_
 
 #### Use Docker Compose
 
