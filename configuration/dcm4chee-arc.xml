@@ -31,14 +31,16 @@
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
         <extension module="org.wildfly.iiop-openjdk"/>
-        <extension module="org.keycloak.keycloak-server-subsystem"/>
         <extension module="org.keycloak.keycloak-adapter-subsystem"/>
     </extensions>
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
-        <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
-        <property name="ssl-required" value="${env.SSL_REQUIRED}"/>
+        <property name="auth-server-url" value="${env.KEYCLOAK_URL}"/>
+        <property name="realm" value="${env.KEYCLOAK_REALM}"/>
+        <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
+        <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
+        <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
     </system-properties>
 
     <management>
@@ -57,7 +59,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="dcm4chee-arc/key.jks" relative-to="jboss.server.config.dir" keystore-password="secret" alias="dcm4chee-arc" key-password="secret"/>
+                        <keystore path="${env.ARCHIVE_KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.ARCHIVE_KEYSTORE_PASSWORD}" provider="${env.ARCHIVE_KEYSTORE_TYPE}"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -193,14 +195,6 @@
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
-                    <driver>h2</driver>
-                    <security>
-                        <user-name>sa</user-name>
-                        <password>sa</password>
-                    </security>
-                </datasource>
-                <datasource jta="false" jndi-name="java:jboss/datasources/KeycloakDS" pool-name="KeycloakDS" use-java-context="true">
-                    <connection-url>jdbc:h2:${jboss.server.data.dir}/keycloak;AUTO_SERVER=TRUE</connection-url>
                     <driver>h2</driver>
                     <security>
                         <user-name>sa</user-name>
@@ -344,23 +338,6 @@
                 </local-cache>
                 <local-cache name="timestamps"/>
             </cache-container>
-            <cache-container name="keycloak" jndi-name="infinispan/Keycloak">
-                <local-cache name="realms"/>
-                <local-cache name="users">
-                    <eviction strategy="LRU" max-entries="10000"/>
-                </local-cache>
-                <local-cache name="sessions"/>
-                <local-cache name="offlineSessions"/>
-                <local-cache name="loginFailures"/>
-                <local-cache name="work"/>
-                <local-cache name="authorization">
-                    <eviction strategy="LRU" max-entries="100"/>
-                </local-cache>
-                <local-cache name="keys">
-                    <eviction strategy="LRU" max-entries="1000"/>
-                    <expiration max-idle="3600000"/>
-                </local-cache>
-            </cache-container>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:iiop-openjdk:1.0">
             <orb socket-binding="iiop" ssl-socket-binding="iiop-ssl"/>
@@ -432,7 +409,7 @@
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
-                <connection-factory name="RemoteConnectionFactory" connectors="http-connector" entries="java:jboss/exported/jms/RemoteConnectionFactory"/>
+                <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
             </server>
         </subsystem>
@@ -533,123 +510,26 @@
             <client-config name="Standard-Client-Config"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:3.0"/>
-        <subsystem xmlns="urn:jboss:domain:keycloak-server:1.1">
-            <web-context>auth</web-context>
-            <providers>
-                <provider>
-                    classpath:${jboss.home.dir}/providers/*
-                </provider>
-                <provider>
-                    module:org.dcm4che.audit-keycloak
-                </provider>
-            </providers>
-            <master-realm-name>master</master-realm-name>
-            <scheduled-task-interval>900</scheduled-task-interval>
-            <theme>
-                <staticMaxAge>2592000</staticMaxAge>
-                <cacheThemes>true</cacheThemes>
-                <cacheTemplates>true</cacheTemplates>
-                <dir>${jboss.home.dir}/themes</dir>
-            </theme>
-            <spi name="eventsStore">
-                <default-provider>jpa</default-provider>
-                <provider name="jpa" enabled="true">
-                    <properties>
-                        <property name="exclude-events" value="[&quot;REFRESH_TOKEN&quot;]"/>
-                    </properties>
-                </provider>
-            </spi>
-            <spi name="eventsListener">
-                <provider name="dcm4che-rest" enabled="true">
-                    <properties>
-                        <property name="includes" value="[&quot;LOGIN&quot;, &quot;LOGIN_ERROR&quot;, &quot;LOGOUT&quot;, &quot;LOGOUT_ERROR&quot;]"/>
-                    </properties>
-                </provider>
-            </spi>
-            <spi name="realm">
-                <default-provider>jpa</default-provider>
-            </spi>
-            <spi name="user">
-                <default-provider>jpa</default-provider>
-            </spi>
-            <spi name="userCache">
-                <provider name="default" enabled="true"/>
-            </spi>
-            <spi name="userSessionPersister">
-                <default-provider>jpa</default-provider>
-            </spi>
-            <spi name="authorizationPersister">
-                <default-provider>jpa</default-provider>
-            </spi>
-            <spi name="timer">
-                <default-provider>basic</default-provider>
-            </spi>
-            <spi name="connectionsHttpClient">
-                <provider name="default" enabled="true"/>
-            </spi>
-            <spi name="connectionsJpa">
-                <provider name="default" enabled="true">
-                    <properties>
-                        <property name="dataSource" value="java:jboss/datasources/KeycloakDS"/>
-                        <property name="initializeEmpty" value="true"/>
-                        <property name="migrationStrategy" value="update"/>
-                        <property name="migrationExport" value="${jboss.home.dir}/keycloak-database-update.sql"/>
-                    </properties>
-                </provider>
-            </spi>
-            <spi name="realmCache">
-                <provider name="default" enabled="true"/>
-            </spi>
-            <spi name="connectionsInfinispan">
-                <default-provider>default</default-provider>
-                <provider name="default" enabled="true">
-                    <properties>
-                        <property name="cacheContainer" value="java:comp/env/infinispan/Keycloak"/>
-                    </properties>
-                </provider>
-            </spi>
-            <spi name="jta-lookup">
-                <default-provider>${keycloak.jta.lookup.provider:jboss}</default-provider>
-                <provider name="jboss" enabled="true"/>
-            </spi>
-            <spi name="publicKeyStorage">
-                <provider name="infinispan" enabled="true">
-                    <properties>
-                        <property name="minTimeBetweenRequests" value="10"/>
-                    </properties>
-                </provider>
-            </spi>
-            <spi name="truststore">
-                <provider name="file" enabled="true">
-                    <properties>
-                        <property name="file" value="${jboss.server.config.dir}/dcm4chee-arc/key.jks"/>
-                        <property name="password" value="secret"/>
-                        <property name="hostname-verification-policy" value="ANY"/>
-                        <property name="disabled" value="false"/>
-                    </properties>
-                </provider>
-            </spi>
-        </subsystem>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
             <secure-deployment name="dcm4chee-arc-ui2-5.10.5-secure.war">
-                <realm>dcm4che</realm>
+                <realm>${realm}</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
-                <ssl-required>${ssl-required}</ssl-required>
-                <resource>dcm4chee-arc-ui2</resource>
-                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
-                <truststore-password>secret</truststore-password>
-                <allow-any-hostname>true</allow-any-hostname>
+                <ssl-required>${env.KEYCLOAK_SSL_REQUIRED}</ssl-required>
+                <resource>${env.KEYCLOAK_ARC_UI}</resource>
+                <truststore>${jboss.server.config.dir}/${env.KEYCLOAK_TRUSTSTORE}</truststore>
+                <truststore-password>${env.KEYCLOAK_TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.KEYCLOAK_ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.10.5-secure.war">
-                <realm>dcm4che</realm>
+                <realm>${realm}</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
-                <ssl-required>${ssl-required}</ssl-required>
-                <resource>dcm4chee-arc-rs</resource>
-                <truststore>${jboss.server.config.dir}/dcm4chee-arc/key.jks</truststore>
-                <truststore-password>secret</truststore-password>
-                <allow-any-hostname>true</allow-any-hostname>
+                <ssl-required>${env.KEYCLOAK_SSL_REQUIRED}</ssl-required>
+                <resource>${env.KEYCLOAK_ARC_RS}</resource>
+                <truststore>${jboss.server.config.dir}/${env.KEYCLOAK_TRUSTSTORE}</truststore>
+                <truststore-password>${env.KEYCLOAK_TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.KEYCLOAK_ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
         </subsystem>
     </profile>
