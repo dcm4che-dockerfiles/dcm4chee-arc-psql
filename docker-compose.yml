@@ -1,6 +1,7 @@
 version: "2"
 services:
   slapd:
+    container_name: slapd
     image: dcm4che/slapd-dcm4chee:2.4.40-10.5
     ports:
       - "389:389"
@@ -11,6 +12,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
+    container_name: postgres
     image: dcm4che/postgres-dcm4chee:9.6-10
     ports:
       - "5432:5432"
@@ -19,24 +21,45 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+  keycloak:
+    container_name: keycloak
+    image: dcm4che/keycloak:3.2.1
+    ports:
+      - "8880:8880"
+      - "8883:8883"
+      - "8990:8990"
+    env_file: docker-compose.env
+    environment:
+      HTTP_PORT: 8880
+      HTTPS_PORT: 8883
+      MANAGEMENT_HTTP_PORT: 8990
+      KEYCLOAK_WAIT_FOR: ldap:389
+    links:
+      - slapd:ldap
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+      - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   dcm4chee-arc:
+    container_name: dcm4chee-arc
     image: dcm4che/dcm4chee-arc-psql:5.10.5-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
       - "9990:9990"
-      - "8787:8787"
       - "11112:11112"
       - "2575:2575"
     env_file: docker-compose.env
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432
-      SSL_REQUIRED: external
-      AUTH_SERVER_URL: /auth
+      KEYCLOAK_URL: https://keycloak:8883/auth
+      KEYCLOAK_ARC_UI: dcm4chee-arc-ui
+      KEYCLOAK_ARC_RS: dcm4chee-arc-rs
     links:
       - slapd:ldap
       - postgres:db
+      - keycloak:keycloak
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
