@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:10.1.0.Final
+FROM dcm4che/wildfly:10.1.0-3.2.1
 
 ENV DCM4CHEE_ARC_VERSION 5.10.5
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
@@ -11,14 +11,11 @@ RUN cd $JBOSS_HOME \
     && curl -f http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
     && curl -f http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
-    && curl -fO https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
+    && curl -fO https://jdbc.postgresql.org/download/postgresql-42.1.4.jar \
     && cd /docker-entrypoint.d/deployments \
-    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear \
-    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arr-proxy/${DCM4CHEE_ARC_VERSION}/dcm4chee-arr-proxy-${DCM4CHEE_ARC_VERSION}-secure.war
+    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear
 
 COPY configuration /docker-entrypoint.d/configuration
-
-ENV WILDFLY_INIT $JBOSS_HOME/standalone/configuration/adjust-dcm4che-realm.sh
 
 # Default configuration: can be overridden at the docker command line
 ENV LDAP_HOST=ldap \
@@ -30,6 +27,9 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
+    HTTP_PORT=8080 \
+    HTTPS_PORT=8443 \
+    MANAGEMENT_HTTP_PORT=9990 \
     WILDFLY_ADMIN_USER=admin \
     WILDFLY_EXECUTER_MAX_THREADS=100 \
     WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
@@ -37,13 +37,18 @@ ENV LDAP_HOST=ldap \
     GELF_FACILITY=dcm4chee-arc \
     GELF_LEVEL=WARN \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-    ARR_PROXY_HOST=kibana \
-    ARR_PROXY_URL=http://kibana:8080 \
-    SSL_REQUIRED=external \
-    AUTH_SERVER_URL=http://localhost:8080/auth
+    ARCHIVE_KEYSTORE=dcm4chee-arc/key.jks \
+    ARCHIVE_KEYSTORE_PASSWORD=secret \
+    ARCHIVE_KEYSTORE_TYPE=JKS \
+    KEYCLOAK_URL=http://keycloak:8080/auth \
+    KEYCLOAK_REALM=dcm4che \
+    KEYCLOAK_SSL_REQUIRED=external \
+    KEYCLOAK_ARC_UI=dcm4chee-arc-ui \
+    KEYCLOAK_ARC_RS=dcm4chee-arc-rs \
+    KEYCLOAK_TRUSTSTORE=dcm4chee-arc/cacerts.jks \
+    KEYCLOAK_TRUSTSTORE_PASSWORD=secret \
+    KEYCLOAK_ALLOW_ANY_HOSTNAME=true
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
-CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml", \
-     "-Dkeycloak.migration.action=import", "-Dkeycloak.migration.provider=singleFile", \
-     "-Dkeycloak.migration.file=/opt/wildfly/standalone/configuration/dcm4che-realm.json" ]
+CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml" ]
