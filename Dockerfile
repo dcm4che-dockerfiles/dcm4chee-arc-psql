@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:10.1.0.Final
+FROM dcm4che/wildfly:10.1.0-3.2.1
 
 ENV DCM4CHEE_ARC_VERSION 5.10.5
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
@@ -11,10 +11,9 @@ RUN cd $JBOSS_HOME \
     && curl -f http://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
     && curl -f http://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
-    && curl -fO https://jdbc.postgresql.org/download/postgresql-9.4-1206-jdbc41.jar \
+    && curl -fO https://jdbc.postgresql.org/download/postgresql-42.1.4.jar \
     && cd /docker-entrypoint.d/deployments \
-    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear \
-    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arr-proxy/${DCM4CHEE_ARC_VERSION}/dcm4chee-arr-proxy-${DCM4CHEE_ARC_VERSION}-unsecure.war
+    && curl -fO http://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear
 
 COPY configuration /docker-entrypoint.d/configuration
 
@@ -28,15 +27,17 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
+    HTTP_PORT=8080 \
+    HTTPS_PORT=8443 \
+    MANAGEMENT_HTTP_PORT=9990 \
     WILDFLY_ADMIN_USER=admin \
     WILDFLY_EXECUTER_MAX_THREADS=100 \
     WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
     SYSLOG_HOST=logstash \
     GELF_FACILITY=dcm4chee-arc \
     GELF_LEVEL=WARN \
-    ARCHIVE_DEVICE_NAME=dcm4chee-arc \
-    ARR_PROXY_HOST=kibana
+    ARCHIVE_DEVICE_NAME=dcm4chee-arc
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
-CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml"]
+CMD ["standalone.sh", "-b", "0.0.0.0", "-bmanagement", "0.0.0.0", "-c", "dcm4chee-arc.xml" ]

@@ -35,6 +35,9 @@
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
+        <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
+        <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
+        <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
     </system-properties>
 
     <management>
@@ -53,7 +56,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="dcm4chee-arc/key.jks" relative-to="jboss.server.config.dir" keystore-password="secret" alias="dcm4chee-arc" key-password="secret"/>
+                        <keystore path="${env.ARCHIVE_KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.ARCHIVE_KEYSTORE_PASSWORD}" provider="${env.ARCHIVE_KEYSTORE_TYPE}"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -204,7 +207,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true">
-                    <connection-url>jdbc:postgresql://db:5432/${env.POSTGRES_DB}</connection-url>
+                    <connection-url>jdbc:postgresql://${env.POSTGRES_HOST}:${env.POSTGRES_PORT}/${env.POSTGRES_DB}</connection-url>
                     <driver>psql</driver>
                     <pool>
                         <max-pool-size>${env.WILDFLY_PACSDS_MAX_POOL_SIZE}</max-pool-size>
@@ -411,7 +414,7 @@
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
-                <connection-factory name="RemoteConnectionFactory" connectors="http-connector" entries="java:jboss/exported/jms/RemoteConnectionFactory"/>
+                <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
             </server>
         </subsystem>
@@ -479,11 +482,6 @@
                 <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true" max-post-size="10000000000"/>
                 <https-listener name="https" socket-binding="https" security-realm="ApplicationRealm" enable-http2="true"/>
                 <host name="default-host" alias="localhost">
-                    <location name="/" handler="welcome-content"/>
-                    <filter-ref name="server-header"/>
-                    <filter-ref name="x-powered-by-header"/>
-                </host>
-                <host name="arr-proxy" alias="${env.ARR_PROXY_HOST}">
                     <location name="/" handler="welcome-content"/>
                     <filter-ref name="server-header"/>
                     <filter-ref name="x-powered-by-header"/>
