@@ -1,6 +1,7 @@
 version: "2"
 services:
   slapd:
+    container_name: slapd
     image: dcm4che/slapd-dcm4chee:2.4.40-10.5
     ports:
       - "389:389"
@@ -11,6 +12,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
+    container_name: postgres
     image: dcm4che/postgres-dcm4chee:9.6-10
     ports:
       - "5432:5432"
@@ -20,6 +22,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   elasticsearch:
+    container_name: elasticsearch
     image: elasticsearch:5.5.1
     ports:
       - "9200:9200"
@@ -29,6 +32,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
+    container_name: kibana
     image: kibana:5.5.1
     ports:
       - "5601:5601"
@@ -38,9 +42,11 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   logstash:
+    container_name: logstash
     image: dcm4che/logstash-dcm4chee:5.5.1-3
     ports:
       - "12201:12201/udp"
+      - "8514:8514/udp"
       - "8514:8514"
     links:
       - elasticsearch:elasticsearch
@@ -48,6 +54,7 @@ services:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
   keycloak:
+    container_name: keycloak
     image: dcm4che/keycloak:3.2.1-logstash
     ports:
       - "8880:8880"
@@ -67,6 +74,7 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   dcm4chee-arc:
+    container_name: dcm4chee-arc
     image: dcm4che/dcm4chee-arc-psql:5.10.5-logstash-secure
     ports:
       - "8080:8080"
@@ -78,7 +86,7 @@ services:
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
-      KEYCLOAK_URL: http://keycloak:8880/auth
+      KEYCLOAK_URL: https://keycloak:8883/auth
       KEYCLOAK_ARC_UI: dcm4chee-arc-ui
       KEYCLOAK_ARC_RS: dcm4chee-arc-rs
     links:
