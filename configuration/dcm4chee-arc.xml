@@ -56,7 +56,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="${env.ARCHIVE_KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.ARCHIVE_KEYSTORE_PASSWORD}" provider="${env.ARCHIVE_KEYSTORE_TYPE}"/>
+                        <keystore path="${env.KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.KEYSTORE_PASSWORD}" key-password="${env.KEY_PASSWORD}" provider="${env.KEYSTORE_TYPE}"/>
                     </ssl>
                 </server-identities>
                 <authentication>
