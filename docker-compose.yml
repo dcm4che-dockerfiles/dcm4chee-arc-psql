@@ -1,7 +1,6 @@
 version: "2"
 services:
   slapd:
-    container_name: slapd
     image: dcm4che/slapd-dcm4chee:2.4.40-10.5
     ports:
       - "389:389"
@@ -12,7 +11,6 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   postgres:
-    container_name: postgres
     image: dcm4che/postgres-dcm4chee:9.6-10
     ports:
       - "5432:5432"
@@ -22,9 +20,9 @@ services:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   dcm4chee-arc:
-    container_name: dcm4chee-arc
     image: dcm4che/dcm4chee-arc-psql:5.10.4
     ports:
+      - "8443:8443"
       - "9990:9990"
       - "11112:11112"
       - "2575:2575"

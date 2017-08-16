@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:10.1.0-3.2.1
+FROM dcm4che/wildfly:10.1.0-1
 
 ENV DCM4CHEE_ARC_VERSION 5.10.5
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
@@ -27,13 +27,20 @@ ENV LDAP_HOST=ldap \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
+    ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     HTTP_PORT=8080 \
     HTTPS_PORT=8443 \
     MANAGEMENT_HTTP_PORT=9990 \
     WILDFLY_ADMIN_USER=admin \
+    WILDFLY_ADMIN_PASSWORD= \
+    KEYSTORE=dcm4chee-arc/key.jks \
+    KEYSTORE_PASSWORD=secret \
+    KEY_PASSWORD=secret \
+    KEYSTORE_TYPE=JKS \
+    TRUSTSTORE=dcm4chee-arc/cacerts.jks \
+    TRUSTSTORE_PASSWORD=secret \
     WILDFLY_EXECUTER_MAX_THREADS=100 \
-    WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
-    ARCHIVE_DEVICE_NAME=dcm4chee-arc
+    WILDFLY_PACSDS_MAX_POOL_SIZE=50
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
