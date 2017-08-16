@@ -1,7 +1,7 @@
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-10.5
+    image: dcm4che/slapd-dcm4chee:2.4.44-10.5
     ports:
       - "389:389"
     env_file: docker-compose.env
