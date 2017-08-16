@@ -36,8 +36,8 @@
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
-        <property name="auth-server-url" value="${env.KEYCLOAK_URL}"/>
-        <property name="realm" value="${env.KEYCLOAK_REALM}"/>
+        <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
+        <property name="realm-name" value="${env.REALM_NAME}"/>
         <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
         <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
         <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
@@ -59,7 +59,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="${env.ARCHIVE_KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.ARCHIVE_KEYSTORE_PASSWORD}" provider="${env.ARCHIVE_KEYSTORE_TYPE}"/>
+                        <keystore path="${env.KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.KEYSTORE_PASSWORD}" key-password="${env.KEY_PASSWORD}" provider="${env.KEYSTORE_TYPE}"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -520,24 +520,24 @@
         <subsystem xmlns="urn:jboss:domain:weld:3.0"/>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
             <secure-deployment name="dcm4chee-arc-ui2-5.10.5-secure.war">
-                <realm>${realm}</realm>
+                <realm>${realm-name}</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
-                <ssl-required>${env.KEYCLOAK_SSL_REQUIRED}</ssl-required>
-                <resource>${env.KEYCLOAK_ARC_UI}</resource>
-                <truststore>${jboss.server.config.dir}/${env.KEYCLOAK_TRUSTSTORE}</truststore>
-                <truststore-password>${env.KEYCLOAK_TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.KEYCLOAK_ALLOW_ANY_HOSTNAME}</allow-any-hostname>
+                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
+                <resource>${env.UI_CLIENT_ID}</resource>
+                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.10.5-secure.war">
-                <realm>${realm}</realm>
+                <realm>${realm-name}</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
                 <public-client>true</public-client>
-                <ssl-required>${env.KEYCLOAK_SSL_REQUIRED}</ssl-required>
-                <resource>${env.KEYCLOAK_ARC_RS}</resource>
-                <truststore>${jboss.server.config.dir}/${env.KEYCLOAK_TRUSTSTORE}</truststore>
-                <truststore-password>${env.KEYCLOAK_TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.KEYCLOAK_ALLOW_ANY_HOSTNAME}</allow-any-hostname>
+                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
+                <resource>${env.RS_CLIENT_ID}</resource>
+                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
         </subsystem>
     </profile>
