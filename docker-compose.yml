@@ -77,6 +77,9 @@ services:
       - "2575:2575"
     env_file: docker-compose.env
     environment:
+      HTTP_PORT: 8080
+      HTTPS_PORT: 8443
+      MANAGEMENT_HTTP_PORT: 9990
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
       UI_CLIENT_ID: dcm4chee-arc-ui
