@@ -120,28 +120,6 @@ Default value is _**pacs**_.
 
 This environment variable is the superuser password for PostgreSQL. Default value is _**pacs**_. 
 
-##### `KEYCLOAK_ADMIN_USER`
-
-This environment variable used in conjunction with `KEYCLOAK_ADMIN_PASSWORD` is the user with superuser power and its password
-for Keycloak Master realm which is used in for debugging purposes, should something go wrong with secured version of archive. 
-Default value is _**admin**_. 
-
-##### `KEYCLOAK_ADMIN_PASSWORD`
-
-This environment variable is the superuser password for Keycloak. Default value is _**admin**_. 
-
-##### `SSL_REQUIRED`
-
-This environment variable is used to indicate the type of SSL authentication required for Keycloak.
-Keycloak can run out of the box without SSL so long as one sticks to private IP addresses like localhost, 127.0.0.1, 
-10.0.x.x, 192.168.x.x, and 172..16.x.x. If one doesn’t have SSL/HTTPS configured on the server or one tries to access 
-Keycloak over HTTP from a non-private IP address then one will get an error. Default value is _**external**_.
-
-##### `AUTH_SERVER_URL`
-
-This environment variable is used to match `auth-server-url` used in the wildfly configuration for Keycloak. 
-Default value is _**/auth**_. 
-
 ##### `JAVA_OPTS`
 
 This environment variable is used to set the JAVA_OPTS during archive startup. Default value is 
@@ -250,10 +228,6 @@ STORAGE_DIR=/storage/fs1
 POSTGRES_DB=pacsdb
 POSTGRES_USER=pacs
 POSTGRES_PASSWORD=pacs
-KEYCLOAK_ADMIN_USER=admin
-KEYCLOAK_ADMIN_PASSWORD=admin
-SSL_REQUIRED=external
-AUTH_SERVER_URL=/auth
 ````
 
 and starting them by
@@ -268,7 +242,6 @@ and starting them by
     --- | --- | ---
     `user` | `user` | `user`
     `admin` | `admin` | `user` + `admin`
-- Keycloak Administration Console: <http://localhost:8080/auth>, login with Username: `admin`, Password: `admin`.
 - Wildfly Administration Console: <http://localhost:9990>, login with Username: `admin`, Password: `admin`.
 - Kibana UI: <http://localhost:5601>
 - DICOM QIDO-RS Base URL: <http://localhost:8080/dcm4chee-arc/aets/DCM4CHEE/rs>
