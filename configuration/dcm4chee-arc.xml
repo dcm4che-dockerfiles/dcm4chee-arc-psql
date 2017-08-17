@@ -532,7 +532,7 @@
             <secure-deployment name="dcm4chee-arc-war-5.10.5-secure.war">
                 <realm>${realm-name}</realm>
                 <auth-server-url>${auth-server-url}</auth-server-url>
-                <public-client>true</public-client>
+                <bearer-only>true</bearer-only>
                 <ssl-required>${env.SSL_REQUIRED}</ssl-required>
                 <resource>${env.RS_CLIENT_ID}</resource>
                 <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
