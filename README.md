@@ -18,7 +18,8 @@ You may choose between
   but not secured RESTful services (Tag Name: `5.10.6-logstash-secure-ui`).
 
 Before running the Archive container, you have to start a container providing the [LDAP server](https://github.com/dcm4che-dockerfiles/slapd-dcm4chee#how-to-use-this-image)
-and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image), 
+and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image)
+and [Keycloak container](https://github.com/dcm4che-dockerfiles/keycloak#how-to-use-this-image)
 
 If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
 you have to also start containers providing [Elasticsearch, Logstash and Kibana](https://www.elastic.co/products):
@@ -48,7 +49,8 @@ you have to also start containers providing [Elasticsearch, Logstash and Kibana]
            -d kibana:5.2.2
 ```
 
-You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and the _PostgreSQL_ (alias:`db`) container:
+You have to link the archive container with the _OpenLDAP_ (alias:`ldap`), the _PostgreSQL_ (alias:`db`) and 
+the _Keycloak_ (alias:`keycloak`) containers :
 ```bash
 > $docker run --name dcm4chee-arc \
            -p 8080:8080 \
@@ -59,6 +61,7 @@ You have to link the archive container with the _OpenLDAP_ (alias:`ldap`) and th
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
            --link postgres:db \
+           --link keycloak:keycloak \
            -d dcm4che/dcm4chee-arc-psql:5.10.6-secure-ui
 ```
 
@@ -75,6 +78,7 @@ with the _Logstash_ (alias:`logstash`) container:
            -v /var/local/dcm4chee-arc/storage:/storage \
            --link slapd:ldap \
            --link postgres:db \
+           --link keycloak:keycloak \
            --link logstash:logstash \
            -d dcm4che/dcm4chee-arc-psql:5.10.6-logstash-secure-ui
 ```
@@ -84,7 +88,7 @@ with the _Logstash_ (alias:`logstash`) container:
 Below explained environment variables can be set as per one's application to override the default values if need be.
 An example of how one can set an env variable in `docker run` command is shown below :
 
-    -e LDAP_ROOTPASS=mypass
+    -e ARCHIVE_DEVICE_NAME=my-dcm4chee-arc
 
 _**Note**_ : If default values of any environment variables were overridden in startup of `slapd` or `postgres` containers, 
 then ensure that the same values are also used for overriding the defaults during startup of archive container. 
@@ -92,6 +96,10 @@ then ensure that the same values are also used for overriding the defaults durin
 ##### `LDAP_BASE_DN`
 
 This environment variable sets the base domain name for LDAP. Default value is _**dc=dcm4che,dc=org**_.
+
+### `LDAP_ORGANISATION`
+
+This environment variable sets the organisation name for LDAP. Default value is "dcm4che.org".
 
 ##### `LDAP_ROOTPASS`
 
@@ -139,7 +147,7 @@ the containers, by specifying the services in a configuration file `docker-compo
 version: "2"
 services:
   slapd:
-    image: dcm4che/slapd-dcm4chee:2.4.40-10.6
+    image: dcm4che/slapd-dcm4chee:2.4.44-10.6
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -186,6 +194,25 @@ services:
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
+  keycloak:
+      image: dcm4che/keycloak:3.2.1-1-logstash
+      ports:
+        - "8880:8880"
+        - "8843:8843"
+        - "8990:8990"
+      env_file: docker-compose.env
+      environment:
+        HTTP_PORT: 8880
+        HTTPS_PORT: 8843
+        MANAGEMENT_HTTP_PORT: 8990
+        KEYCLOAK_WAIT_FOR: ldap:389 logstash:8514
+      links:
+        - slapd:ldap
+        - logstash:logstash
+      volumes:
+        - /etc/timezone:/etc/timezone
+        - /etc/localtime:/etc/localtime
+        - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   dcm4chee-arc:
     image: dcm4che/dcm4chee-arc-psql:5.10.6-logstash-secure-ui
     ports:
@@ -197,16 +224,36 @@ services:
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
-      AUTH_SERVER_URL: /auth
+      UI_CLIENT_ID: dcm4chee-arc-ui
+      RS_CLIENT_ID: dcm4chee-arc-rs
     links:
       - slapd:ldap
       - postgres:db
       - logstash:logstash
+      - keycloak:keycloak
     volumes:
       - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/storage:/storage
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
+  keycloak-proxy:
+      image: dcm4che/keycloak-proxy:3.2.1-1
+      ports:
+        - "8601:8601"
+        - "8643:8643"
+      env_file: docker-compose.env
+      environment:
+        HTTP_PORT: 8601
+        HTTPS_PORT: 8643
+        TARGET_URL: http://gunter-nb:5601
+        CLIENT_ID: kibana
+        ROLE_ALLOWED: auditlog
+      links:
+        - kibana:kibana
+        - keycloak:keycloak
+      volumes:
+        - /etc/timezone:/etc/timezone
+        - /etc/localtime:/etc/localtime
 ````
 
 and environment in the referenced file `docker-compose.env` (e.g.):
@@ -216,18 +263,22 @@ LDAP_BASE_DN=dc=dcm4che,dc=org
 LDAP_ORGANISATION=dcm4che.org
 LDAP_ROOTPASS=secret
 LDAP_CONFIGPASS=secret
+POSTGRES_DB=pacsdb
+POSTGRES_USER=pacs
+POSTGRES_PASSWORD=pacs
 ARCHIVE_DEVICE_NAME=dcm4chee-arc
 AE_TITLE=DCM4CHEE
 DICOM_HOST=localhost
 DICOM_PORT=11112
 HL7_PORT=2575
+STORAGE_DIR=/storage/fs1
+SYSLOG_DEVICE_NAME=logstash
 SYSLOG_HOST=logstash
 SYSLOG_PORT=8514
 SYSLOG_PROTOCOL=TLS
-STORAGE_DIR=/storage/fs1
-POSTGRES_DB=pacsdb
-POSTGRES_USER=pacs
-POSTGRES_PASSWORD=pacs
+KEYCLOAK_DEVICE_NAME=keycloak
+REALM_NAME=dcm4che
+AUTH_SERVER_URL=https://gunter-nb:8843/auth
 ````
 
 and starting them by
