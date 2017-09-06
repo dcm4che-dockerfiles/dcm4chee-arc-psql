@@ -1,87 +1,14 @@
-### dcm4chee-arc-psql Docker image
+# Supported tags and respective `Dockerfile` links
 
-This is a Dockerfile with the DICOM Archive [dcm4chee-arc-light](https://github.com/dcm4che/dcm4chee-arc-light/wiki)
-for use with Postgres SQL as database. Beside Postgres SQL - provided by Docker image
-[dcm4che/postgres-dcm4chee](https://hub.docker.com/r/dcm4che/postgres-dcm4chee/) -  it also depends
-on a LDAP server - provided by Docker image
-[dcm4che/slapd-dcm4che](https://hub.docker.com/r/dcm4che/slapd-dcm4chee/).
+- [`5.10.5` (*5.10.5/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5/Dockerfile)
+- [`5.10.5-secure-ui` (*5.10.5-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5-secure-ui/Dockerfile)
+- [`5.10.5-logstash` (*5.10.5-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5-logstash/Dockerfile)
+- [`5.10.5-logstash-secure-ui` (*5.10.5-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5-logstash-secure-ui/Dockerfile)
 
-You may choose between
-- a not secured version (Tag Name: `5.10.6`),
-- a version with secured UI and secured RESTful services (Tag Name: `5.10.6-secure`),
-- a version with secured UI, but not secured RESTful services (Tag Name: `5.10.6-secure-ui`),
-- a not secured version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html)
-  to emit System logs to Logstash (Tag Name: `5.10.6-logstash`),
-- a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI
-  and secured RESTful services (Tag Name: `5.10.6-logstash-secure`) and
-- a version with pre-configured [GELF Logger](http://logging.paluch.biz/examples/wildfly.html) and with secured UI,
-  but not secured RESTful services (Tag Name: `5.10.6-logstash-secure-ui`).
+# How to use this image
 
-Before running the Archive container, you have to start a container providing the [LDAP server](https://github.com/dcm4che-dockerfiles/slapd-dcm4chee#how-to-use-this-image)
-and a container providing the [database server](https://github.com/dcm4che-dockerfiles/postgres-dcm4chee#how-to-use-this-image)
-and [Keycloak container](https://github.com/dcm4che-dockerfiles/keycloak#how-to-use-this-image)
-
-If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in [Elasticsearch](https://www.elastic.co/products/elasticsearch)
-you have to also start containers providing [Elasticsearch, Logstash and Kibana](https://www.elastic.co/products):
-
-```bash
-> $docker run --name elasticsearch \
-           -p 9200:9200 \
-           -p 9300:9300 \
-           -v /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data \
-           -d elasticsearch:5.2.2
-```
-
-```bash
-> $docker run --name logstash \
-           -p 12201:12201/udp \
-           -p 8514:8514/udp \
-           -p 8514:8514 \
-           -v /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data \
-           --link elasticsearch:elasticsearch \
-           -d dcm4che/logstash-dcm4chee:5.2.2-2
-```
-
-```bash
-> $docker run --name kibana \
-           -p 5601:5601 \
-           --link elasticsearch:elasticsearch \
-           -d kibana:5.2.2
-```
-
-You have to link the archive container with the _OpenLDAP_ (alias:`ldap`), the _PostgreSQL_ (alias:`db`) and 
-the _Keycloak_ (alias:`keycloak`) containers :
-```bash
-> $docker run --name dcm4chee-arc \
-           -p 8080:8080 \
-           -p 9990:9990 \
-           -p 11112:11112 \
-           -p 2575:2575 \
-           -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
-           -v /var/local/dcm4chee-arc/storage:/storage \
-           --link slapd:ldap \
-           --link postgres:db \
-           --link keycloak:keycloak \
-           -d dcm4che/dcm4chee-arc-psql:5.10.6-secure-ui
-```
-
-If you want to store DCM4CHEE Archive 5's System logs and Audit Messages in
-[Elasticsearch](https://www.elastic.co/products/elasticsearch), you also have to link the archive container
-with the _Logstash_ (alias:`logstash`) container:
-```bash
-> $docker run --name dcm4chee-arc \
-           -p 8080:8080 \
-           -p 9990:9990 \
-           -p 11112:11112 \
-           -p 2575:2575 \
-           -v /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone \
-           -v /var/local/dcm4chee-arc/storage:/storage \
-           --link slapd:ldap \
-           --link postgres:db \
-           --link keycloak:keycloak \
-           --link logstash:logstash \
-           -d dcm4che/dcm4chee-arc-psql:5.10.6-logstash-secure-ui
-```
+See [Running on Docker](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Running-on-Docker) at the
+[dcm4che Archive 5 Wiki](https://github.com/dcm4che/dcm4chee-arc-light/wiki).
 
 #### Environment Variables 
 
