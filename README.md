@@ -5,7 +5,7 @@
 - [`5.10.5-logstash` (*5.10.5-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5-logstash/Dockerfile)
 - [`5.10.5-logstash-secure-ui` (*5.10.5-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.10.5-logstash-secure-ui/Dockerfile)
 
-# How to use this image
+## How to use this image
 
 See [Running on Docker](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Running-on-Docker) at the
 [dcm4che Archive 5 Wiki](https://github.com/dcm4che/dcm4chee-arc-light/wiki).
@@ -45,10 +45,6 @@ This environment variable sets the root password for LDAP. Default value is `sec
 This environment variable sets the password for users who wish to change the schema configuration in LDAP. 
 Default value is `secret`. 
 
-#### `ARCHIVE_DEVICE_NAME`
-
-This is the name of archive device which can be set per one's application. Default value is `dcm4chee-arc`. 
-
 #### `POSTGRES_HOST`
 
 This environment variable sets the host name for POSTGRES. Default value is `db`.
@@ -69,6 +65,10 @@ Default value is `pacs`.
 #### `POSTGRES_PASSWORD`
 
 This environment variable is the superuser password for PostgreSQL. Default value is `pacs`. 
+
+#### `ARCHIVE_DEVICE_NAME`
+
+This is the name of archive device which can be set per one's application. Default value is `dcm4chee-arc`. 
 
 #### `JAVA_OPTS`
 
@@ -92,23 +92,57 @@ This environment variable sets the Https port of Wildfly. Default value is `8443
 
 This environment variable sets the Management Http port of Wildfly. Default value is `9990`.
 
-##### `AUTH_SERVER_URL`
+#### `WILDFLY_ADMIN_USER`
 
-This environment variable is the auth-server-url of Keycloak used for authenticating the client requests. 
-eg. `http://<keycloak-host>:8843/auth`. Ensure that the `<keycloak-host>` should be the docker host where the Keycloak container is running.
+This environment variable sets the admin user name for Wildfly. Default value is `admin`.
+
+#### `WILDFLY_ADMIN_PASSWORD`
+
+This environment variable sets the password for the WILDFLY_ADMIN_USER. Default value can be viewed in LDAP, it is set to `admin`.
+
+#### `KEYSTORE`
+
+This environment variable sets the keystore used in ssl server identities in Wildfly configuration. Default value is `dcm4chee-arc/key.jks`.
+
+#### `KEYSTORE_PASSWORD`
+
+This environment variables sets the password of the keystore used in ssl server identities in Wildfly configuration. Default value is `secret`.
+
+#### `KEY_PASSWORD`
+
+This environment variables sets the password of the key used in ssl server identities in Wildfly configuration. Default value is `secret`.
+
+#### `KEYSTORE_TYPE`
+
+This environment variable sets the type of keystore that is used above. Default value is `JKS`.
+
+#### `TRUSTSTORE`
+
+This environment variable sets the truststore which will be used to verify Keycloak's certificate in Https communication.
+Default value is `dcm4chee-arc/cacerts.jks`.
+
+#### `TRUSSTORE_PASSWORD`
+
+This environment variable sets the password of the above truststore. Default value is `secret`.
+
+#### `SSL_REQUIRED`
+
+This environment variable defines the SSL/HTTPS requirements for interacting with the realm. Default value is `external`.
+Values which are accepted are : `external`, `none` or `all`.
 
 ##### `REALM_NAME`
 
 This is the name of the realm configured in Keycloak for securing archive UI and RESTful services. Default value is `dcm4che`.
 
-#### `SSL_REQUIRED`
-
-This environment variable defines the SSL/HTTPS requirements for interacting with the realm. Default value is `external`.
-
 #### `ALLOW_ANY_HOSTNAME`
 
 If the Keycloak server requires HTTPS and this config option is set to true the Keycloak server’s certificate is 
 validated via the truststore, but host name validation is not done. Default value set is `true`.
+
+##### `AUTH_SERVER_URL`
+
+This environment variable is the auth-server-url of Keycloak used for authenticating the client requests. 
+Default value is `http://keycloak:8843/auth`.
 
 #### `UI_CLIENT_ID`
 
@@ -140,27 +174,3 @@ This environment variable sets the facility name needed by GELF logging used in 
 #### `GELF_LEVEL`
 
 This environment variable sets the level of GELF logging used in wildfly configuration. Default value is `WARN`.
-
-#### `KEYSTORE`
-
-This environment variable sets the keystore used in ssl server identities in Wildfly configuration. Default value is `dcm4chee-arc/key.jks`.
-
-#### `KEYSTORE_PASSWORD`
-
-This environment variables sets the password of the keystore used in ssl server identities in Wildfly configuration. Default value is `secret`.
-
-#### `KEY_PASSWORD`
-
-This environment variables sets the password of the key used in ssl server identities in Wildfly configuration. Default value is `secret`.
-
-#### `KEYSTORE_TYPE`
-
-This environment variable sets the type of keystore that is used above. Default value is `JKS`.
-
-#### `WILDFLY_ADMIN_USER`
-
-This environment variable sets the admin user name for Wildfly. Default value is `admin`.
-
-#### `WILDFLY_ADMIN_PASSWORD`
-
-This environment variable sets the admin user name for Wildfly. Default value can be viewed in LDAP, it is set to `admin`.
