@@ -1,60 +1,38 @@
-version: "2"
+version: "3"
 services:
-  slapd:
+  ldap:
     image: dcm4che/slapd-dcm4chee:2.4.44-10.6
     ports:
       - "389:389"
     env_file: docker-compose.env
     volumes:
-      - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
-  postgres:
+  db:
     image: dcm4che/postgres-dcm4chee:9.6-10
     ports:
       - "5432:5432"
     env_file: docker-compose.env
     volumes:
-      - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
-  dcm4chee-arc:
+  arc:
     image: dcm4che/dcm4chee-arc-psql:5.10.6
     ports:
+      - "8080:8080"
       - "8443:8443"
       - "9990:9990"
       - "11112:11112"
       - "2575:2575"
     env_file: docker-compose.env
     environment:
-      HTTP_PORT: 8080
-      HTTPS_PORT: 8443
-      MANAGEMENT_HTTP_PORT: 9990
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432
-    links:
-      - slapd:ldap
-      - postgres:db
+    depends_on:
+      - ldap
+      - db
     volumes:
-      - /etc/timezone:/etc/timezone
       - /etc/localtime:/etc/localtime
-      - /var/local/dcm4chee-arc/storage:/storage
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
-  tserver:
-    image: dcm4che/trafficserver:7.0
-    ports:
-      - "8080:8080"
-    env_file: docker-compose.env
-    environment:
-      TS_MAP_TARGET: http://localhost:8080
-      TS_MAP_REPLACEMENT: http://dcm4chee-arc:8080
-      TS_STORAGE: var/trafficserver 256M
-    links:
-      - dcm4chee-arc:dcm4chee-arc
-    volumes:
-      - /etc/timezone:/etc/timezone
-      - /etc/localtime:/etc/localtime
-      - /var/local/dcm4chee-arc/tserver-config:/opt/ats/etc/trafficserver
-      - /var/local/dcm4chee-arc/tserver-storage:/opt/ats/var/trafficserver
-      - /var/local/dcm4chee-arc/tserver-log:/opt/ats/var/log/trafficserver
+      - /var/local/dcm4chee-arc/storage:/storage
