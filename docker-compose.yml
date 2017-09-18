@@ -15,7 +15,7 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.5.1-3
+    image: dcm4che/logstash-dcm4chee:5.5.1-4
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
