@@ -12,7 +12,8 @@ services:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
     image: kibana:5.5.1
@@ -23,7 +24,8 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   logstash:
     image: dcm4che/logstash-dcm4chee:5.5.1-4
     logging:
@@ -37,7 +39,8 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   ldap:
     image: dcm4che/slapd-dcm4chee:2.4.44-10.6
     logging:
@@ -51,7 +54,8 @@ services:
     depends_on:
       - logstash
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   db:
@@ -67,7 +71,8 @@ services:
     depends_on:
       - logstash
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.10.6-logstash
@@ -93,6 +98,7 @@ services:
       - db
       - logstash
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
