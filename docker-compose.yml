@@ -2,6 +2,12 @@ version: "3"
 services:
   elasticsearch:
     image: elasticsearch:5.5.1
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -10,12 +16,20 @@ services:
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
     image: kibana:5.5.1
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
     depends_on:
       - elasticsearch
     volumes:
       - /etc/localtime:/etc/localtime
   logstash:
     image: dcm4che/logstash-dcm4chee:5.5.1-4
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
     ports:
       - "12201:12201/udp"
       - "8514:8514/udp"
@@ -26,15 +40,27 @@ services:
       - /etc/localtime:/etc/localtime
   ldap:
     image: dcm4che/slapd-dcm4chee:2.4.44-10.6
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://gunter-nb:12201"
+        tag: slapd
     ports:
       - "389:389"
     env_file: docker-compose.env
+    depends_on:
+      - logstash
     volumes:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   keycloak:
     image: dcm4che/keycloak:3.2.1-1-logstash
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://gunter-nb:12201"
+        tag: keycloak
     ports:
       - "8880:8880"
       - "8843:8843"
@@ -53,6 +79,11 @@ services:
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-proxy:
     image: dcm4che/keycloak-proxy:3.2.1-1
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://gunter-nb:12201"
+        tag: keycloak-proxy
     ports:
       - "8601:8601"
       - "8643:8643"
@@ -67,14 +98,26 @@ services:
       - /etc/localtime:/etc/localtime
   db:
     image: dcm4che/postgres-dcm4chee:9.6-10
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://gunter-nb:12201"
+        tag: postgres
     ports:
       - "5432:5432"
     env_file: docker-compose.env
+    depends_on:
+      - logstash
     volumes:
       - /etc/localtime:/etc/localtime
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
     image: dcm4che/dcm4chee-arc-psql:5.10.6-logstash-secure-ui
+    logging:
+      driver: gelf
+      options:
+        gelf-address: "udp://gunter-nb:12201"
+        tag: dcm4chee-arc
     ports:
       - "8080:8080"
       - "8443:8443"
