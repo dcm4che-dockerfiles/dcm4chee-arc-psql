@@ -12,7 +12,8 @@ services:
       - "9200:9200"
       - "9300:9300"
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
     image: kibana:5.5.1
@@ -23,7 +24,8 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   logstash:
     image: dcm4che/logstash-dcm4chee:5.5.1-4
     logging:
@@ -37,7 +39,8 @@ services:
     depends_on:
       - elasticsearch
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   ldap:
     image: dcm4che/slapd-dcm4chee:2.4.44-10.6
     logging:
@@ -97,7 +100,8 @@ services:
       - kibana
       - keycloak
     volumes:
-      - /etc/localtime:/etc/localtime
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
   db:
     image: dcm4che/postgres-dcm4chee:9.6-10
     logging:
