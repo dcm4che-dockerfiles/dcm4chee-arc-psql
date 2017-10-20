@@ -59,7 +59,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:3.2.1-1-logstash
+    image: dcm4che/keycloak:3.2.1-10.6-logstash
     logging:
       driver: gelf
       options:
