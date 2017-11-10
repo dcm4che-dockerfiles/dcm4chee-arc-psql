@@ -59,7 +59,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:3.3.0-11.0-logstash
+    image: dcm4che/keycloak:3.4.0-11.0-logstash
     logging:
       driver: gelf
       options:
@@ -83,7 +83,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-proxy:
-    image: dcm4che/keycloak-proxy:3.3.0-1
+    image: dcm4che/keycloak-proxy:3.4.0-1
     logging:
       driver: gelf
       options:
