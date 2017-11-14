@@ -103,7 +103,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   db:
-    image: dcm4che/postgres-dcm4chee:9.6-11
+    image: dcm4che/postgres-dcm4chee:10.0-11
     logging:
       driver: gelf
       options:
