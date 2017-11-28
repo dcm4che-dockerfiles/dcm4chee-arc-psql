@@ -1,7 +1,7 @@
 version: "3"
 services:
   elasticsearch:
-    image: elasticsearch:5.5.1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.0.0
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
     logging:
@@ -16,7 +16,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:5.5.1
+    image: docker.elastic.co/kibana/kibana-oss:6.0.0
     logging:
       driver: json-file
       options:
@@ -29,7 +29,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   logstash:
-    image: dcm4che/logstash-dcm4chee:5.5.1-4
+    image: dcm4che/logstash-dcm4chee:6.0.0-4
     logging:
       driver: json-file
       options:
