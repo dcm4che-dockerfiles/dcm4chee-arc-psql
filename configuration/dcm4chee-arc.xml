@@ -116,6 +116,8 @@
                 <level name="${env.GELF_LEVEL}" />
                 <properties>
                     <property name="host" value="${env.SYSLOG_HOST}" />
+                    <property name="extractStackTrace" value="${env.GELF_EXTRACT_STACK_TRACE}" />
+                    <property name="filterStackTrace" value="${env.GELF_FILTER_STACK_TRACE}" />
                     <property name="facility" value="${env.GELF_FACILITY}" />
                 </properties>
             </custom-handler>

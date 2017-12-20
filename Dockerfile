@@ -40,7 +40,12 @@ ENV LDAP_HOST=ldap \
     TRUSTSTORE=dcm4chee-arc/cacerts.jks \
     TRUSTSTORE_PASSWORD=secret \
     WILDFLY_EXECUTER_MAX_THREADS=100 \
-    WILDFLY_PACSDS_MAX_POOL_SIZE=50
+    WILDFLY_PACSDS_MAX_POOL_SIZE=50 \
+    SYSLOG_HOST=logstash \
+    GELF_EXTRACT_STACK_TRACE=true \
+    GELF_FILTER_STACK_TRACE=true \
+    GELF_FACILITY=dcm4chee-arc \
+    GELF_LEVEL=WARN
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
