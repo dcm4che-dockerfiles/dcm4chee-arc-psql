@@ -167,7 +167,15 @@ This environment variable sets the maximum pool size allowed for the PacsDS data
 
 #### `SYSLOG_HOST`
 
-This environment variable is the host name of logstash container used in wildfly configuration. Default value is `logstash`.
+Specifies host name to which Wildfly Gelf Logger This environment variable is the host name of logstash container used in wildfly configuration. Default value is `logstash`.
+
+#### `GELF_EXTRACT_STACK_TRACE`
+
+Indicates if the Wildfly Gelf Logger sends the Stack-Trace to the StackTrace field (true/false) . Default value is `true`.
+
+#### `GELF_FILTER_STACK_TRACE`
+
+Indicates if the Wildfly Gelf Logger performs Stack-Trace filtering (true/false) . Default value is `true`.
 
 #### `GELF_FACILITY`
 
