@@ -29,7 +29,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   db:
-    image: dcm4che/postgres-dcm4chee:10.0-11
+    image: dcm4che/postgres-dcm4chee:10.0-12
     ports:
       - "5432:5432"
     env_file: docker-compose.env
