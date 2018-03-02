@@ -41,6 +41,7 @@ ENV LDAP_HOST=ldap \
     TRUSTSTORE_PASSWORD=secret \
     SSL_REQUIRED=external \
     REALM_NAME=dcm4che \
+    SUPER_USER=admin \
     ALLOW_ANY_HOSTNAME=true \
     AUTH_SERVER_URL=http://keycloak:8080/auth \
     UI_CLIENT_ID=dcm4chee-arc-ui \
