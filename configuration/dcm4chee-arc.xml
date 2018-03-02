@@ -40,7 +40,7 @@
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
         <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
         <property name="realm-name" value="${env.REALM_NAME}"/>
-        <property name="super-user" value="${env.SUPER_USER}"/>
+        <property name="super-user-role" value="${env.SUPER_USER_ROLE}"/>
         <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
         <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
         <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
