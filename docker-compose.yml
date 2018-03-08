@@ -62,16 +62,12 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   db:
-<<<<<<< HEAD
-    image: dcm4che/postgres-dcm4chee:10.0-12
+    image: dcm4che/postgres-dcm4chee:10.0-13
     logging:
       driver: gelf
       options:
         gelf-address: "udp://gunter-nb:12201"
         tag: postgres
-=======
-    image: dcm4che/postgres-dcm4chee:10.0-13
->>>>>>> 8386275... increment version to 5.13.0
     ports:
       - "5432:5432"
     env_file: docker-compose.env
@@ -82,16 +78,12 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-<<<<<<< HEAD
-    image: dcm4che/dcm4chee-arc-psql:5.12.0-logstash
+    image: dcm4che/dcm4chee-arc-psql:5.13.0-logstash
     logging:
       driver: gelf
       options:
         gelf-address: "udp://gunter-nb:12201"
         tag: dcm4chee-arc
-=======
-    image: dcm4che/dcm4chee-arc-psql:5.13.0
->>>>>>> 8386275... increment version to 5.13.0
     ports:
       - "8080:8080"
       - "8443:8443"
