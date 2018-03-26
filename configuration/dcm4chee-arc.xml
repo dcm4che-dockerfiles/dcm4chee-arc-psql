@@ -535,6 +535,7 @@
                 <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
+                <jms-queue name="DiffTask" entries="java:/jms/queue/DiffTask"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
