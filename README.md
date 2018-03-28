@@ -102,6 +102,11 @@ This environment variable sets the admin user name for Wildfly. Default value is
 
 This environment variable sets the password for the WILDFLY_ADMIN_USER. Default value can be viewed in LDAP, it is set to `admin`.
 
+#### `SUPER_USER_ROLE`
+
+This environment variable sets the user role to identify super users, which have unrestricted access to all UI functions,
+bypassing the verification of user permissions. Default value is `admin`.
+
 #### `KEYSTORE`
 
 This environment variable sets the keystore used in ssl server identities in Wildfly configuration. Default value is `dcm4chee-arc/key.jks`.
