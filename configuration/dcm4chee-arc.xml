@@ -44,6 +44,19 @@
         <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
         <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
         <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
+        <property name="jms.queue.StgCmtSCP.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT}"/>
+        <property name="jms.queue.StgCmtSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT}"/>
+        <property name="jms.queue.MPPSSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT}"/>
+        <property name="jms.queue.IANSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export2.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT2_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export4.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT4_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export5.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT5_CONSUMER_COUNT}"/>
+        <property name="jms.queue.HL7Send.consumer-count" value="${env.WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT}"/>
+        <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT}"/>
+        <property name="jms.queue.CMoveSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT}"/>
+        <property name="jms.queue.DiffTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT}"/>
     </system-properties>
 
     <management>
@@ -266,7 +279,7 @@
             <pools>
                 <bean-instance-pools>
                     <strict-max-pool name="slsb-strict-max-pool" derive-size="from-worker-pools" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
-                    <strict-max-pool name="mdb-strict-max-pool" derive-size="from-cpu-count" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" derive-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE}" max-pool-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_SIZE}" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                 </bean-instance-pools>
             </pools>
             <caches>
