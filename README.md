@@ -164,15 +164,95 @@ for securing archive's RESTful services. Default value set is `dcm4chee-arc-rs`.
 #### `WILDFLY_EXECUTER_MAX_THREADS`
 
 This environment variable sets the maximum threads allowed for the managed-executor-service in the Wildfly configuration. 
-Default value set is `100`.
+Default value is `100`.
 
 #### `WILDFLY_PACSDS_MAX_POOL_SIZE`
 
-This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration. Default value set is `50`.
+This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration.
+Default value is `50`.
+
+#### `WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE`
+
+Specifies if and what the max pool size for message driven beans should be derived from. A value of `none` indicates
+that the explicit value of max-pool-size should be used. A value of `from-worker-pools` indicates that the max pool
+size should be derived from the size of the total threads for all  worker pools configured on the system.
+A value of `from-cpu-count` indicates that the max pool size should be derived from the total number of processors
+available on the system. Default value is `from-cpu-count`.
+
+#### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
+
+Configured maximum number of message driven bean instances that the pool can hold at a given point in time. Only
+effective if `WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE=none`. Default value is `20`.
+
+#### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `StgCmtSCP`. Limits number of concurrently processed Storage
+Commitment requests. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `StgCmtSCU`. Limits number of concurrently invoked Storage
+Commitment requests. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `MPPSSCU`. Limits number of concurrently forwarded MPPS messages.
+Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `IANSCU`. Limits number of concurrently sent IAN notifications.
+Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export1`. Limits number of concurrently processed Export Tasks
+from `Export1` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT2_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export2`. Limits number of concurrently processed Export Tasks
+from `Export2` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export3`. Limits number of concurrently processed Export Tasks
+from `Export3` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT4_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export4`. Limits number of concurrently processed Export Tasks
+from `Export4` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT5_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export5`. Limits number of concurrently processed Export Tasks
+from `Export5` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `HL7Send`. Limits number of concurrently sent HL7v2 messages.
+Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `RSClient`. Limits number of concurrently forwarded RESTful
+requests. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `CMoveSCU`. Limits number of concurrently invoked retrieve
+requests. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `DiffTasks`. Limits number of concurrently processed Studies
+Compare Tasks. Default value is `1`.
 
 #### `SYSLOG_HOST`
 
-Specifies host name to which Wildfly Gelf Logger This environment variable is the host name of logstash container used in wildfly configuration. Default value is `logstash`.
+Specifies host name to which Wildfly Gelf Logger This environment variable is the host name of logstash container used
+in Wildfly configuration. Default value is `logstash`.
 
 #### `GELF_EXTRACT_STACK_TRACE`
 
