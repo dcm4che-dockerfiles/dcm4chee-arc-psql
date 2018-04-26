@@ -171,18 +171,10 @@ Default value is `100`.
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration.
 Default value is `50`.
 
-#### `WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE`
-
-Specifies if and what the max pool size for message driven beans should be derived from. A value of `none` indicates
-that the explicit value of max-pool-size should be used. A value of `from-worker-pools` indicates that the max pool
-size should be derived from the size of the total threads for all  worker pools configured on the system.
-A value of `from-cpu-count` indicates that the max pool size should be derived from the total number of processors
-available on the system. Default value is `from-cpu-count`.
-
 #### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
 
-Configured maximum number of message driven bean instances that the pool can hold at a given point in time. Only
-effective if `WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE=none`. Default value is `20`.
+Configured maximum number of message driven bean instances that the pool can hold at a given point in time.
+Default value is `32`.
 
 #### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
 
