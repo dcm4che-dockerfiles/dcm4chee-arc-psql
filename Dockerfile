@@ -62,10 +62,7 @@ ENV LDAP_HOST=ldap \
     WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT=1 \
     WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT=1 \
     WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT=1 \
-    WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT=1 \
-    SYSLOG_HOST=logstash \
-    GELF_FACILITY=dcm4chee-arc \
-    GELF_LEVEL=WARN
+    WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT=1
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
