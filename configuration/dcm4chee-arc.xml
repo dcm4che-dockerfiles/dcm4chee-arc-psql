@@ -275,7 +275,7 @@
             <pools>
                 <bean-instance-pools>
                     <strict-max-pool name="slsb-strict-max-pool" derive-size="from-worker-pools" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
-                    <strict-max-pool name="mdb-strict-max-pool" derive-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_DERIVE_SIZE}" max-pool-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_SIZE}" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_SIZE}" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                 </bean-instance-pools>
             </pools>
             <caches>
@@ -535,6 +535,8 @@
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
                 <jms-queue name="Export2" entries="java:/jms/queue/Export2"/>
                 <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
+                <jms-queue name="Export4" entries="java:/jms/queue/Export4"/>
+                <jms-queue name="Export5" entries="java:/jms/queue/Export5"/>
                 <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
