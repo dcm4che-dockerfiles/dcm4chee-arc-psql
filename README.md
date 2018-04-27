@@ -77,6 +77,10 @@ This is the name of archive device which can be set per one's application. Defau
 This environment variable is used to set the JAVA_OPTS during archive startup. Default value is 
 `"-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"`
 
+#### `REVERSE_DNS`
+
+Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connections. Default value is `true`.
+
 #### `WILDFLY_CHOWN`
 
 This environment variable is used to set the ownership to the storage directory. Default value is 
