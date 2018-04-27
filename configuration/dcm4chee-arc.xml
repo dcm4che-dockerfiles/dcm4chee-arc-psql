@@ -37,6 +37,7 @@
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
+        <property name="org.dcm4che3.util.ReverseDNS" value="${env.REVERSE_DNS}"/>
         <property name="jboss.http.port" value="${env.HTTP_PORT}"/>
         <property name="jboss.https.port" value="${env.HTTPS_PORT}"/>
         <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
@@ -174,6 +175,9 @@
                 <level name="INFO"/>
             </logger>
             <logger category="org.dcm4che3.net.imageio">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.util.ReverseDNS">
                 <level name="INFO"/>
             </logger>
             <logger category="org.dcm4chee.arc">
