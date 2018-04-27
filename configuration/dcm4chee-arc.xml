@@ -38,6 +38,7 @@
 
     <system-properties>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
+        <property name="org.dcm4che3.util.ReverseDNS" value="${env.REVERSE_DNS}"/>
         <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
         <property name="realm-name" value="${env.REALM_NAME}"/>
         <property name="super-user-role" value="${env.SUPER_USER_ROLE}"/>
@@ -169,6 +170,9 @@
                 <level name="INFO"/>
             </logger>
             <logger category="org.dcm4che3.net.imageio">
+                <level name="INFO"/>
+            </logger>
+            <logger category="org.dcm4che3.util.ReverseDNS">
                 <level name="INFO"/>
             </logger>
             <logger category="org.dcm4chee.arc">
