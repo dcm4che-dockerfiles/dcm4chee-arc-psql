@@ -153,7 +153,7 @@ validated via the truststore, but host name validation is not done. Default valu
 ##### `AUTH_SERVER_URL`
 
 This environment variable is the auth-server-url of Keycloak used for authenticating the client requests. 
-Default value is `http://keycloak:8843/auth`.
+Default value is `http://keycloak:8080/auth`.
 
 #### `UI_CLIENT_ID`
 
