@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.44-13.2
+    image: dcm4che/slapd-dcm4chee:2.4.44-13.3
     ports:
       - "389:389"
     env_file: docker-compose.env
@@ -38,7 +38,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.13.2-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.13.3-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
