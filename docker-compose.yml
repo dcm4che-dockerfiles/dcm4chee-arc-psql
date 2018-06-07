@@ -43,7 +43,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.44-13.2
+    image: dcm4che/slapd-dcm4chee:2.4.44-13.3
     logging:
       driver: gelf
       options:
@@ -120,7 +120,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.13.2-logstash-secure
+    image: dcm4che/dcm4chee-arc-psql:5.13.3-logstash-secure
     logging:
       driver: gelf
       options:
