@@ -642,31 +642,6 @@
             <client-config name="Standard-Client-Config"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
-<<<<<<< HEAD
-=======
-        <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui2-5.13.3-secure.war">
-                <realm>${realm-name}</realm>
-                <auth-server-url>${auth-server-url}</auth-server-url>
-                <public-client>true</public-client>
-                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
-                <resource>${env.UI_CLIENT_ID}</resource>
-                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
-            </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.13.3-secure.war">
-                <realm>${realm-name}</realm>
-                <auth-server-url>${auth-server-url}</auth-server-url>
-                <bearer-only>true</bearer-only>
-                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
-                <resource>${env.RS_CLIENT_ID}</resource>
-                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
-            </secure-deployment>
-        </subsystem>
->>>>>>> 50c0d44... increment version to 5.13.3
     </profile>
     <interfaces>
         <interface name="management">
