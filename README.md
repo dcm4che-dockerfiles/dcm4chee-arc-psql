@@ -182,7 +182,7 @@ Default value is `32`.
 
 #### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
 
-Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured paged.
+Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured pages.
 Default value is `false`.
 
 #### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
@@ -194,6 +194,11 @@ Commitment requests. Default value is `1`.
 
 The number of consumers consuming messages from queue `StgCmtSCU`. Limits number of concurrently invoked Storage
 Commitment requests. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_STGVERTASKS_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `StgVerTasks`. Limits number of concurrently invoked Storage
+Verification tasks. Default value is `1`.
 
 #### `WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT`
 
