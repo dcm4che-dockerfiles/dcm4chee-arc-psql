@@ -634,7 +634,7 @@
                     <filter-ref name="x-powered-by-header"/>
                 </host>
             </server>
-            <servlet-container name="default">
+            <servlet-container name="default" disable-caching-for-secured-pages="${env.WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES}">
                 <jsp-config/>
                 <websockets/>
             </servlet-container>
