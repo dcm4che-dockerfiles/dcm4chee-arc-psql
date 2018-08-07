@@ -180,6 +180,11 @@ Default value is `50`.
 Configured maximum number of message driven bean instances that the pool can hold at a given point in time.
 Default value is `32`.
 
+#### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
+
+Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured paged.
+Default value is `false`.
+
 #### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
 
 The number of consumers consuming messages from queue `StgCmtSCP`. Limits number of concurrently processed Storage
