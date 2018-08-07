@@ -47,7 +47,7 @@
         <property name="jboss.management.http.port" value="${env.MANAGEMENT_HTTP_PORT}"/>
         <property name="jms.queue.StgCmtSCP.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT}"/>
         <property name="jms.queue.StgCmtSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT}"/>
-        <property name="jms.queue.StgCmtTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTTASKS_CONSUMER_COUNT}"/>
+        <property name="jms.queue.StgVerTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGVERTASKS_CONSUMER_COUNT}"/>
         <property name="jms.queue.MPPSSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT}"/>
         <property name="jms.queue.IANSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT}"/>
@@ -549,6 +549,7 @@
                 <jms-queue name="DLQ" entries="java:/jms/queue/DLQ"/>
                 <jms-queue name="StgCmtSCP" entries="java:/jms/queue/StgCmtSCP"/>
                 <jms-queue name="StgCmtSCU" entries="java:/jms/queue/StgCmtSCU"/>
+                <jms-queue name="StgVerTasks" entries="java:/jms/queue/StgVerTasks"/>
                 <jms-queue name="MPPSSCU" entries="java:/jms/queue/MPPSSCU"/>
                 <jms-queue name="IANSCU" entries="java:/jms/queue/IANSCU"/>
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
