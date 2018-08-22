@@ -84,7 +84,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-proxy:
-    image: dcm4che/keycloak-proxy:4.0.0-1
+    image: dcm4che/keycloak-proxy:4.3.0-1
     logging:
       driver: gelf
       options:
