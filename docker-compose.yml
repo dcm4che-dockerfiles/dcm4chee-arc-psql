@@ -4,6 +4,9 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.3.2
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
+      http.cors.enabled: "true"
+      http.cors.allow-origin: "/.*/"
+      http.cors.allow-headers: "X-Requested-With,Content-Length,Content-Type,Authorization"
       TAKE_FILE_OWNERSHIP: 1
     logging:
       driver: json-file
@@ -84,7 +87,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-proxy:
-    image: dcm4che/keycloak-proxy:4.3.0-1
+    image: dcm4che/keycloak-proxy:4.3.0-2
     logging:
       driver: gelf
       options:
