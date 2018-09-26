@@ -54,6 +54,7 @@ services:
         tag: slapd
     ports:
       - "389:389"
+      - "636:636"
     env_file: docker-compose.env
     depends_on:
       - logstash
