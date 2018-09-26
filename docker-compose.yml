@@ -4,6 +4,7 @@ services:
     image: dcm4che/slapd-dcm4chee:2.4.44-14.1
     ports:
       - "389:389"
+      - "636:636"
     env_file: docker-compose.env
     volumes:
       - /etc/localtime:/etc/localtime:ro

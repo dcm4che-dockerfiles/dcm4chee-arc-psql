@@ -18,15 +18,16 @@ RUN cd $JBOSS_HOME \
 COPY configuration /docker-entrypoint.d/configuration
 
 # Default configuration: can be overridden at the docker command line
-ENV LDAP_HOST=ldap \
-    LDAP_PORT=389 \
+ENV LDAP_URL=ldap://ldap:389 \
     LDAP_BASE_DN=dc=dcm4che,dc=org \
     LDAP_ROOTPASS=secret \
+    LDAP_ROOTPASS_FILE= \
     POSTGRES_HOST=db \
     POSTGRES_PORT=5432 \
     POSTGRES_DB=pacsdb \
     POSTGRES_USER=pacs \
     POSTGRES_PASSWORD=pacs \
+    POSTGRES_PASSWORD_FILE= \
     ARCHIVE_DEVICE_NAME=dcm4chee-arc \
     REVERSE_DNS=true \
     HTTP_PORT=8080 \
@@ -34,12 +35,16 @@ ENV LDAP_HOST=ldap \
     MANAGEMENT_HTTP_PORT=9990 \
     WILDFLY_ADMIN_USER=admin \
     WILDFLY_ADMIN_PASSWORD= \
+    WILDFLY_ADMIN_PASSWORD_FILE= \
     KEYSTORE=dcm4chee-arc/key.jks \
     KEYSTORE_PASSWORD=secret \
+    KEYSTORE_PASSWORD_FILE= \
     KEY_PASSWORD=secret \
+    KEY_PASSWORD_FILE= \
     KEYSTORE_TYPE=JKS \
     TRUSTSTORE=dcm4chee-arc/cacerts.jks \
     TRUSTSTORE_PASSWORD=secret \
+    TRUSTSTORE_PASSWORD_FILE= \
     SSL_REQUIRED=external \
     REALM_NAME=dcm4che \
     SUPER_USER_ROLE=admin \
