@@ -90,7 +90,7 @@
             </security-realm>
         </security-realms>
         <outbound-connections>
-            <ldap name="ldap" url="ldap://${env.LDAP_HOST}:${env.LDAP_PORT}" search-dn="cn=admin,${env.LDAP_BASE_DN}" search-credential="${env.LDAP_ROOTPASS}"/>
+            <ldap name="ldap" url="${env.LDAP_URL}" search-dn="cn=admin,${env.LDAP_BASE_DN}" search-credential="${env.LDAP_ROOTPASS}"/>
         </outbound-connections>
         <audit-log>
             <formatters>
