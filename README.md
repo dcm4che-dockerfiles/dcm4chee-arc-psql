@@ -22,30 +22,21 @@ An example of how one can set an env variable in `docker run` command is shown b
 _**Note**_ : If default values of any environment variables were overridden in startup of `slapd` or `postgres` containers, 
 then ensure that the same values are also used for overriding the defaults during startup of archive container. 
 
-#### `LDAP_HOST`
+#### `LDAP_URL`
 
-This environment variable sets the host name for LDAP. Default value is `ldap`.
-
-#### `LDAP_PORT`
-
-This environment variable sets the port for LDAP. Default value is `389`.
+This environment variable sets the URL for accessing LDAP. Default value is `ldap://ldap:389`.
 
 #### `LDAP_BASE_DN`
 
 This environment variable sets the base domain name for LDAP. Default value is `dc=dcm4che,dc=org`.
 
-#### `LDAP_ORGANISATION`
-
-This environment variable sets the organisation name for LDAP. Default value is `dcm4che.org`.
-
 #### `LDAP_ROOTPASS`
 
-This environment variable sets the root password for LDAP. Default value is `secret`. 
+This environment variable sets the password for LDAP. Default value is `secret`. 
 
-#### `LDAP_CONFIGPASS`
+#### `LDAP_ROOTPASS_FILE`
 
-This environment variable sets the password for users who wish to change the schema configuration in LDAP. 
-Default value is `secret`. 
+Path to file containing the password for LDAP. Overwrites password set by `LDAP_ROOTPASS`.
 
 #### `POSTGRES_HOST`
 
@@ -66,7 +57,11 @@ Default value is `pacs`.
 
 #### `POSTGRES_PASSWORD`
 
-This environment variable is the superuser password for PostgreSQL. Default value is `pacs`. 
+This environment variable is the password for PostgreSQL. Default value is `pacs`. 
+
+#### `POSTGRES_PASSWORD_FILE`
+
+Path to file containing the password for PostgreSQL. Overwrites password set by `POSTGRES_PASSWORD`.
 
 #### `ARCHIVE_DEVICE_NAME`
 
@@ -106,6 +101,10 @@ This environment variable sets the admin user name for Wildfly. Default value is
 
 This environment variable sets the password for the WILDFLY_ADMIN_USER. Default value can be viewed in LDAP, it is set to `admin`.
 
+#### `WILDFLY_ADMIN_PASSWORD_FILE`
+
+Path to file containing the password for the WILDFLY_ADMIN_USER. Overwrites password set by `WILDFLY_ADMIN_PASSWORD`.
+
 #### `SUPER_USER_ROLE`
 
 This environment variable sets the user role to identify super users, which have unrestricted access to all UI functions,
@@ -119,9 +118,17 @@ This environment variable sets the keystore used in ssl server identities in Wil
 
 This environment variables sets the password of the keystore used in ssl server identities in Wildfly configuration. Default value is `secret`.
 
+#### `KEYSTORE_PASSWORD_FILE`
+
+Path to file containing the password of the keystore used in ssl server identities in Wildfly configuration. Overwrites password set by `KEYSTORE_PASSWORD`.
+
 #### `KEY_PASSWORD`
 
 This environment variables sets the password of the key used in ssl server identities in Wildfly configuration. Default value is `secret`.
+
+#### `KEY_PASSWORD_FILE`
+
+Path to file containing the password of the key used in ssl server identities in Wildfly configuration. Overwrites password set by `KEY_PASSWORD`.
 
 #### `KEYSTORE_TYPE`
 
@@ -132,9 +139,13 @@ This environment variable sets the type of keystore that is used above. Default 
 This environment variable sets the truststore which will be used to verify Keycloak's certificate in Https communication.
 Default value is `dcm4chee-arc/cacerts.jks`.
 
-#### `TRUSSTORE_PASSWORD`
+#### `TRUSTSTORE_PASSWORD`
 
 This environment variable sets the password of the above truststore. Default value is `secret`.
+
+#### `TRUSSTORE_PASSWORD_FILE`
+
+Path to file containing the password of the above truststore. Overwrites password set by `TRUSTSTORE_PASSWORD`.
 
 #### `SSL_REQUIRED`
 
