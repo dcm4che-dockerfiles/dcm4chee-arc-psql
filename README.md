@@ -32,11 +32,14 @@ This environment variable sets the base domain name for LDAP. Default value is `
 
 #### `LDAP_ROOTPASS`
 
-This environment variable sets the password for LDAP. Default value is `secret`. 
+This environment variable sets the password for LDAP.
+Only effective if the file specified by `LDAP_ROOTPASS_FILE` does not exist. Default value is `secret`.
 
 #### `LDAP_ROOTPASS_FILE`
 
-Path to file containing the password for LDAP. Overwrites password set by `LDAP_ROOTPASS`.
+Path to file containing the password for LDAP.
+If the file does not exist, it will be created containing the password specified by `LDAP_ROOTPASS`. 
+Default value is `/tmp/ldap_rootpass`.
 
 #### `POSTGRES_HOST`
 
@@ -57,11 +60,14 @@ Default value is `pacs`.
 
 #### `POSTGRES_PASSWORD`
 
-This environment variable is the password for PostgreSQL. Default value is `pacs`. 
+This environment variable is the password for PostgreSQL. 
+Only effective if the file specified by `POSTGRES_PASSWORD_FILE` does not exist. Default value is `pacs`.
 
 #### `POSTGRES_PASSWORD_FILE`
 
-Path to file containing the password for PostgreSQL. Overwrites password set by `POSTGRES_PASSWORD`.
+Path to file containing the password for PostgreSQL.
+If the file does not exist, it will be created containing the password specified by `POSTGRES_PASSWORD`. 
+Default value is `/tmp/postgres_password`.
 
 #### `ARCHIVE_DEVICE_NAME`
 
@@ -116,19 +122,25 @@ This environment variable sets the keystore used in ssl server identities in Wil
 
 #### `KEYSTORE_PASSWORD`
 
-This environment variables sets the password of the keystore used in ssl server identities in Wildfly configuration. Default value is `secret`.
+This environment variables sets the password of the keystore used in ssl server identities in Wildfly configuration.
+Only effective if the file specified by `KEYSTORE_PASSWORD_FILE` does not exist. Default value is `secret`.
 
 #### `KEYSTORE_PASSWORD_FILE`
 
-Path to file containing the password of the keystore used in ssl server identities in Wildfly configuration. Overwrites password set by `KEYSTORE_PASSWORD`.
+Path to file containing the password of the keystore used in ssl server identities in Wildfly configuration.
+If the file does not exist, it will be created containing the password specified by `KEYSTORE_PASSWORD`. 
+Default value is `/tmp/keystore_password`.
 
 #### `KEY_PASSWORD`
 
-This environment variables sets the password of the key used in ssl server identities in Wildfly configuration. Default value is `secret`.
+This environment variables sets the password of the key used in ssl server identities in Wildfly configuration.
+Only effective if the file specified by `KEY_PASSWORD_FILE` does not exist. Default value is `secret`.
 
 #### `KEY_PASSWORD_FILE`
 
-Path to file containing the password of the key used in ssl server identities in Wildfly configuration. Overwrites password set by `KEY_PASSWORD`.
+Path to file containing the password of the key used in ssl server identities in Wildfly configuration.
+If the file does not exist, it will be created containing the password specified by `KEY_PASSWORD`. 
+Default value is `/tmp/key_password`.
 
 #### `KEYSTORE_TYPE`
 
@@ -141,11 +153,14 @@ Default value is `dcm4chee-arc/cacerts.jks`.
 
 #### `TRUSTSTORE_PASSWORD`
 
-This environment variable sets the password of the above truststore. Default value is `secret`.
+This environment variable sets the password of the above truststore.
+Only effective if the file specified by `TRUSTSTORE_PASSWORD_FILE` does not exist. Default value is `secret`.
 
 #### `TRUSSTORE_PASSWORD_FILE`
 
-Path to file containing the password of the above truststore. Overwrites password set by `TRUSTSTORE_PASSWORD`.
+Path to file containing the password of the above truststore.
+If the file does not exist, it will be created containing the password specified by `TRUSTSTORE_PASSWORD`. 
+Default value is `/tmp/truststore_password`.
 
 #### `SSL_REQUIRED`
 
