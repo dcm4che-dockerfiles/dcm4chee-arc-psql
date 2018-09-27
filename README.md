@@ -103,14 +103,6 @@ This environment variable sets the Management Http port of Wildfly. Default valu
 
 This environment variable sets the admin user name for Wildfly. Default value is `admin`.
 
-#### `WILDFLY_ADMIN_PASSWORD`
-
-This environment variable sets the password for the WILDFLY_ADMIN_USER. Default value can be viewed in LDAP, it is set to `admin`.
-
-#### `WILDFLY_ADMIN_PASSWORD_FILE`
-
-Path to file containing the password for the WILDFLY_ADMIN_USER. Overwrites password set by `WILDFLY_ADMIN_PASSWORD`.
-
 #### `SUPER_USER_ROLE`
 
 This environment variable sets the user role to identify super users, which have unrestricted access to all UI functions,
