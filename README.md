@@ -1,11 +1,11 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.14.1` (*5.14.1/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1/Dockerfile)
-- [`5.14.1-secure` (*5.14.1-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1-secure/Dockerfile)
-- [`5.14.1-secure-ui` (*5.14.1-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1-secure-ui/Dockerfile)
-- [`5.14.1-logstash` (*5.14.1-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1-logstash/Dockerfile)
-- [`5.14.1-logstash-secure` (*5.14.1-logstash-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1-logstash-secure/Dockerfile)
-- [`5.14.1-logstash-secure-ui` (*5.14.1-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.14.1-logstash-secure-ui/Dockerfile)
+- [`5.15.0` (*5.15.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0/Dockerfile)
+- [`5.15.0-secure` (*5.15.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0-secure/Dockerfile)
+- [`5.15.0-secure-ui` (*5.15.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0-secure-ui/Dockerfile)
+- [`5.15.0-logstash` (*5.15.0-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0-logstash/Dockerfile)
+- [`5.15.0-logstash-secure` (*5.15.0-logstash-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0-logstash-secure/Dockerfile)
+- [`5.15.0-logstash-secure-ui` (*5.15.0-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.15.0-logstash-secure-ui/Dockerfile)
 
 ## How to use this image
 
