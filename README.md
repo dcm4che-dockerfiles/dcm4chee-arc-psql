@@ -253,6 +253,31 @@ from `Export4` queue. Default value is `1`.
 The number of consumers consuming messages from queue `Export5`. Limits number of concurrently processed Export Tasks
 from `Export5` queue. Default value is `1`.
 
+#### `WILDFLY_JMS_QUEUE_EXPORT6_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export6`. Limits number of concurrently processed Export Tasks
+from `Export6` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT7_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export7`. Limits number of concurrently processed Export Tasks
+from `Export7` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT8_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export8`. Limits number of concurrently processed Export Tasks
+from `Export8` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT9_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export9`. Limits number of concurrently processed Export Tasks
+from `Export9` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT10_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export10`. Limits number of concurrently processed Export Tasks
+from `Export10` queue. Default value is `1`.
+
 #### `WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT`
 
 The number of consumers consuming messages from queue `HL7Send`. Limits number of concurrently sent HL7v2 messages.
