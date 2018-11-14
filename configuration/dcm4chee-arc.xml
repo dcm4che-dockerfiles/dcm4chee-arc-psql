@@ -55,6 +55,11 @@
         <property name="jms.queue.Export3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export4.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT4_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export5.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT5_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export6.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT6_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export7.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT7_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export8.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT8_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export9.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT9_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Export10.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT10_CONSUMER_COUNT}"/>
         <property name="jms.queue.HL7Send.consumer-count" value="${env.WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT}"/>
         <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT}"/>
         <property name="jms.queue.CMoveSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT}"/>
@@ -547,6 +552,11 @@
                 <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
                 <jms-queue name="Export4" entries="java:/jms/queue/Export4"/>
                 <jms-queue name="Export5" entries="java:/jms/queue/Export5"/>
+                <jms-queue name="Export6" entries="java:/jms/queue/Export6"/>
+                <jms-queue name="Export7" entries="java:/jms/queue/Export7"/>
+                <jms-queue name="Export8" entries="java:/jms/queue/Export8"/>
+                <jms-queue name="Export9" entries="java:/jms/queue/Export9"/>
+                <jms-queue name="Export10" entries="java:/jms/queue/Export10"/>
                 <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
