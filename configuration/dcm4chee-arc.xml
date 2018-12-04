@@ -82,7 +82,7 @@
             <security-realm name="ApplicationRealm">
                 <server-identities>
                     <ssl>
-                        <keystore path="${env.KEYSTORE}" relative-to="jboss.server.config.dir" keystore-password="${env.KEYSTORE_PASSWORD}" key-password="${env.KEY_PASSWORD}" provider="${env.KEYSTORE_TYPE}"/>
+                        <keystore path="${env.KEYSTORE}" keystore-password="${env.KEYSTORE_PASSWORD}" key-password="${env.KEY_PASSWORD}" provider="${env.KEYSTORE_TYPE}"/>
                     </ssl>
                 </server-identities>
                 <authentication>
@@ -682,7 +682,7 @@
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED}</ssl-required>
                 <resource>${env.UI_CLIENT_ID}</resource>
-                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
+                <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
@@ -692,7 +692,7 @@
                 <bearer-only>true</bearer-only>
                 <ssl-required>${env.SSL_REQUIRED}</ssl-required>
                 <resource>${env.RS_CLIENT_ID}</resource>
-                <truststore>${jboss.server.config.dir}/${env.TRUSTSTORE}</truststore>
+                <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
