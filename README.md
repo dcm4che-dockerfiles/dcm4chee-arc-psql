@@ -202,7 +202,7 @@ Default value is `32`.
 #### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
 
 Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured pages.
-Default value is `false`.
+Default value is `true`.
 
 #### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
 
