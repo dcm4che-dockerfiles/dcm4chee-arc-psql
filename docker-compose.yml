@@ -48,7 +48,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.44-15.1
+    image: dcm4che/slapd-dcm4chee:2.4.44-16.0
     logging:
       driver: gelf
       options:
@@ -66,7 +66,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:10.4-15
+    image: dcm4che/postgres-dcm4chee:10.4-16
     logging:
       driver: gelf
       options:
@@ -82,7 +82,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.15.1-logstash
+    image: dcm4che/dcm4chee-arc-psql:5.16.0-logstash
     logging:
       driver: gelf
       options:
