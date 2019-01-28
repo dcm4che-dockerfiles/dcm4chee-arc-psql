@@ -299,6 +299,11 @@ requests. Default value is `1`.
 The number of consumers consuming messages from queue `DiffTasks`. Limits number of concurrently processed Studies
 Compare Tasks. Default value is `1`.
 
+#### `WILDFLY_JMS_QUEUE_REJECT_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Reject`. Limits number of concurrently processed Rejection Tasks.
+Compare Tasks. Default value is `1`.
+
 #### `SYSLOG_HOST`
 
 Specifies host name to which Wildfly Gelf Logger This environment variable is the host name of logstash container used
