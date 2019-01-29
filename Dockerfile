@@ -65,7 +65,7 @@ ENV LDAP_URL=ldap://ldap:389 \
     WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT=1 \
     WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT=1 \
     WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT=1 \
-    WILDFLY_JMS_QUEUE_REJECT_CONSUMER_COUNT=1
+    WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT=1
 
  # Set the default command to run on boot
  # This will boot WildFly in the standalone mode and bind to all interface
