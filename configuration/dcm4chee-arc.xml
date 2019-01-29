@@ -64,7 +64,7 @@
         <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT}"/>
         <property name="jms.queue.CMoveSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT}"/>
         <property name="jms.queue.DiffTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT}"/>
-        <property name="jms.queue.Reject.consumer-count" value="${env.WILDFLY_JMS_QUEUE_REJECT_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Rejection.consumer-count" value="${env.WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT}"/>
     </system-properties>
 
     <management>
@@ -572,7 +572,7 @@
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
                 <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
                 <jms-queue name="DiffTasks" entries="java:/jms/queue/DiffTasks"/>
-                <jms-queue name="Reject" entries="java:/jms/queue/Reject"/>
+                <jms-queue name="Rejection" entries="java:/jms/queue/Rejection"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
