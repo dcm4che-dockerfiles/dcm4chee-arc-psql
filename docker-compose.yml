@@ -12,7 +12,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
       - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:10.4-16
+    image: dcm4che/postgres-dcm4chee:11.2-16
     ports:
       - "5432:5432"
     env_file: docker-compose.env
