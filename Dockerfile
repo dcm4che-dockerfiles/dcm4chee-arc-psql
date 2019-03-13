@@ -11,7 +11,7 @@ RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd modules/org/postgresql/main \
-    && curl -fO https://jdbc.postgresql.org/download/postgresql-42.1.4.jar \
+    && curl -fO https://jdbc.postgresql.org/download/postgresql-42.2.5.jar \
     && cd /docker-entrypoint.d/deployments \
     && curl -fO http://maven.dcm4che.org/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear
 
