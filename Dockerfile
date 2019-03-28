@@ -1,11 +1,10 @@
-FROM dcm4che/wildfly:12.0.0-4.6.0
+FROM dcm4che/wildfly:16.0.0-5.0.0
 
 ENV DCM4CHEE_ARC_VERSION 5.16.1
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
 
 RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
-    && curl -f http://maven.dcm4che.org/org/dcm4che/querydsl-jboss-modules/4.2.1-noguava/querydsl-jboss-modules-4.2.1-noguava.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jclouds-jboss-modules/2.1.1-noguava/jclouds-jboss-modules-2.1.1-noguava.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/ecs-object-client-jboss-modules/3.0.0/ecs-object-client-jboss-modules-3.0.0.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jdbc-jboss-modules/1.0.0/jdbc-jboss-modules-1.0.0-psql.tar.gz | tar xz \
