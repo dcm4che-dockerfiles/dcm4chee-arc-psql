@@ -155,34 +155,50 @@ Path to file containing the password of the above truststore.
 If the file does not exist, it will be created containing the password specified by `TRUSTSTORE_PASSWORD`. 
 Default value is `/tmp/truststore_password`.
 
+##### `AUTH_SERVER_URL`
+
+Base URL of the Keycloak server used for authenticating the client requests.
+Default value is `http://keycloak:8080/auth`.
+
 #### `SSL_REQUIRED`
 
-This environment variable defines the SSL/HTTPS requirements for interacting with the realm. Default value is `external`.
-Values which are accepted are : `external`, `none` or `all`.
-
-##### `REALM_NAME`
-
-This is the name of the realm configured in Keycloak for securing archive UI and RESTful services. Default value is `dcm4che`.
+Ensures that all communication to and from the Keycloak server is over HTTPS. In production this should be set to `all`.
+The default value is `external` meaning that HTTPS is required by default for external requests.
+Valid values are `all`, `external` and `none`.
 
 #### `ALLOW_ANY_HOSTNAME`
 
-If the Keycloak server requires HTTPS and this config option is set to true the Keycloak server’s certificate is 
+If the Keycloak server requires HTTPS and this config option is set to `true` the Keycloak server’s certificate is 
 validated via the truststore, but host name validation is not done. Default value set is `true`.
 
-##### `AUTH_SERVER_URL`
+##### `REALM_NAME`
 
-This environment variable is the auth-server-url of Keycloak used for authenticating the client requests. 
-Default value is `http://keycloak:8080/auth`.
+Name of the realm configured in Keycloak for securing the UI and RESTful services of the archive,
+and the Wildfly Administration Console and Management API.
+Default value is `dcm4che`.
 
 #### `UI_CLIENT_ID`
 
-This environment variable sets the client ID for the UI client. This value is used in creation of client for securing 
-archive's UI. Default value set is `dcm4chee-arc-ui`.
+Keycloak client ID for securing the UI of the archive. Default value set is `dcm4chee-arc-ui`.
 
 #### `RS_CLIENT_ID`
 
-This environment variable sets the client ID for the RESTful client. This value is used in creation of client 
-for securing archive's RESTful services. Default value set is `dcm4chee-arc-rs`.
+Keycloak client ID for securing RESTful services of the archive. Default value set is `dcm4chee-arc-rs`.
+
+##### `WILDFLY_REALM_NAME`
+
+Name of the realm configured in Keycloak for securing the Wildfly Administration Console and Management API.
+Default value is `dcm4che`.
+
+#### `WILDFLY_CONSOLE`
+
+Keycloak client ID for [securing the Wildfly Administration Console](https://docs.jboss.org/author/display/WFLY/Protecting+Wildfly+Adminstration+Console+With+Keycloak).
+Default value set is `wildfly-console`.
+
+#### `WILDFLY_MANAGEMENT`
+
+Keycloak client ID for [securing the Wildfly Management API](https://docs.jboss.org/author/display/WFLY/Protecting+Wildfly+Adminstration+Console+With+Keycloak).
+Default value set is `wildfly-management`.
 
 #### `WILDFLY_EXECUTER_MAX_THREADS`
 
