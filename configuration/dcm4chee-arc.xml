@@ -78,9 +78,7 @@
             <security-realm name="ManagementRealm">
                 <authentication>
                     <local default-user="$local" skip-group-loading="true"/>
-                    <ldap connection="ldap" base-dn="ou=users,${env.LDAP_BASE_DN}">
-                        <advanced-filter filter="(&amp;(uid={0})(uid=${env.WILDFLY_ADMIN_USER}))"/>
-                    </ldap>
+                    <properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
                 </authentication>
                 <authorization map-groups-to-roles="false">
                     <properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
@@ -101,9 +99,6 @@
                 </authorization>
             </security-realm>
         </security-realms>
-        <outbound-connections>
-            <ldap name="ldap" url="${env.LDAP_URL}" search-dn="cn=admin,${env.LDAP_BASE_DN}" search-credential="${env.LDAP_ROOTPASS}"/>
-        </outbound-connections>
         <audit-log>
             <formatters>
                 <json-formatter name="json-formatter"/>
@@ -118,12 +113,12 @@
             </logger>
         </audit-log>
         <management-interfaces>
-            <http-interface security-realm="ManagementRealm">
-                <http-upgrade enabled="true"/>
+            <http-interface http-authentication-factory="keycloak-mgmt-http-authentication">
+                <http-upgrade enabled="true" sasl-authentication-factory="management-sasl-authentication"/>
                 <socket-binding http="management-http"/>
             </http-interface>
         </management-interfaces>
-        <access-control provider="simple">
+        <access-control provider="rbac" use-identity-roles="true">
             <role-mapping>
                 <role name="SuperUser">
                     <include>
@@ -373,15 +368,11 @@
                 <simple-permission-mapper name="default-permission-mapper" mapping-mode="first">
                     <permission-mapping>
                         <principal name="anonymous"/>
-                        <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
-                        <permission class-name="org.wildfly.transaction.client.RemoteTransactionPermission" module="org.wildfly.transaction.client"/>
-                        <permission class-name="org.jboss.ejb.client.RemoteEJBPermission" module="org.jboss.ejb-client"/>
+                        <permission-set name="default-permissions"/>
                     </permission-mapping>
                     <permission-mapping match-all="true">
-                        <permission class-name="org.wildfly.security.auth.permission.LoginPermission"/>
-                        <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
-                        <permission class-name="org.wildfly.transaction.client.RemoteTransactionPermission" module="org.wildfly.transaction.client"/>
-                        <permission class-name="org.jboss.ejb.client.RemoteEJBPermission" module="org.jboss.ejb-client"/>
+                        <permission-set name="login-permission"/>
+                        <permission-set name="default-permissions"/>
                     </permission-mapping>
                 </simple-permission-mapper>
                 <constant-realm-mapper name="local" realm-name="local"/>
@@ -391,6 +382,16 @@
                     <role name="SuperUser"/>
                 </constant-role-mapper>
             </mappers>
+            <permission-sets>
+                <permission-set name="login-permission">
+                    <permission class-name="org.wildfly.security.auth.permission.LoginPermission"/>
+                </permission-set>
+                <permission-set name="default-permissions">
+                    <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
+                    <permission class-name="org.wildfly.transaction.client.RemoteTransactionPermission" module="org.wildfly.transaction.client"/>
+                    <permission class-name="org.jboss.ejb.client.RemoteEJBPermission" module="org.jboss.ejb-client"/>
+                </permission-set>
+            </permission-sets>
             <http>
                 <http-authentication-factory name="management-http-authentication" security-domain="ManagementDomain" http-server-mechanism-factory="global">
                     <mechanism-configuration>
@@ -399,15 +400,14 @@
                         </mechanism>
                     </mechanism-configuration>
                 </http-authentication-factory>
-                <http-authentication-factory name="application-http-authentication" http-server-mechanism-factory="global" security-domain="ApplicationDomain">
+                <http-authentication-factory name="keycloak-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="keycloak-http-server-mechanism-factory">
                     <mechanism-configuration>
-                        <mechanism mechanism-name="BASIC">
-                            <mechanism-realm realm-name="Application Realm"/>
+                        <mechanism mechanism-name="KEYCLOAK">
+                            <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
                         </mechanism>
-                        <mechanism mechanism-name="FORM"/>
                     </mechanism-configuration>
                 </http-authentication-factory>
-                <http-authentication-factory name="keycloak-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="keycloak-http-server-mechanism-factory">
+                <http-authentication-factory name="keycloak-mgmt-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="wildfly-management">
                     <mechanism-configuration>
                         <mechanism mechanism-name="KEYCLOAK">
                             <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
@@ -678,8 +678,8 @@
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
             <secure-deployment name="dcm4chee-arc-ui2-5.16.1-secure.war">
-                <realm>${realm-name}</realm>
-                <auth-server-url>${auth-server-url}</auth-server-url>
+                <realm>${env.REALM_NAME}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL}</auth-server-url>
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED}</ssl-required>
                 <resource>${env.UI_CLIENT_ID}</resource>
@@ -688,14 +688,35 @@
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.16.1-secure.war">
-                <realm>${realm-name}</realm>
-                <auth-server-url>${auth-server-url}</auth-server-url>
-                <public-client>true</public-client>
+                <realm>${env.REALM_NAME}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL}</auth-server-url>
+                <bearer-only>true</bearer-only>
                 <ssl-required>${env.SSL_REQUIRED}</ssl-required>
                 <resource>${env.RS_CLIENT_ID}</resource>
                 <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
+            </secure-deployment>
+            <secure-server name="wildfly-console">
+                <realm>${env.REALM_NAME}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL}</auth-server-url>
+                <public-client>true</public-client>
+                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
+                <resource>${env.WILDFLY_CONSOLE}</resource>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
+            </secure-server>
+            <secure-deployment name="wildfly-management">
+                <realm>${env.REALM_NAME}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL}</auth-server-url>
+                <bearer-only>true</bearer-only>
+                <ssl-required>${env.SSL_REQUIRED}</ssl-required>
+                <resource>${env.WILDFLY_MANAGEMENT}</resource>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME}</allow-any-hostname>
+                <principal-attribute>preferred_username</principal-attribute>
             </secure-deployment>
         </subsystem>
     </profile>
