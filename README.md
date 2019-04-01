@@ -41,6 +41,11 @@ Path to file containing the password for LDAP.
 If the file does not exist, it will be created containing the password specified by `LDAP_ROOTPASS`. 
 Default value is `/tmp/ldap_rootpass`.
 
+#### `LDAP_DISABLE_HOSTNAME_VERIFICATION`
+
+Indicates to disable the verification of the hostname of the certificate of the LDAP server,
+if using TLS (`LDAP_URL=ldaps://<host>:<port>`). Default value is `true`.
+
 #### `POSTGRES_HOST`
 
 This environment variable sets the host name for POSTGRES. Default value is `db`.

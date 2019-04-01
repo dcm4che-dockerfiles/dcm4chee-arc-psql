@@ -43,6 +43,7 @@
     </extensions>
 
     <system-properties>
+        <property name="com.sun.jndi.ldap.object.disableEndpointIdentification" value="${env.LDAP_DISABLE_HOSTNAME_VERIFICATION}"/>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME}"/>
         <property name="org.dcm4che3.util.ReverseDNS" value="${env.REVERSE_DNS}"/>
         <property name="auth-server-url" value="${env.AUTH_SERVER_URL}"/>
