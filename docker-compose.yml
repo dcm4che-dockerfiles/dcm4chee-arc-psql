@@ -88,26 +88,33 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
-  keycloak-proxy:
-    image: dcm4che/keycloak-proxy:4.6.0-2
+  keycloak-gatekeeper:
+    image: dcm4che/keycloak-gatekeeper:5.0.0
     logging:
       driver: gelf
       options:
         gelf-address: "udp://gunter-nb:12201"
-        tag: keycloak-proxy
+        tag: keycloak-gatekeeper
     ports:
-      - "8601:8601"
       - "8643:8643"
-    env_file: docker-compose.env
     environment:
-      HTTP_PORT: 8601
-      HTTPS_PORT: 8643
+      PROXY_LISTEN: 0.0.0.0:8643
+      PROXY_REDIRECTION_URL: https://gunter-nb:8643
+      PROXY_UPSTREAM_URL: http://kibana:5601
+      PROXY_DISCOVERY_URL: https://gunter-nb:8843/auth/realms/dcm4che
+      PROXY_CLIENT_ID: kibana
+      PROXY_CLIENT_SECRET: 968956a3-582b-4f8c-9d09-249fc9f74c35
+      PROXY_ENCRYPTION_KEY: AgXa7xRcoClDEU0ZDSH4X0XhL5Qy2Z2j
+    command:
+      - "--openid-provider-timeout=120s"
+      - "--tls-cert=/etc/certs/cert.pem"
+      - "--tls-private-key=/etc/certs/key.pem"
+      - "--skip-openid-provider-tls-verify=true"
+      - "--enable-refresh-tokens=true"
+      - "--resources=uri=/*|methods=GET|roles=auditlog"
     depends_on:
       - kibana
       - keycloak
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
   db:
     image: dcm4che/postgres-dcm4chee:11.2-16
     logging:
