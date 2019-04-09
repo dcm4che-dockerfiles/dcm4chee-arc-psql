@@ -54,6 +54,10 @@
         <property name="jms.queue.StgVerTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGVERTASKS_CONSUMER_COUNT}"/>
         <property name="jms.queue.MPPSSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT}"/>
         <property name="jms.queue.IANSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT}"/>
+        <property name="jms.queue.HL7Send.consumer-count" value="${env.WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT}"/>
+        <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT}"/>
+        <property name="jms.queue.DiffTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Rejection.consumer-count" value="${env.WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export2.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT2_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT}"/>
@@ -64,11 +68,19 @@
         <property name="jms.queue.Export8.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT8_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export9.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT9_CONSUMER_COUNT}"/>
         <property name="jms.queue.Export10.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT10_CONSUMER_COUNT}"/>
-        <property name="jms.queue.HL7Send.consumer-count" value="${env.WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT}"/>
-        <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT}"/>
-        <property name="jms.queue.CMoveSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT}"/>
-        <property name="jms.queue.DiffTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT}"/>
-        <property name="jms.queue.Rejection.consumer-count" value="${env.WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE1_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve2.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE2_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE3_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve4.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE4_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve5.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE5_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve6.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE6_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve7.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE7_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve8.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE8_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve9.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE9_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve10.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE10_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve11.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE11_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve12.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE12_CONSUMER_COUNT}"/>
+        <property name="jms.queue.Retrieve13.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE13_CONSUMER_COUNT}"/>
     </system-properties>
 
     <management>
@@ -565,6 +577,11 @@
                 <jms-queue name="StgVerTasks" entries="java:/jms/queue/StgVerTasks"/>
                 <jms-queue name="MPPSSCU" entries="java:/jms/queue/MPPSSCU"/>
                 <jms-queue name="IANSCU" entries="java:/jms/queue/IANSCU"/>
+                <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
+                <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
+                <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
+                <jms-queue name="DiffTasks" entries="java:/jms/queue/DiffTasks"/>
+                <jms-queue name="Rejection" entries="java:/jms/queue/Rejection"/>
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
                 <jms-queue name="Export2" entries="java:/jms/queue/Export2"/>
                 <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
@@ -575,11 +592,16 @@
                 <jms-queue name="Export8" entries="java:/jms/queue/Export8"/>
                 <jms-queue name="Export9" entries="java:/jms/queue/Export9"/>
                 <jms-queue name="Export10" entries="java:/jms/queue/Export10"/>
-                <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
-                <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
-                <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
-                <jms-queue name="DiffTasks" entries="java:/jms/queue/DiffTasks"/>
-                <jms-queue name="Rejection" entries="java:/jms/queue/Rejection"/>
+                <jms-queue name="Retrieve1" entries="java:/jms/queue/Retrieve1"/>
+                <jms-queue name="Retrieve2" entries="java:/jms/queue/Retrieve2"/>
+                <jms-queue name="Retrieve3" entries="java:/jms/queue/Retrieve3"/>
+                <jms-queue name="Retrieve4" entries="java:/jms/queue/Retrieve4"/>
+                <jms-queue name="Retrieve5" entries="java:/jms/queue/Retrieve5"/>
+                <jms-queue name="Retrieve6" entries="java:/jms/queue/Retrieve6"/>
+                <jms-queue name="Retrieve7" entries="java:/jms/queue/Retrieve7"/>
+                <jms-queue name="Retrieve8" entries="java:/jms/queue/Retrieve8"/>
+                <jms-queue name="Retrieve9" entries="java:/jms/queue/Retrieve9"/>
+                <jms-queue name="Retrieve10" entries="java:/jms/queue/Retrieve10"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
