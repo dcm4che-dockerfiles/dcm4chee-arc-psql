@@ -250,56 +250,6 @@ Default value is `1`.
 The number of consumers consuming messages from queue `IANSCU`. Limits number of concurrently sent IAN notifications.
 Default value is `1`.
 
-#### `WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export1`. Limits number of concurrently processed Export Tasks
-from `Export1` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT2_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export2`. Limits number of concurrently processed Export Tasks
-from `Export2` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export3`. Limits number of concurrently processed Export Tasks
-from `Export3` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT4_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export4`. Limits number of concurrently processed Export Tasks
-from `Export4` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT5_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export5`. Limits number of concurrently processed Export Tasks
-from `Export5` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT6_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export6`. Limits number of concurrently processed Export Tasks
-from `Export6` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT7_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export7`. Limits number of concurrently processed Export Tasks
-from `Export7` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT8_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export8`. Limits number of concurrently processed Export Tasks
-from `Export8` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT9_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export9`. Limits number of concurrently processed Export Tasks
-from `Export9` queue. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_EXPORT10_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export10`. Limits number of concurrently processed Export Tasks
-from `Export10` queue. Default value is `1`.
-
 #### `WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT`
 
 The number of consumers consuming messages from queue `HL7Send`. Limits number of concurrently sent HL7v2 messages.
@@ -308,11 +258,6 @@ Default value is `1`.
 #### `WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT`
 
 The number of consumers consuming messages from queue `RSClient`. Limits number of concurrently forwarded RESTful
-requests. Default value is `1`.
-
-#### `WILDFLY_JMS_QUEUE_CMOVESCU_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `CMoveSCU`. Limits number of concurrently invoked retrieve
 requests. Default value is `1`.
 
 #### `WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT`
@@ -324,6 +269,16 @@ Compare Tasks. Default value is `1`.
 
 The number of consumers consuming messages from queue `Rejection`. Limits number of concurrently processed Rejection Tasks.
 Compare Tasks. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_EXPORT{N}_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Export{N}` with N = [1..10]. Limits number of concurrently
+processed Export Tasks from `Export{N}` queue. Default value is `1`.
+
+#### `WILDFLY_JMS_QUEUE_RETRIEVE{N}_CONSUMER_COUNT`
+
+The number of consumers consuming messages from queue `Retrieve{N}` with N = [1..13]. Limits number of concurrently
+processed Retrieve Tasks from `Retrieve{N}` queue. Default value is `1`.
 
 #### `SYSLOG_HOST`
 
