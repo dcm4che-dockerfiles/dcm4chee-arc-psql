@@ -592,6 +592,9 @@
                 <jms-queue name="Retrieve8" entries="java:/jms/queue/Retrieve8"/>
                 <jms-queue name="Retrieve9" entries="java:/jms/queue/Retrieve9"/>
                 <jms-queue name="Retrieve10" entries="java:/jms/queue/Retrieve10"/>
+                <jms-queue name="Retrieve11" entries="java:/jms/queue/Retrieve11"/>
+                <jms-queue name="Retrieve12" entries="java:/jms/queue/Retrieve12"/>
+                <jms-queue name="Retrieve13" entries="java:/jms/queue/Retrieve13"/>
                 <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
                 <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
