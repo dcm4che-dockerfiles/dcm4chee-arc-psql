@@ -579,7 +579,6 @@
                 <jms-queue name="IANSCU" entries="java:/jms/queue/IANSCU"/>
                 <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
                 <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
-                <jms-queue name="CMoveSCU" entries="java:/jms/queue/CMoveSCU"/>
                 <jms-queue name="DiffTasks" entries="java:/jms/queue/DiffTasks"/>
                 <jms-queue name="Rejection" entries="java:/jms/queue/Rejection"/>
                 <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
