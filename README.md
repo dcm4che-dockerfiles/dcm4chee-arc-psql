@@ -104,9 +104,16 @@ This environment variable sets the Https port of Wildfly. Default value is `8443
 
 This environment variable sets the Management Http port of Wildfly. Default value is `9990`.
 
+#### `MANAGEMENT_HTTPS_PORT`
+
+This environment variable sets the Management Https port of Wildfly. Default value is `9993`.
+
 #### `WILDFLY_ADMIN_USER`
 
-This environment variable sets the admin user name for Wildfly. Default value is `admin`.
+This environment variable sets the user name for accessing the Wildfly Administration Console for the
+unsecured version of the archive. Secured versions use Keycloak for
+[securing the Wildfly Administration Console](https://docs.jboss.org/author/display/WFLY/Protecting+Wildfly+Adminstration+Console+With+Keycloak).
+Default value is `admin`.
 
 #### `SUPER_USER_ROLE`
 
