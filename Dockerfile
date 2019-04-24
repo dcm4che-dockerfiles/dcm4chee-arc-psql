@@ -33,6 +33,7 @@ ENV LDAP_URL=ldap://ldap:389 \
     HTTP_PORT=8080 \
     HTTPS_PORT=8443 \
     MANAGEMENT_HTTP_PORT=9990 \
+    MANAGEMENT_HTTPS_PORT=9993 \
     KEYSTORE=/opt/wildfly/standalone/configuration/dcm4chee-arc/key.jks \
     KEYSTORE_PASSWORD=secret \
     KEYSTORE_PASSWORD_FILE=/tmp/keystore_password \
