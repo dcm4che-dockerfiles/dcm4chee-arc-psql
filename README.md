@@ -1,11 +1,11 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.16.2` (*5.16.2/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2/Dockerfile)
-- [`5.16.2-secure` (*5.16.2-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2-secure/Dockerfile)
-- [`5.16.2-secure-ui` (*5.16.2-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2-secure-ui/Dockerfile)
-- [`5.16.2-logstash` (*5.16.2-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2-logstash/Dockerfile)
-- [`5.16.2-logstash-secure` (*5.16.2-logstash-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2-logstash-secure/Dockerfile)
-- [`5.16.2-logstash-secure-ui` (*5.16.2-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.16.2-logstash-secure-ui/Dockerfile)
+- [`5.17.0` (*5.17.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0/Dockerfile)
+- [`5.17.0-secure` (*5.17.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0-secure/Dockerfile)
+- [`5.17.0-secure-ui` (*5.17.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0-secure-ui/Dockerfile)
+- [`5.17.0-logstash` (*5.17.0-logstash/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0-logstash/Dockerfile)
+- [`5.17.0-logstash-secure` (*5.17.0-logstash-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0-logstash-secure/Dockerfile)
+- [`5.17.0-logstash-secure-ui` (*5.17.0-logstash-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.17.0-logstash-secure-ui/Dockerfile)
 
 ## How to use this image
 
@@ -193,8 +193,22 @@ archive's UI. Default value set is `dcm4chee-arc-ui`.
 
 #### `RS_CLIENT_ID`
 
-This environment variable sets the client ID for the RESTful client. This value is used in creation of client 
-for securing archive's RESTful services. Default value set is `dcm4chee-arc-rs`.
+Keycloak client ID for securing RESTful services of the archive. Default value set is `dcm4chee-arc-rs`.
+
+#### `WILDFLY_REALM_NAME`
+
+Name of the realm configured in Keycloak for securing the Wildfly Administration Console and Management API.
+Default value is `dcm4che`.
+
+#### `WILDFLY_CONSOLE`
+
+Keycloak client ID for [securing the Wildfly Administration Console](https://docs.jboss.org/author/display/WFLY/Protecting+Wildfly+Adminstration+Console+With+Keycloak).
+Default value set is `wildfly-console`.
+
+#### `WILDFLY_MANAGEMENT`
+
+Keycloak client ID for [securing the Wildfly Management API](https://docs.jboss.org/author/display/WFLY/Protecting+Wildfly+Adminstration+Console+With+Keycloak).
+Default value set is `wildfly-management`.
 
 #### `WILDFLY_EXECUTER_MAX_THREADS`
 
