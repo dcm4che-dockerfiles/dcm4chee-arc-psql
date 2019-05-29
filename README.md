@@ -110,6 +110,8 @@ HTTPS port of Wildfly Administration Console (optional, default is `9993`).
 #### `WILDFLY_ADMIN_USER`
 
 User to authenticate to the Wildfly Administration Console (optional, default is `admin`).
+(Ignored by secured archive version, where any user with assigned role `ADMINISTRATOR` is authorized to access
+the Wildfly Administration Console.)
 
 #### `SUPER_USER_ROLE`
 
