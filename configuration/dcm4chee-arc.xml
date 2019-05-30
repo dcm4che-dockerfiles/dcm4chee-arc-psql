@@ -239,7 +239,7 @@
                     <connection-url>jdbc:postgresql://${env.POSTGRES_HOST:db}:${env.POSTGRES_PORT:5432}/${env.POSTGRES_DB:pacs}${env.POSTGRES_JDBC_PARAMS:}</connection-url>
                     <driver>psql</driver>
                     <pool>
-                        <max-pool-size>${env.WILDFLY_PACSDS_MAX_POOL_SIZE=50:50}</max-pool-size>
+                        <max-pool-size>${env.WILDFLY_PACSDS_MAX_POOL_SIZE:50}</max-pool-size>
                     </pool>
                     <security>
                         <user-name>${env.POSTGRES_USER:pacs}</user-name>
@@ -588,10 +588,12 @@
                 <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa"/>
             </server>
         </subsystem>
+<!--
         <subsystem xmlns="urn:wildfly:microprofile-config-smallrye:1.0"/>
         <subsystem xmlns="urn:wildfly:microprofile-health-smallrye:1.0" security-enabled="false"/>
         <subsystem xmlns="urn:wildfly:microprofile-metrics-smallrye:2.0" security-enabled="false" exposed-subsystems="*" prefix="${wildfly.metrics.prefix:wildfly}"/>
         <subsystem xmlns="urn:wildfly:microprofile-opentracing-smallrye:1.0"/>
+-->
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
             <remote-naming/>
         </subsystem>
