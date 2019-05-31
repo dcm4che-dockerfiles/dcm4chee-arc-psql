@@ -144,12 +144,12 @@
                 <append value="true"/>
             </periodic-rotating-file-handler>
             <custom-handler name="LOGSTASH" class="biz.paluch.logging.gelf.wildfly.WildFlyGelfLogHandler" module="biz.paluch.logging">
-                <level name="${env.GELF_LEVEL}" />
+                <level name="${env.GELF_LEVEL:WARN}" />
                 <properties>
                     <property name="host" value="${env.LOGSTASH_HOST:logstash}" />
                     <property name="extractStackTrace" value="${env.GELF_EXTRACT_STACK_TRACE:true}" />
                     <property name="filterStackTrace" value="${env.GELF_FILTER_STACK_TRACE:true}" />
-                    <property name="facility" value="${env.GELF_FACILITY:WARN}" />
+                    <property name="facility" value="${env.GELF_FACILITY:wildfly}" />
                 </properties>
             </custom-handler>
             <logger category="com.arjuna">
