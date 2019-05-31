@@ -40,7 +40,7 @@ else
 	SYS_PROPS="-c dcm4chee-arc.xml"
 fi
 
-SYS_PROPS+=" -Djboss.management.http.port=${MANAGEMENT_HTTP_PORT:9990}"
-SYS_PROPS+=" -Djboss.management.https.port=${MANAGEMENT_HTTPS_PORT:9993}"
-SYS_PROPS+=" -Djboss.http.port=${HTTP_PORT:8080}"
-SYS_PROPS+=" -Djboss.https.port=${HTTPS_PORT:8443}"
+SYS_PROPS+=" -Djboss.management.http.port=${MANAGEMENT_HTTP_PORT:-9990}"
+SYS_PROPS+=" -Djboss.management.https.port=${MANAGEMENT_HTTPS_PORT:-9993}"
+SYS_PROPS+=" -Djboss.http.port=${HTTP_PORT:-8080}"
+SYS_PROPS+=" -Djboss.https.port=${HTTPS_PORT:-8443}"
