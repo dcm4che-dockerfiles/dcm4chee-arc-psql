@@ -316,7 +316,7 @@ Hostname/IP-Address of the Logstash host. Required for emitting system logs to [
 
 #### `GELF_FACILITY`
 
-Name of the Facility (optional, default is `keycloak`).
+Name of the Facility (optional, default is `wildfly`).
 
 #### `GELF_LEVEL`
 
