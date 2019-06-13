@@ -695,6 +695,9 @@
             <handlers>
                 <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
             </handlers>
+            <filters>
+                <filter name="request-dumper" class-name="io.undertow.server.handlers.RequestDumpingHandler" module="io.undertow.core"/>
+            </filters>
             <application-security-domains>
                 <application-security-domain name="other" http-authentication-factory="keycloak-http-authentication"/>
             </application-security-domains>
