@@ -45,8 +45,6 @@
         <property name="com.sun.jndi.ldap.object.disableEndpointIdentification" value="${env.LDAP_DISABLE_HOSTNAME_VERIFICATION:true}"/>
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME:dcm4chee-arc}"/>
         <property name="org.dcm4che3.util.ReverseDNS" value="${env.REVERSE_DNS:true}"/>
-        <property name="auth-server-url" value="${env.AUTH_SERVER_URL:http://keycloak:8080/auth}"/>
-        <property name="realm-name" value="${env.REALM_NAME:dcm4che}"/>
         <property name="super-user-role" value="${env.SUPER_USER_ROLE:admin}"/>
         <property name="jms.queue.StgCmtSCP.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT:1}"/>
         <property name="jms.queue.StgCmtSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT:1}"/>
