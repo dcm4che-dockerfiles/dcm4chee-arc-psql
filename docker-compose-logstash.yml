@@ -94,7 +94,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-gatekeeper:
-    image: dcm4che/keycloak-gatekeeper:6.0.1
+    image: dcm4che/keycloak-gatekeeper:6.0.1-update-ca-certificates
     logging:
       driver: gelf
       options:
@@ -116,6 +116,9 @@ services:
       - "--tls-private-key=/etc/certs/key.pem"
       - "--skip-openid-provider-tls-verify=true"
       - "--enable-refresh-tokens=true"
+      - "--enable-token-header=false"
+      - "--enable-authorization-header=false"
+      - "--enable-authorization-cookies=false"
       - "--resources=uri=/*|roles=auditlog"
     depends_on:
       - kibana
