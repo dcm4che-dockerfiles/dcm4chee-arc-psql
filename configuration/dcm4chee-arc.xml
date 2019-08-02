@@ -470,7 +470,7 @@
                 <key-stores>
                     <key-store name="httpsKS">
                         <credential-reference clear-text="${env.KEYSTORE_PASSWORD}"/>
-                        <implementation type="${env.KEYSTORE_TYPE:JKS}"/>
+                        <implementation type="${env.KEYSTORE_TYPE}"/>
                         <file path="${env.KEYSTORE}"/>
                     </key-store>
                 </key-stores>
