@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.18.0` (*5.18.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.0/Dockerfile)
-- [`5.18.0-secure` (*5.18.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.0-secure/Dockerfile)
-- [`5.18.0-secure-ui` (*5.18.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.0-secure-ui/Dockerfile)
+- [`5.18.1` (*5.18.1/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.1/Dockerfile)
+- [`5.18.1-secure` (*5.18.1-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.1-secure/Dockerfile)
+- [`5.18.1-secure-ui` (*5.18.1-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.18.1-secure-ui/Dockerfile)
 
 ## How to use this image
 
