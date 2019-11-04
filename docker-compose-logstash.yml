@@ -50,7 +50,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/logstash/filter-hashtree:/usr/share/logstash/data/filter-hashtree
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.44-19.1
+    image: dcm4che/slapd-dcm4chee:2.4.48-19.1
     logging:
       driver: gelf
       options:
@@ -63,12 +63,10 @@ services:
     depends_on:
       - logstash
     volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - /var/local/dcm4chee-arc/ldap:/var/lib/ldap
-      - /var/local/dcm4chee-arc/slapd.d:/etc/ldap/slapd.d
+      - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
+      - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:7.0.0
+    image: dcm4che/keycloak:7.0.1
     logging:
       driver: gelf
       options:
@@ -94,7 +92,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   keycloak-gatekeeper:
-    image: dcm4che/keycloak-gatekeeper:6.0.1-update-ca-certificates
+    image: dcm4che/keycloak-gatekeeper:7.0.0
     logging:
       driver: gelf
       options:
