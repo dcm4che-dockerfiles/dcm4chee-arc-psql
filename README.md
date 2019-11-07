@@ -329,3 +329,45 @@ Indicates if the Stack-Trace shall be sent in the StackTrace field (optional, de
 #### `GELF_FILTER_STACK_TRACE`
 
 Indicates if Stack-Trace filtering shall be performed (optional, default is `true`).
+
+## Deploy additional application(s)
+
+You may extend the image by creating a new one and place your application(s) inside the
+`/docker-entrypoint.d/deployments/` directory with the `COPY` command. E.g.:
+
+```console
+$ ls
+Dockerfile  weasis-pacs-connector.war
+```
+```console
+$ cat Dockerfile
+FROM dcm4che/dcm4chee-arc-psql:5.19.1
+COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
+```
+```console
+$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.19.1 .
+Sending build context to Docker daemon  1.924MB
+Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.19.1
+5.19.1: Pulling from dcm4che/dcm4chee-arc-psql
+c7b7d16361e0: Already exists
+b7a128769df1: Already exists
+1128949d0793: Already exists
+667692510b70: Already exists
+5352881f31d4: Already exists
+9c5c547fc9af: Already exists
+1425a6f5654d: Already exists
+5686d3c45e41: Already exists
+d26ca0854059: Already exists
+b04b5d1d48ca: Already exists
+73f6e4c54635: Already exists
+495a8a1a3634: Pull complete
+01e5664d91d6: Pull complete
+22267eaaa65e: Pull complete
+Digest: sha256:efd76ca282504bc3e7284cc544434dd769a84b45af5f96ff84ed462a6425780d
+Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.19.1
+ ---> c84231dce4d2
+Step 2/2 : COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
+ ---> b0f94489c0cb
+Successfully built b0f94489c0cb
+Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.19.1
+```
