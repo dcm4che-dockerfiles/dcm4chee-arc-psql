@@ -47,7 +47,9 @@ services:
       - "9993:9993"
       - "8787:8787"
       - "11112:11112"
+      - "2762:2762"
       - "2575:2575"
+      - "12575:12575"
     env_file: docker-compose.env
     environment:
       WILDFLY_CHOWN: /opt/wildfly/standalone /storage
