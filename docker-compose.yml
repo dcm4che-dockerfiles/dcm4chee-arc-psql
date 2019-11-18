@@ -6,8 +6,6 @@ services:
       - "389:389"
       - "636:636"
     env_file: docker-compose.env
-    environment:
-      EXT_INIT_CONFIG: default-ui-config.ldif
     volumes:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
