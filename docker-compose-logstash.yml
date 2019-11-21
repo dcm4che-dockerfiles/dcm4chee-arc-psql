@@ -50,7 +50,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/logstash/filter-hashtree:/usr/share/logstash/data/filter-hashtree
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.48-19.2
+    image: dcm4che/slapd-dcm4chee:2.4.48-20.0
     logging:
       driver: gelf
       options:
