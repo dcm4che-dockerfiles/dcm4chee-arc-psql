@@ -243,6 +243,16 @@ This environment variable sets the maximum threads allowed for the managed-execu
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
+#### `WILDFLY_JMS_THREAD_POOL_MAX_SIZE`
+
+The number of threads that the main thread pool of the ActiveMQ server has. -1 means no limit
+(optional, default is `30`).
+
+#### `WILDFLY_JMS_SCHEDULED_THREAD_POOL_MAX_SIZE`
+
+The number of threads that the main scheduled thread pool of the ActiveMQ server has
+(optional, default is `5`).
+
 #### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
 
 Configured maximum number of message driven bean instances that the pool can hold at a given point in time.
