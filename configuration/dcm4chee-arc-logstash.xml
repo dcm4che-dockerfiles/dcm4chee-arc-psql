@@ -577,7 +577,7 @@
             </mail-session>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:messaging-activemq:8.0">
-            <server name="default">
+            <server name="default" scheduled-thread-pool-max-size="${env.WILDFLY_JMS_SCHEDULED_THREAD_POOL_MAX_SIZE:5}" thread-pool-max-size="${env.WILDFLY_JMS_THREAD_POOL_MAX_SIZE:30}">
                 <statistics enabled="${wildfly.messaging-activemq.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
                 <security-setting name="#">
                     <role name="guest" send="true" consume="true" create-non-durable-queue="true" delete-non-durable-queue="true"/>
