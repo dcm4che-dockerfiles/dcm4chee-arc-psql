@@ -121,12 +121,12 @@
             </logger>
         </audit-log>
         <management-interfaces>
-            <http-interface security-realm="ManagementRealm" ssl-context="httpsSSC">
-                <http-upgrade enabled="true"/>
+            <http-interface http-authentication-factory="keycloak-mgmt-http-authentication" ssl-context="httpsSSC">
+                <http-upgrade enabled="true" sasl-authentication-factory="management-sasl-authentication"/>
                 <socket-binding http="management-http" https="management-https"/>
             </http-interface>
         </management-interfaces>
-        <access-control provider="simple">
+        <access-control provider="rbac" use-identity-roles="true">
             <role-mapping>
                 <role name="SuperUser">
                     <include>
@@ -374,8 +374,12 @@
                     <realm name="ManagementRealm" role-decoder="groups-to-roles"/>
                     <realm name="local" role-mapper="super-user-mapper"/>
                 </security-domain>
+                <security-domain name="KeycloakDomain" default-realm="KeycloakOIDCRealm" permission-mapper="default-permission-mapper" security-event-listener="local-audit">
+                    <realm name="KeycloakOIDCRealm"/>
+                </security-domain>
             </security-domains>
             <security-realms>
+                <custom-realm name="KeycloakOIDCRealm" module="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" class-name="org.keycloak.adapters.elytron.KeycloakSecurityRealm"/>
                 <identity-realm name="local" identity="$local"/>
                 <properties-realm name="ApplicationRealm">
                     <users-properties path="application-users.properties" relative-to="jboss.server.config.dir" digest-realm-name="ApplicationRealm"/>
@@ -398,6 +402,7 @@
                     </permission-mapping>
                 </simple-permission-mapper>
                 <constant-realm-mapper name="local" realm-name="local"/>
+                <constant-realm-mapper name="keycloak-oidc-realm-mapper" realm-name="KeycloakOIDCRealm"/>
                 <simple-role-decoder name="groups-to-roles" attribute="groups"/>
                 <constant-role-mapper name="super-user-mapper">
                     <role name="SuperUser"/>
@@ -421,7 +426,26 @@
                         </mechanism>
                     </mechanism-configuration>
                 </http-authentication-factory>
+                <http-authentication-factory name="keycloak-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="keycloak-http-server-mechanism-factory">
+                    <mechanism-configuration>
+                        <mechanism mechanism-name="KEYCLOAK">
+                            <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
+                        </mechanism>
+                    </mechanism-configuration>
+                </http-authentication-factory>
+                <http-authentication-factory name="keycloak-mgmt-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="wildfly-management">
+                    <mechanism-configuration>
+                        <mechanism mechanism-name="KEYCLOAK">
+                            <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
+                        </mechanism>
+                    </mechanism-configuration>
+                </http-authentication-factory>
+                <aggregate-http-server-mechanism-factory name="keycloak-http-server-mechanism-factory">
+                    <http-server-mechanism-factory name="keycloak-oidc-http-server-mechanism-factory"/>
+                    <http-server-mechanism-factory name="global"/>
+                </aggregate-http-server-mechanism-factory>
                 <provider-http-server-mechanism-factory name="global"/>
+                <service-loader-http-server-mechanism-factory name="keycloak-oidc-http-server-mechanism-factory" module="org.keycloak.keycloak-wildfly-elytron-oidc-adapter"/>
             </http>
             <sasl>
                 <sasl-authentication-factory name="application-sasl-authentication" sasl-server-factory="configured" security-domain="ApplicationDomain">
@@ -696,6 +720,9 @@
             <filters>
                 <filter name="request-dumper" class-name="io.undertow.server.handlers.RequestDumpingHandler" module="io.undertow.core"/>
             </filters>
+            <application-security-domains>
+                <application-security-domain name="other" http-authentication-factory="keycloak-http-authentication"/>
+            </application-security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:webservices:2.0" statistics-enabled="${wildfly.webservices.statistics-enabled:${wildfly.statistics-enabled:false}}">
             <wsdl-host>${jboss.bind.address:127.0.0.1}</wsdl-host>
@@ -732,6 +759,27 @@
                 <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+            </secure-deployment>
+            <secure-server name="wildfly-console">
+                <realm>${env.REALM_NAME:dcm4che}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
+                <public-client>true</public-client>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <resource>${env.WILDFLY_CONSOLE:wildfly-console}</resource>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+            </secure-server>
+            <secure-deployment name="wildfly-management">
+                <realm>${env.REALM_NAME:dcm4che}</realm>
+                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
+                <bearer-only>true</bearer-only>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <resource>${env.WILDFLY_MANAGEMENT:wildfly-management}</resource>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <principal-attribute>preferred_username</principal-attribute>
             </secure-deployment>
         </subsystem>
     </profile>

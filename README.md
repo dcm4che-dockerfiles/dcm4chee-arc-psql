@@ -107,22 +107,26 @@ HTTP port of Wildfly Administration Console (optional, default is `9990`).
 
 HTTPS port of Wildfly Administration Console (optional, default is `9993`).
 
-#### `WILDFLY_ADMIN_USER` (Ignored by archive versions secured by Keycloak)
+#### `WILDFLY_ADMIN_OIDC` (Only effective by archive versions secured by Keycloak)
+
+Protect Wildfly Adminstration Console with Keycloak (optional, default is `true`).
+
+#### `WILDFLY_ADMIN_USER` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
 
 By default there is no admin user created so you won't be able to login to the Wildfly Administration Console.
 User to authenticate to the Wildfly Administration Console.
-(At archive versions secured by Keycloak, any user with assigned role `ADMINISTRATOR` is authorized to access the
-Wildfly Administration Console.)
+(At archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`, any user with assigned role `ADMINISTRATOR`
+is authorized to access the Wildfly Administration Console.)
 
-#### `WILDFLY_ADMIN_USER_FILE` (Ignored by archive versions secured by Keycloak)
+#### `WILDFLY_ADMIN_USER_FILE` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
 
 User to authenticate to the Wildfly Administration Console via file input (alternative to WILDFLY_ADMIN_USER).
 
-#### `WILDFLY_ADMIN_PASSWORD` (Ignored by archive versions secured by Keycloak)
+#### `WILDFLY_ADMIN_PASSWORD` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
 
 User's password to use to authenticate to the Wildfly Administration Console.
 
-#### `WILDFLY_ADMIN_PASSWORD_FILE` (Ignored by archive versions secured by Keycloak)
+#### `WILDFLY_ADMIN_PASSWORD_FILE` (Ignored by archive versions secured by Keycloak and `WILDFLY_ADMIN_OIDC=true`)
 
 User's password to use to authenticate to the Wildfly Administration Console via file input (alternative to WILDFLY_ADMIN_PASSWORD).
 
