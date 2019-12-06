@@ -10,7 +10,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:8.0.0
+    image: dcm4che/keycloak:8.0.1
     ports:
       - "8880:8880"
       - "8843:8843"
