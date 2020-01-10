@@ -247,14 +247,39 @@ This environment variable sets the maximum threads allowed for the managed-execu
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
-#### `WILDFLY_JMS_THREAD_POOL_MAX_SIZE`
+#### `WILDFLY_JMS_GLOBAL_CLIENT_THREAD_POOL_MAX_SIZE`
 
-The number of threads that the main thread pool of the ActiveMQ server has. -1 means no limit
+Maximum size of the pool of threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
 (optional, default is `30`).
 
-#### `WILDFLY_JMS_SCHEDULED_THREAD_POOL_MAX_SIZE`
+#### `WILDFLY_JMS_GLOBAL_CLIENT_SCHEDULED_THREAD_POOL_MAX_SIZE`
 
-The number of threads that the main scheduled thread pool of the ActiveMQ server has
+Maximum size of the pool of scheduled threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
+(optional, default is `5`).
+
+#### `WILDFLY_JMS_SERVER_THREAD_POOL_MAX_SIZE`
+
+The number of threads that the main thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has. -1 means no limit
+(optional, default is `30`).
+
+#### `WILDFLY_JMS_SERVER_SCHEDULED_THREAD_POOL_MAX_SIZE`
+
+The number of threads that the main scheduled thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has
+(optional, default is `5`).
+
+#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_MAX_POOL_SIZE`
+
+The maximum size for the pool of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
+(optional, default is `20`).
+
+#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_THREAD_POOL_MAX_SIZE`
+
+The thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
+(optional, default is `30`).
+
+#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_SCHEDULED_THREAD_POOL_MAX_SIZE`
+
+The scheduled thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
 (optional, default is `5`).
 
 #### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
