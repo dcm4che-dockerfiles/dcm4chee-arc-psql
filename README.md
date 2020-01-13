@@ -267,7 +267,7 @@ The number of threads that the main thread pool of the [ActiveMQ server](https:/
 The number of threads that the main scheduled thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has
 (optional, default is `5`).
 
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_MAX_POOL_SIZE`
+#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_MAX_POOL_SIZE`
 
 The maximum size for the pool of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
 (optional, default is `20`).
