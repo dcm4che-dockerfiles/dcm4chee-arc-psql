@@ -91,9 +91,13 @@ Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connection
 This environment variable is used to set the ownership to the storage directory (optional, default is 
 `"/opt/wildfly/standalone /storage"`
 
+#### `HTTP_MAX_POST_SIZE`
+
+The maximum size of a HTTP POST request that will be accepted, in bytes. (optional, default is `10000000000`).
+
 #### `HTTP_PORT`
 
-HTTP port of Keycloak (optional, default is `8080`).
+HTTP port of Wildfly (optional, default is `8080`).
 
 #### `HTTPS_PORT`
 
