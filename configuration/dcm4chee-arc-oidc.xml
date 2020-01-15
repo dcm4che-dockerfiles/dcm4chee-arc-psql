@@ -695,7 +695,7 @@
             <buffer-cache name="default"/>
             <server name="default-server">
                 <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true" max-post-size="10000000000"/>
-                <https-listener name="https" socket-binding="https" ssl-context="httpsSSC" enable-http2="true"/>
+                <https-listener name="https" socket-binding="https" ssl-context="httpsSSC" enable-http2="true" max-post-size="10000000000"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
                     <http-invoker security-realm="ApplicationRealm"/>
