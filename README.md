@@ -136,7 +136,7 @@ User's password to use to authenticate to the Wildfly Administration Console via
 
 #### `AUTH_USER_ROLE`
 
-User role required to access the UI and/or RESTful service of the Archive (optional, default is `user`).
+User role required to access the UI and RESTful services of the Archive (optional, default is `user`).
 
 #### `SUPER_USER_ROLE`
 
