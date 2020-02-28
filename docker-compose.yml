@@ -10,7 +10,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:8.0.2
+    image: dcm4che/keycloak:9.0.0
     ports:
       - "8880:8880"
       - "8843:8843"
@@ -30,7 +30,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   db:
-    image: dcm4che/postgres-dcm4chee:12.1-22
+    image: dcm4che/postgres-dcm4chee:12.2-22
     ports:
       - "5432:5432"
     env_file: docker-compose.env
