@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.48-22.1
+    image: dcm4che/slapd-dcm4chee:2.4.48-22.2
     ports:
       - "389:389"
       - "636:636"
@@ -10,7 +10,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:9.0.0
+    image: dcm4che/keycloak:9.0.2
     ports:
       - "8880:8880"
       - "8843:8843"
@@ -39,7 +39,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.22.1-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.22.2-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
