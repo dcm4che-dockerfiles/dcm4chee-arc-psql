@@ -146,7 +146,7 @@ verification of user permissions (optional, default is `admin`).
 #### `KEYSTORE`
 
 Path to keystore file with private key and certificate for HTTPS (optional, default is
-`/opt/keycloak/standalone/configuration/keystore/key.jks`, with sample key + certificate:
+`/opt/wildfly/standalone/configuration/keystore/key.jks`, with sample key + certificate:
 ```
 Subject    - CN=PACS_J4C,O=J4CARE,C=AT
 Issuer     - CN=IHE Europe CA, O=IHE Europe, C=FR
@@ -183,7 +183,7 @@ Type (`JKS` or `PKCS12`) of the keystore specified by `KEYSTORE` (optional, defa
 #### `TRUSTSTORE`
 
 Path to keystore file with trusted certificates for HTTPS (optional, default is
-`/opt/keycloak/standalone/configuration/keystore/cacerts.jks`, with sample CA certificate:
+`/opt/wildfly/standalone/configuration/keystore/cacerts.jks`, with sample CA certificate:
 ```
 Subject    - CN=IHE Europe CA,O=IHE Europe,C=FR
 Issuer     - CN=IHE Europe CA, O=IHE Europe, C=FR
