@@ -143,6 +143,10 @@ User role required to access the UI and RESTful services of the Archive (optiona
 User role to identify super users, which have unrestricted access to all UI functions of the Archive, bypassing the
 verification of user permissions (optional, default is `admin`).
 
+#### `PROXY_USER_ROLE`
+
+User role required to access HTTP services over a proxy. (optional, default is `user`).
+
 #### `KEYSTORE`
 
 Path to keystore file with private key and certificate for HTTPS (optional, default is
