@@ -207,6 +207,17 @@ Password used to protect the integrity of the keystore specified by `TRUSTSTORE`
 Password used to protect the integrity of the keystore specified by `TRUSTSTORE` via file input
 (alternative to `TRUSTSTORE_PASSWORD`).
 
+#### `TLS_PROTOCOLS`
+
+Comma separated list of enabled TLS protocols (`SSLv2`, `SSLv3`, `TLSv1`, `TLSv1.1`, `TLSv1.2`, `TLSv1.3`)
+(optional, default is `TLSv1.2`). 
+
+#### `CIPHER_SUITE_FILTER`
+
+The filter to apply to specify the enabled cipher suites for TLSv1.2 and below. See
+[javadoc](https://wildfly-security.github.io/wildfly-elytron/1.1.x/org/wildfly/security/ssl/CipherSuiteSelector.html#fromString-java.lang.String-)
+for possible values. (optional, default is `DEFAULT`).
+
 ##### `AUTH_SERVER_URL`
 
 Base URL of the Keycloak server used for authenticating the client requests.
