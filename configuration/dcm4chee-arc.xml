@@ -451,7 +451,7 @@
                     </key-manager>
                 </key-managers>
                 <server-ssl-contexts>
-                    <server-ssl-context name="httpsSSC" protocols="TLSv1.2" key-manager="httpsKM"/>
+                    <server-ssl-context name="httpsSSC" cipher-suite-filter="${env.CIPHER_SUITE_FILTER:DEFAULT}" protocols="${env.TLS_PROTOCOLS:TLSv1.2}" key-manager="httpsKM"/>
                 </server-ssl-contexts>
             </tls>
         </subsystem>
