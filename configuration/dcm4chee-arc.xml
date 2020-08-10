@@ -712,6 +712,7 @@
                 <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.22.4-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
@@ -722,6 +723,7 @@
                 <truststore>${env.TRUSTSTORE}</truststore>
                 <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
             </secure-deployment>
         </subsystem>
     </profile>
