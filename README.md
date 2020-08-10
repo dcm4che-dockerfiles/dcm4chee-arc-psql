@@ -242,6 +242,11 @@ Defining the SSL/HTTPS requirements for interacting with the Keycloak server:
 If the Keycloak server requires HTTPS and this config option is set to `true` the Keycloak server’s certificate is 
 validated via the truststore, but host name validation is not done (optional, default value set is `true`).
 
+#### `DISABLE_TRUST_MANAGER`
+
+If the Keycloak server requires HTTPS and this config option is set to `true` the Keycloak server’s certificate is 
+is **not** validated via the truststore (optional, default value set is `false`).
+
 ##### `UI_CLIENT_ID`
 
 Keycloak client ID for securing the UI of the archive (optional, default is `dcm4chee-arc-ui`).
