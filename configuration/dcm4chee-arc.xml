@@ -52,6 +52,8 @@
         <property name="realm-name" value="${env.REALM_NAME:dcm4che}"/>
         <property name="ssl-required" value="${env.SSL_REQUIRED:external}"/>
         <property name="ui-client-id" value="${env.UI_CLIENT_ID:dcm4chee-arc-ui}"/>
+        <property name="disable-trust-manager" value="${env.DISABLE_TRUST_MANAGER:false}"/>
+        <property name="allow-any-hostname" value="${env.ALLOW_ANY_HOSTNAME:true}"/>
         <property name="auth-user-role" value="${env.AUTH_USER_ROLE:user}"/>
         <property name="super-user-role" value="${env.SUPER_USER_ROLE:admin}"/>
         <property name="proxy-user-role" value="${env.PROXY_USER_ROLE:user}"/>
