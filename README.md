@@ -150,7 +150,7 @@ User role required to access HTTP services over a proxy. (optional, default is `
 #### `KEYSTORE`
 
 Path to keystore file with private key and certificate for HTTPS (optional, default is
-`/opt/wildfly/standalone/configuration/keystore/key.jks`, with sample key + certificate:
+`/opt/wildfly/standalone/configuration/keystore/key.p12`, with sample key + certificate:
 ```
 Subject    - CN=PACS_J4C,O=J4CARE,C=AT
 Issuer     - CN=IHE Europe CA, O=IHE Europe, C=FR
@@ -182,7 +182,7 @@ Password used to protect the private key in the keystore specified by `KEYSTORE`
 
 #### `KEYSTORE_TYPE`
 
-Type (`JKS` or `PKCS12`) of the keystore specified by `KEYSTORE` (optional, default is `JKS`).
+Type (`JKS` or `PKCS12`) of the keystore specified by `KEYSTORE` (optional, default is `PKCS12`).
 
 #### `TRUSTSTORE`
 
