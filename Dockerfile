@@ -18,6 +18,6 @@ COPY configuration /docker-entrypoint.d/configuration
 # Default configuration: can be overridden at the docker command line
 ENV LDAP_URL=ldap://ldap:389 \
     LDAP_BASE_DN=dc=dcm4che,dc=org \
-    KEYSTORE=/opt/wildfly/standalone/configuration/keystores/key.jks \
-    KEYSTORE_TYPE=JKS \
+    KEYSTORE=/opt/wildfly/standalone/configuration/keystores/key.p12 \
+    KEYSTORE_TYPE=PKCS12 \
     TRUSTSTORE=/opt/wildfly/standalone/configuration/keystores/cacerts.jks
