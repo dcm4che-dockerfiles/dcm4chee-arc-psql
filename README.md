@@ -207,6 +207,10 @@ Password used to protect the integrity of the keystore specified by `TRUSTSTORE`
 Password used to protect the integrity of the keystore specified by `TRUSTSTORE` via file input
 (alternative to `TRUSTSTORE_PASSWORD`).
 
+#### `TRUSTSTORE_TYPE`
+
+Type (`JKS` or `PKCS12`) of the keystore specified by `TRUSTSTORE` (optional, default is `PKCS12`).
+
 #### `TLS_PROTOCOLS`
 
 Comma separated list of enabled TLS protocols (`SSLv2`, `SSLv3`, `TLSv1`, `TLSv1.1`, `TLSv1.2`, `TLSv1.3`)
