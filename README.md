@@ -198,6 +198,14 @@ SHA1 : 54:e0:10:c6:4a:fe:2c:aa:20:3f:50:95:45:82:cb:53:55:6b:07:7f
 ```
 provided by the docker image only for testing purpose).
 
+_Note_: Set
+```yaml
+    environment:
+      TRUSTSTORE: /usr/local/openjdk-11/lib/security/cacerts
+      TRUSTSTORE_PASSWORD: changeit
+```
+to trust all JDK Root CA Certificates.
+
 #### `TRUSTSTORE_PASSWORD`
 
 Password used to protect the integrity of the keystore specified by `TRUSTSTORE` (optional, default is `secret`).
