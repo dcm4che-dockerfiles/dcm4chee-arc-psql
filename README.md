@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.22.4` (*5.22.4/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.4/Dockerfile)
-- [`5.22.4-secure` (*5.22.4-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.4-secure/Dockerfile)
-- [`5.22.4-secure-ui` (*5.22.4-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.4-secure-ui/Dockerfile)
+- [`5.22.5` (*5.22.5/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.5/Dockerfile)
+- [`5.22.5-secure` (*5.22.5-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.5-secure/Dockerfile)
+- [`5.22.5-secure-ui` (*5.22.5-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.22.5-secure-ui/Dockerfile)
 
 ## How to use this image
 
@@ -412,14 +412,14 @@ Dockerfile  weasis-pacs-connector.war
 ```
 ```console
 $ cat Dockerfile
-FROM dcm4che/dcm4chee-arc-psql:5.22.4
+FROM dcm4che/dcm4chee-arc-psql:5.22.5
 COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
 ```
 ```console
-$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.22.4 .
+$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.22.5 .
 Sending build context to Docker daemon  1.924MB
-Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.22.4
-5.22.4: Pulling from dcm4che/dcm4chee-arc-psql
+Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.22.5
+5.22.5: Pulling from dcm4che/dcm4chee-arc-psql
 c7b7d16361e0: Already exists
 b7a128769df1: Already exists
 1128949d0793: Already exists
@@ -435,10 +435,10 @@ b04b5d1d48ca: Already exists
 01e5664d91d6: Pull complete
 22267eaaa65e: Pull complete
 Digest: sha256:efd76ca282504bc3e7284cc544434dd769a84b45af5f96ff84ed462a6425780d
-Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.22.4
+Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.22.5
  ---> c84231dce4d2
 Step 2/2 : COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
  ---> b0f94489c0cb
 Successfully built b0f94489c0cb
-Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.22.4
+Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.22.5
 ```
