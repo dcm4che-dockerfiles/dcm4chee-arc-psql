@@ -20,5 +20,6 @@ ENV LDAP_URL=ldap://ldap:389 \
     LDAP_BASE_DN=dc=dcm4che,dc=org \
     KEYSTORE=/opt/wildfly/standalone/configuration/keystores/key.p12 \
     KEYSTORE_TYPE=PKCS12 \
-    TRUSTSTORE=/opt/wildfly/standalone/configuration/keystores/cacerts.p12 \
-    TRUSTSTORE_TYPE=PKCS12
+    TRUSTSTORE=/usr/local/openjdk-11/lib/security/cacerts \
+    TRUSTSTORE_TYPE=JKS \
+    EXTRA_CACERTS=/opt/wildfly/standalone/configuration/keystores/cacerts.p12
