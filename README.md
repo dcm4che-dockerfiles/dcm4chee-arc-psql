@@ -186,29 +186,12 @@ Type (`JKS` or `PKCS12`) of the keystore specified by `KEYSTORE` (optional, defa
 
 #### `TRUSTSTORE`
 
-Path to keystore file with trusted certificates for HTTPS (optional, default is
-`/opt/wildfly/standalone/configuration/keystore/cacerts.jks`, with sample CA certificate:
-```
-Subject    - CN=IHE Europe CA,O=IHE Europe,C=FR
-Issuer     - CN=IHE Europe CA, O=IHE Europe, C=FR
-Valid From - Fri Sep 28 11:19:29 UTC 2012
-Valid To   - Wed Sep 28 11:19:29 UTC 2022
-MD5 : 64:b6:1b:0f:8d:84:17:da:23:e4:e5:1c:56:ba:06:5d
-SHA1 : 54:e0:10:c6:4a:fe:2c:aa:20:3f:50:95:45:82:cb:53:55:6b:07:7f
-```
-provided by the docker image only for testing purpose).
-
-_Note_: Set
-```yaml
-    environment:
-      TRUSTSTORE: /usr/local/openjdk-11/lib/security/cacerts
-      TRUSTSTORE_PASSWORD: changeit
-```
-to trust all JDK Root CA Certificates.
+Path to keystore file with trusted certificates for TLS (optional, default is the default Java truststore
+`/usr/local/openjdk-11/lib/security/cacerts`). s.o. [EXTRA_CACERTS](#extra_cacerts).
 
 #### `TRUSTSTORE_PASSWORD`
 
-Password used to protect the integrity of the keystore specified by `TRUSTSTORE` (optional, default is `secret`).
+Password used to protect the integrity of the keystore specified by `TRUSTSTORE` (optional, default is `changeit`).
 
 #### `TRUSTSTORE_PASSWORD_FILE`
 
@@ -217,7 +200,30 @@ Password used to protect the integrity of the keystore specified by `TRUSTSTORE`
 
 #### `TRUSTSTORE_TYPE`
 
-Type (`JKS` or `PKCS12`) of the keystore specified by `TRUSTSTORE` (optional, default is `PKCS12`).
+Type (`JKS` or `PKCS12`) of the keystore specified by `TRUSTSTORE` (optional, default is `JKS`).
+
+#### `EXTRA_CACERTS`
+
+Path to keystore file with CA certificates imported to default Java truststore (optional, default is
+`/opt/wildfly/standalone/configuration/keystore/cacerts.p12`, with sample CA certificate:
+```
+Subject    - CN=IHE Europe CA,O=IHE Europe,C=FR
+Issuer     - CN=IHE Europe CA,O=IHE Europe,C=FR
+Valid From - Fri Sep 28 11:19:29 UTC 2012
+Valid To   - Wed Sep 28 11:19:29 UTC 2022
+MD5 : 64:b6:1b:0f:8d:84:17:da:23:e4:e5:1c:56:ba:06:5d
+SHA1 : 54:e0:10:c6:4a:fe:2c:aa:20:3f:50:95:45:82:cb:53:55:6b:07:7f
+```
+provided by the docker image only for testing purpose).
+
+#### `EXTRA_CACERTS_PASSWORD`
+
+Password used to protect the integrity of the keystore specified by `EXTRA_CACERTS` (optional, default is `secret`).
+
+#### `EXTRA_CACERTS_PASSWORD_FILE`
+
+Password used to protect the integrity of the keystore specified by `EXTRA_CACERTS` via file input
+(alternative to `EXTRA_CACERTS_PASSWORD`).
 
 #### `TLS_PROTOCOLS`
 
