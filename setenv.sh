@@ -27,7 +27,8 @@ file_env 'POSTGRES_USER' 'pacs'
 file_env 'POSTGRES_PASSWORD' 'pacs'
 file_env 'KEYSTORE_PASSWORD' 'secret'
 file_env 'KEY_PASSWORD' "${KEYSTORE_PASSWORD}"
-file_env 'TRUSTSTORE_PASSWORD' 'secret'
+file_env 'TRUSTSTORE_PASSWORD' 'changeit'
+file_env 'EXTRA_CACERTS_PASSWORD' 'secret'
 file_env 'WILDFLY_ADMIN_USER'
 file_env 'WILDFLY_ADMIN_PASSWORD'
 
