@@ -64,5 +64,3 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
-    extra_hosts:
-      gunter-nb: 192.168.2.131
