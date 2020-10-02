@@ -709,6 +709,7 @@
                 <https-listener name="https" socket-binding="https" ssl-context="httpsSSC" enable-http2="true" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
+                    <filter-ref name="gzipFilter" predicate="regex(pattern='metadata$',value=%R) and regex(pattern='GET',value=%m)"/>
                     <http-invoker security-realm="ApplicationRealm"/>
                 </host>
             </server>
@@ -720,6 +721,7 @@
                 <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
             </handlers>
             <filters>
+                <gzip name="gzipFilter"/>
                 <filter name="request-dumper" class-name="io.undertow.server.handlers.RequestDumpingHandler" module="io.undertow.core"/>
             </filters>
             <application-security-domains>
