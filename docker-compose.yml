@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.50-22.6
+    image: dcm4che/slapd-dcm4chee:2.4.50-23.0
     ports:
       - "389:389"
       - "636:636"
@@ -10,7 +10,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:12.2-22
+    image: dcm4che/postgres-dcm4chee:13.1-23
     ports:
       - "5432:5432"
     env_file: docker-compose.env
@@ -19,7 +19,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.22.6
+    image: dcm4che/dcm4chee-arc-psql:5.23.0
     ports:
       - "8080:8080"
       - "8443:8443"
