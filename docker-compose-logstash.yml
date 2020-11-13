@@ -50,7 +50,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/logstash/filter-hashtree:/usr/share/logstash/data/filter-hashtree
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.50-22.6
+    image: dcm4che/slapd-dcm4chee:2.4.50-23.0
     logging:
       driver: gelf
       options:
@@ -66,7 +66,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:11.0.2
+    image: dcm4che/keycloak:11.0.3
     logging:
       driver: gelf
       options:
@@ -122,7 +122,7 @@ services:
       - kibana
       - keycloak
   db:
-    image: dcm4che/postgres-dcm4chee:12.2-22
+    image: dcm4che/postgres-dcm4chee:13.1-23
     logging:
       driver: gelf
       options:
@@ -138,7 +138,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.22.6-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.23.0-secure-ui
     logging:
       driver: gelf
       options:
