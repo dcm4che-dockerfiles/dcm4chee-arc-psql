@@ -7,7 +7,7 @@ RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jclouds-jboss-modules/2.2.1-noguava/jclouds-jboss-modules-2.2.1-noguava.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/ecs-object-client-jboss-modules/3.0.0/ecs-object-client-jboss-modules-3.0.0.tar.gz | tar xz \
-    && curl -f http://maven.dcm4che.org/org/dcm4che/jdbc-jboss-modules-psql/42.2.12/jdbc-jboss-modules-psql-42.2.12.tar.gz | tar xz \
+    && curl -f http://maven.dcm4che.org/org/dcm4che/jdbc-jboss-modules-psql/42.2.18/jdbc-jboss-modules-psql-42.2.18.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && cd /docker-entrypoint.d/deployments \
     && curl -fO http://maven.dcm4che.org/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure-ui.ear
