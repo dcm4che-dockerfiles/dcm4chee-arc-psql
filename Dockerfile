@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:ffmpeg-21.0.1-11.0.3
+FROM dcm4che/wildfly:ffmpeg-21.0.2-12.0.1
 
 ENV DCM4CHEE_ARC_VERSION 5.23.0
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
