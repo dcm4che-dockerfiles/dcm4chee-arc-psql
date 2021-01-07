@@ -91,6 +91,10 @@ Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connection
 This environment variable is used to set the ownership to the storage directory (optional, default is 
 `"/opt/wildfly/standalone /storage"`
 
+#### `WILDFLY_WAIT_FOR`
+
+Indicates to delay the start of the archive until specified TCP ports become accessible. Format: `<host>:<port> ...`, e.g.: `ldap:389 db:5432`.
+
 #### `HTTP_MAX_POST_SIZE`
 
 The maximum size of a HTTP POST request that will be accepted, in bytes. (optional, default is `10000000000`).
