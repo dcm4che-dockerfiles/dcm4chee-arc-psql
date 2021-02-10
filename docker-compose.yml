@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.50-23.0
+    image: dcm4che/slapd-dcm4chee:2.4.56-23.1
     ports:
       - "389:389"
       - "636:636"
@@ -39,7 +39,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.23.0-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.23.1-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
