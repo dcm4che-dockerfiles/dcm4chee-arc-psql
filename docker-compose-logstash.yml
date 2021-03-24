@@ -21,7 +21,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:7.9.1
+    image: kibana:7.10.1
     logging:
       driver: json-file
       options:
