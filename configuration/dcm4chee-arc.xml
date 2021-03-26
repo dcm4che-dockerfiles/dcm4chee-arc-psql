@@ -598,7 +598,7 @@
         <subsystem xmlns="urn:wildfly:microprofile-jwt-smallrye:1.0"/>
         <subsystem xmlns="urn:wildfly:microprofile-opentracing-smallrye:3.0" default-tracer="jaeger">
             <jaeger-tracer name="jaeger">
-                <sampler-configuration sampler-type="const" sampler-param="1.0"/>
+                <sampler-configuration sampler-type="const" sampler-param="0.0"/>
             </jaeger-tracer>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
