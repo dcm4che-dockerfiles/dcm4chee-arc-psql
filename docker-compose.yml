@@ -64,3 +64,21 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
+  ui:
+    image: dcm4che/dcm4chee-arc-ui:5.23.3-secure
+    ports:
+      - "18080:18080"
+      - "18443:18443"
+      - "19990:19990"
+      - "19993:19993"
+    env_file: docker-compose.env
+    environment:
+      DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
+      HTTP_PORT: 18080
+      HTTPS_PORT: 18443
+      MANAGEMENT_HTTP_PORT: 19990
+      MANAGEMENT_HTTPS_PORT: 19993
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/local/dcm4chee-arc/ui:/opt/wildfly/standalone
