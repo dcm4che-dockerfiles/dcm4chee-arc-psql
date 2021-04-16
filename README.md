@@ -99,6 +99,12 @@ Indicates to delay the start of the archive until specified TCP ports become acc
 
 The maximum size of a HTTP POST request that will be accepted, in bytes. (optional, default is `10000000000`).
 
+#### `HTTP_PROXY_ADDRESS_FORWARDING`
+
+If this is enabled then the X-Forwarded-For and X-Forwarded-Proto headers will be used to determine the peer address.
+This allows applications that are behind a proxy to see the real address of the client, rather than the address
+of the proxy.  (optional, default is `false`).
+
 #### `HTTP_PORT`
 
 HTTP port of Wildfly (optional, default is `8080`).
@@ -106,6 +112,11 @@ HTTP port of Wildfly (optional, default is `8080`).
 #### `HTTPS_PORT`
 
 HTTPS port of Wildfly (optional, default is `8443`).
+
+#### `REDIRECT_HTTPS_PORT`
+
+HTTPS port to redirect requests that require security too. (optional, default is `8443`).
+Have to be set different to `HTTPS_PORT`, if running behind a HTTPS/SSL reverse proxy listing on a different port.
 
 #### `MANAGEMENT_HTTP_PORT`
 
