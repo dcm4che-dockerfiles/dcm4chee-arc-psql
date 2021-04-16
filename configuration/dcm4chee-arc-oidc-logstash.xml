@@ -707,7 +707,7 @@
         <subsystem xmlns="urn:jboss:domain:undertow:12.0" default-server="default-server" default-virtual-host="default-host" default-servlet-container="default" default-security-domain="other" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}">
             <buffer-cache name="default"/>
             <server name="default-server">
-                <http-listener name="default" socket-binding="http" redirect-socket="https" enable-http2="true" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}"/>
+                <http-listener name="default" socket-binding="http" redirect-socket="redirect-https" proxy-address-forwarding="${env.HTTP_PROXY_ADDRESS_FORWARDING:false}" enable-http2="true" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}"/>
                 <https-listener name="https" socket-binding="https" ssl-context="httpsSSC" enable-http2="true" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
@@ -808,6 +808,7 @@
         <socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
         <socket-binding name="https" port="${jboss.https.port:8443}"/>
+        <socket-binding name="redirect-https" port="${jboss.redirect.https.port:8443}"/>
         <socket-binding name="iiop" interface="unsecure" port="3528"/>
         <socket-binding name="iiop-ssl" interface="unsecure" port="3529"/>
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
