@@ -251,6 +251,12 @@ The filter to apply to specify the enabled cipher suites for TLSv1.2 and below. 
 [javadoc](https://wildfly-security.github.io/wildfly-elytron/1.1.x/org/wildfly/security/ssl/CipherSuiteSelector.html#fromString-java.lang.String-)
 for possible values. (optional, default is `DEFAULT`).
 
+##### `GZIP_FILTER_PREDICATE`
+
+Predicate to enable gzip compression of HTTP responses. See
+[Textual Representation of Predicates](https://undertow.io/undertow-docs/undertow-docs-2.1.0/index.html#textual-representation-of-predicates)
+for possible formats. (optional, default is `method(GET) and path-suffix(studies,series,instances,metadata)`.
+
 ##### `AUTH_SERVER_URL`
 
 Base URL of the Keycloak server used for authenticating the client requests.

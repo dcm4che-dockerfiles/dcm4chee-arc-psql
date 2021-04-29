@@ -701,7 +701,7 @@
                 <https-listener name="https" socket-binding="https" ssl-context="httpsSSC" enable-http2="true" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
-                    <filter-ref name="gzipFilter" predicate="regex(pattern='metadata$',value=%R) and regex(pattern='GET',value=%m)"/>
+                    <filter-ref name="gzipFilter" predicate="${env.GZIP_FILTER_PREDICATE:method(GET) and path-suffix(studies,series,instances,metadata)}"/>
                     <http-invoker security-realm="ApplicationRealm"/>
                 </host>
             </server>
