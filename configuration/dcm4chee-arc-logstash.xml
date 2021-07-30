@@ -597,33 +597,6 @@
             <client-config name="Standard-Client-Config"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
-<<<<<<< HEAD
-=======
-        <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui2-5.24.0-secure.war">
-                <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
-                <public-client>true</public-client>
-                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
-                <resource>${env.UI_CLIENT_ID:dcm4chee-arc-ui}</resource>
-                <truststore>${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
-                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
-            </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.24.0-secure.war">
-                <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
-                <bearer-only>true</bearer-only>
-                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
-                <resource>${env.RS_CLIENT_ID:dcm4chee-arc-rs}</resource>
-                <truststore>${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
-                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
-            </secure-deployment>
-        </subsystem>
->>>>>>> 6f4d176 (Replace JMS by Task Scheduler dcm4che/dcm4chee-arc-light#3211)
     </profile>
     <interfaces>
         <interface name="management">
