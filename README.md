@@ -1,8 +1,8 @@
 # Supported tags and respective `Dockerfile` links
 
-- [`5.23.3` (*5.23.3/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.23.3/Dockerfile)
-- [`5.23.3-secure` (*5.23.3-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.23.3-secure/Dockerfile)
-- [`5.23.3-secure-ui` (*5.23.3-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.23.3-secure-ui/Dockerfile)
+- [`5.24.0` (*5.24.0/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.24.0/Dockerfile)
+- [`5.24.0-secure` (*5.24.0-secure/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.24.0-secure/Dockerfile)
+- [`5.24.0-secure-ui` (*5.24.0-secure-ui/Dockerfile*)](https://github.com/dcm4che-dockerfiles/dcm4chee-arc-psql/blob/5.24.0-secure-ui/Dockerfile)
 
 ## How to use this image
 
@@ -314,105 +314,10 @@ This environment variable sets the maximum threads allowed for the managed-execu
 This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
-#### `WILDFLY_JMS_GLOBAL_CLIENT_THREAD_POOL_MAX_SIZE`
-
-Maximum size of the pool of threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_GLOBAL_CLIENT_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-Maximum size of the pool of scheduled threads used by all [ActiveMQ clients](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/index.html) running inside this server
-(optional, default is `5`).
-
-#### `WILDFLY_JMS_SERVER_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has. -1 means no limit
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_SERVER_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-The number of threads that the main scheduled thread pool of the [ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/index.html) has
-(optional, default is `5`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_MAX_POOL_SIZE`
-
-The maximum size for the pool of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
-(optional, default is `20`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_THREAD_POOL_MAX_SIZE`
-
-The thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
-(optional, default is `30`).
-
-#### `WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_SCHEDULED_THREAD_POOL_MAX_SIZE`
-
-The scheduled thread pool max size of the [pooled connection factory of the ActiveMQ server](https://wildscribe.github.io/WildFly/18.0/subsystem/messaging-activemq/server/pooled-connection-factory/index.html)
-(optional, default is `5`).
-
-#### `WILDFLY_MDB_STRICT_MAX_POOL_SIZE`
-
-Configured maximum number of message driven bean instances that the pool can hold at a given point in time.
-(optional, default is `32`).
-
 #### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
 
 Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured pages.
 (optional, default is `true`).
-
-#### `WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `StgCmtSCP`. Limits number of concurrently processed Storage
-Commitment requests (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `StgCmtSCU`. Limits number of concurrently invoked Storage
-Commitment requests (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_STGVERTASKS_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `StgVerTasks`. Limits number of concurrently invoked Storage
-Verification tasks (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `MPPSSCU`. Limits number of concurrently forwarded MPPS messages.
-(optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `IANSCU`. Limits number of concurrently sent IAN notifications.
-(optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `HL7Send`. Limits number of concurrently sent HL7v2 messages.
-(optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `RSClient`. Limits number of concurrently forwarded RESTful
-requests (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `DiffTasks`). Limits number of concurrently processed Studies
-Compare Tasks (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Rejection`). Limits number of concurrently processed Rejection Tasks.
-Compare Tasks (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_EXPORT{N}_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Export{N}` with N = [1..10]. Limits number of concurrently
-processed Export Tasks from `Export{N}` queue (optional, default is `1`).
-
-#### `WILDFLY_JMS_QUEUE_RETRIEVE{N}_CONSUMER_COUNT`
-
-The number of consumers consuming messages from queue `Retrieve{N}` with N = [1..13]. Limits number of concurrently
-processed Retrieve Tasks from `Retrieve{N}` queue (optional, default is `1`).
 
 ### [Logstash/GELF Logger](https://logging.paluch.biz/) configuration:
 
@@ -447,14 +352,14 @@ Dockerfile  weasis-pacs-connector.war
 ```
 ```console
 $ cat Dockerfile
-FROM dcm4che/dcm4chee-arc-psql:5.23.3
+FROM dcm4che/dcm4chee-arc-psql:5.24.0
 COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
 ```
 ```console
-$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.23.3 .
+$ docker build -t dcm4chee-arc-psql-with-weasis-pacs-connector:5.24.0 .
 Sending build context to Docker daemon  1.924MB
-Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.23.3
-5.23.3: Pulling from dcm4che/dcm4chee-arc-psql
+Step 1/2 : FROM dcm4che/dcm4chee-arc-psql:5.24.0
+5.24.0: Pulling from dcm4che/dcm4chee-arc-psql
 c7b7d16361e0: Already exists
 b7a128769df1: Already exists
 1128949d0793: Already exists
@@ -470,10 +375,10 @@ b04b5d1d48ca: Already exists
 01e5664d91d6: Pull complete
 22267eaaa65e: Pull complete
 Digest: sha256:efd76ca282504bc3e7284cc544434dd769a84b45af5f96ff84ed462a6425780d
-Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.23.3
+Status: Downloaded newer image for dcm4che/dcm4chee-arc-psql:5.24.0
  ---> c84231dce4d2
 Step 2/2 : COPY weasis-pacs-connector.war /docker-entrypoint.d/deployments
  ---> b0f94489c0cb
 Successfully built b0f94489c0cb
-Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.23.3
+Successfully tagged dcm4chee-arc-psql-with-weasis-pacs-connector:5.24.0
 ```

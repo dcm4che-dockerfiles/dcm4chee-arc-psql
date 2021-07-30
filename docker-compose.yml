@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.57-23.3
+    image: dcm4che/slapd-dcm4chee:2.4.57-24.0
     ports:
       - "389:389"
       - "636:636"
@@ -10,7 +10,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:11.0.3
+    image: dcm4che/keycloak:14.0.0
     ports:
       - "8880:8880"
       - "8843:8843"
@@ -30,7 +30,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
   db:
-    image: dcm4che/postgres-dcm4chee:13.1-23
+    image: dcm4che/postgres-dcm4chee:13.3-24
     ports:
       - "5432:5432"
     env_file: docker-compose.env
@@ -39,7 +39,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.23.3-secure
+    image: dcm4che/dcm4chee-arc-psql:5.24.0-secure
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -65,7 +65,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
   ui:
-    image: dcm4che/dcm4chee-arc-ui:5.23.3-secure
+    image: dcm4che/dcm4chee-arc-ui:5.24.0-secure
     ports:
       - "18080:18080"
       - "18443:18443"
