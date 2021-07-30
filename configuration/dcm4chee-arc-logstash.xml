@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 
-<server xmlns="urn:jboss:domain:16.0">
+<server xmlns="urn:jboss:domain:17.0">
     <extensions>
         <extension module="org.jboss.as.clustering.infinispan"/>
         <extension module="org.jboss.as.connector"/>
@@ -12,7 +12,6 @@
         <extension module="org.jboss.as.jmx"/>
         <extension module="org.jboss.as.jpa"/>
         <extension module="org.jboss.as.jsf"/>
-        <extension module="org.jboss.as.jsr77"/>
         <extension module="org.jboss.as.logging"/>
         <extension module="org.jboss.as.mail"/>
         <extension module="org.jboss.as.naming"/>
@@ -32,7 +31,6 @@
         <extension module="org.wildfly.extension.elytron"/>
         <extension module="org.wildfly.extension.health"/>
         <extension module="org.wildfly.extension.io"/>
-        <extension module="org.wildfly.extension.messaging-activemq"/>
         <extension module="org.wildfly.extension.metrics"/>
         <extension module="org.wildfly.extension.microprofile.config-smallrye"/>
         <extension module="org.wildfly.extension.microprofile.jwt-smallrye"/>
@@ -40,7 +38,6 @@
         <extension module="org.wildfly.extension.request-controller"/>
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
-        <extension module="org.wildfly.iiop-openjdk"/>
         <extension module="org.keycloak.keycloak-adapter-subsystem"/>
     </extensions>
 
@@ -57,38 +54,6 @@
         <property name="auth-user-role" value="${env.AUTH_USER_ROLE:user}"/>
         <property name="super-user-role" value="${env.SUPER_USER_ROLE:admin}"/>
         <property name="proxy-user-role" value="${env.PROXY_USER_ROLE:user}"/>
-        <property name="jms.queue.StgCmtSCP.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCP_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.StgCmtSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGCMTSCU_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.StgVerTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_STGVERTASKS_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.MPPSSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_MPPSSCU_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.IANSCU.consumer-count" value="${env.WILDFLY_JMS_QUEUE_IANSCU_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.HL7Send.consumer-count" value="${env.WILDFLY_JMS_QUEUE_HL7SEND_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.RSClient.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RSCLIENT_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.DiffTasks.consumer-count" value="${env.WILDFLY_JMS_QUEUE_DIFFTASKS_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Rejection.consumer-count" value="${env.WILDFLY_JMS_QUEUE_REJECTION_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT1_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export2.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT2_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT3_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export4.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT4_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export5.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT5_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export6.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT6_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export7.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT7_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export8.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT8_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export9.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT9_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Export10.consumer-count" value="${env.WILDFLY_JMS_QUEUE_EXPORT10_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve1.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE1_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve2.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE2_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve3.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE3_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve4.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE4_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve5.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE5_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve6.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE6_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve7.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE7_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve8.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE8_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve9.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE9_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve10.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE10_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve11.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE11_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve12.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE12_CONSUMER_COUNT:1}"/>
-        <property name="jms.queue.Retrieve13.consumer-count" value="${env.WILDFLY_JMS_QUEUE_RETRIEVE13_CONSUMER_COUNT:1}"/>
     </system-properties>
 
     <management>
@@ -164,9 +129,6 @@
                 <level name="WARN"/>
             </logger>
             <logger category="io.jaegertracing.Configuration">
-                <level name="WARN"/>
-            </logger>
-            <logger category="org.apache.activemq.audit">
                 <level name="WARN"/>
             </logger>
             <logger category="org.jboss.as.config">
@@ -307,7 +269,7 @@
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" long-running-tasks="true" keepalive-time="3000"/>
                 </managed-scheduled-executor-services>
             </concurrent>
-            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" jms-connection-factory="java:jboss/DefaultJMSConnectionFactory" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee-security:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:9.0">
@@ -318,13 +280,9 @@
                 <stateful default-access-timeout="5000" cache-ref="simple" passivation-disabled-cache-ref="simple"/>
                 <singleton default-access-timeout="5000"/>
             </session-bean>
-            <mdb>
-                <resource-adapter-ref resource-adapter-name="${ejb.resource-adapter-name:activemq-ra.rar}"/>
-                <bean-instance-pool-ref pool-name="mdb-strict-max-pool"/>
-            </mdb>
             <pools>
                 <bean-instance-pools>
-                    <strict-max-pool name="mdb-strict-max-pool" max-pool-size="${env.WILDFLY_MDB_STRICT_MAX_POOL_SIZE:32}" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" derive-size="from-cpu-count" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                     <strict-max-pool name="slsb-strict-max-pool" derive-size="from-worker-pools" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                 </bean-instance-pools>
             </pools>
@@ -352,13 +310,12 @@
                     <keepalive-time time="60" unit="seconds"/>
                 </thread-pool>
             </thread-pools>
-            <iiop enable-by-default="false" use-qualified-name="false"/>
             <default-security-domain value="other"/>
             <default-missing-method-permissions-deny-access value="true"/>
             <statistics enabled="${wildfly.ejb3.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
             <log-system-exceptions value="true"/>
         </subsystem>
-        <subsystem xmlns="urn:wildfly:elytron:13.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
+        <subsystem xmlns="urn:wildfly:elytron:14.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
             <providers>
                 <aggregate-providers name="combined-providers">
                     <providers name="elytron"/>
@@ -476,27 +433,22 @@
             </tls>
         </subsystem>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
-        <subsystem xmlns="urn:jboss:domain:iiop-openjdk:2.1">
-            <orb socket-binding="iiop"/>
-            <initializers security="identity" transactions="spec"/>
-            <security server-requires-ssl="false" client-requires-ssl="false"/>
-        </subsystem>
-        <subsystem xmlns="urn:jboss:domain:infinispan:12.0">
-            <cache-container name="ejb" default-cache="passivation" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
+        <subsystem xmlns="urn:jboss:domain:infinispan:13.0">
+            <cache-container name="ejb" default-cache="passivation" marshaller="PROTOSTREAM" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
                 <local-cache name="passivation">
                     <file-store passivation="true" purge="false"/>
                 </local-cache>
             </cache-container>
-            <cache-container name="web" default-cache="passivation" modules="org.wildfly.clustering.web.infinispan">
+            <cache-container name="web" default-cache="passivation" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.web.infinispan">
                 <local-cache name="passivation">
                     <file-store passivation="true" purge="false"/>
                 </local-cache>
                 <local-cache name="sso"/>
             </cache-container>
-            <cache-container name="server" default-cache="default" modules="org.wildfly.clustering.server">
+            <cache-container name="server" default-cache="default" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.server">
                 <local-cache name="default"/>
             </cache-container>
-            <cache-container name="hibernate" modules="org.infinispan.hibernate-cache">
+            <cache-container name="hibernate" marshaller="JBOSS" modules="org.infinispan.hibernate-cache">
                 <local-cache name="entity">
                     <heap-memory size="10000"/>
                     <expiration max-idle="100000"/>
@@ -545,73 +497,10 @@
             <jpa default-extended-persistence-inheritance="DEEP"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:jsf:1.1"/>
-        <subsystem xmlns="urn:jboss:domain:jsr77:1.0"/>
         <subsystem xmlns="urn:jboss:domain:mail:4.0">
             <mail-session name="default" jndi-name="java:jboss/mail/Default">
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
-        </subsystem>
-        <subsystem xmlns="urn:jboss:domain:messaging-activemq:13.0">
-            <global-client scheduled-thread-pool-max-size="${env.WILDFLY_JMS_GLOBAL_CLIENT_SCHEDULED_THREAD_POOL_MAX_SIZE:5}" thread-pool-max-size="${env.WILDFLY_JMS_GLOBAL_CLIENT_THREAD_POOL_MAX_SIZE:30}" />
-            <server name="default" scheduled-thread-pool-max-size="${env.WILDFLY_JMS_SERVER_SCHEDULED_THREAD_POOL_MAX_SIZE:5}" thread-pool-max-size="${env.WILDFLY_JMS_SERVER_THREAD_POOL_MAX_SIZE:30}">
-                <statistics enabled="${wildfly.messaging-activemq.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
-                <security-setting name="#">
-                    <role name="guest" send="true" consume="true" create-non-durable-queue="true" delete-non-durable-queue="true"/>
-                </security-setting>
-                <address-setting name="#" dead-letter-address="jms.queue.DLQ" expiry-address="jms.queue.ExpiryQueue" max-size-bytes="10485760" page-size-bytes="2097152" message-counter-history-day-limit="10"/>
-                <http-connector name="http-connector" socket-binding="http" endpoint="http-acceptor"/>
-                <http-connector name="http-connector-throughput" socket-binding="http" endpoint="http-acceptor-throughput">
-                    <param name="batch-delay" value="50"/>
-                </http-connector>
-                <in-vm-connector name="in-vm" server-id="0">
-                    <param name="buffer-pooling" value="false"/>
-                </in-vm-connector>
-                <http-acceptor name="http-acceptor" http-listener="default"/>
-                <http-acceptor name="http-acceptor-throughput" http-listener="default">
-                    <param name="batch-delay" value="50"/>
-                    <param name="direct-deliver" value="false"/>
-                </http-acceptor>
-                <in-vm-acceptor name="in-vm" server-id="0">
-                    <param name="buffer-pooling" value="false"/>
-                </in-vm-acceptor>
-                <jms-queue name="ExpiryQueue" entries="java:/jms/queue/ExpiryQueue"/>
-                <jms-queue name="DLQ" entries="java:/jms/queue/DLQ"/>
-                <jms-queue name="StgCmtSCP" entries="java:/jms/queue/StgCmtSCP"/>
-                <jms-queue name="StgCmtSCU" entries="java:/jms/queue/StgCmtSCU"/>
-                <jms-queue name="StgVerTasks" entries="java:/jms/queue/StgVerTasks"/>
-                <jms-queue name="MPPSSCU" entries="java:/jms/queue/MPPSSCU"/>
-                <jms-queue name="IANSCU" entries="java:/jms/queue/IANSCU"/>
-                <jms-queue name="HL7Send" entries="java:/jms/queue/HL7Send"/>
-                <jms-queue name="RSClient" entries="java:/jms/queue/RSClient"/>
-                <jms-queue name="DiffTasks" entries="java:/jms/queue/DiffTasks"/>
-                <jms-queue name="Rejection" entries="java:/jms/queue/Rejection"/>
-                <jms-queue name="Export1" entries="java:/jms/queue/Export1"/>
-                <jms-queue name="Export2" entries="java:/jms/queue/Export2"/>
-                <jms-queue name="Export3" entries="java:/jms/queue/Export3"/>
-                <jms-queue name="Export4" entries="java:/jms/queue/Export4"/>
-                <jms-queue name="Export5" entries="java:/jms/queue/Export5"/>
-                <jms-queue name="Export6" entries="java:/jms/queue/Export6"/>
-                <jms-queue name="Export7" entries="java:/jms/queue/Export7"/>
-                <jms-queue name="Export8" entries="java:/jms/queue/Export8"/>
-                <jms-queue name="Export9" entries="java:/jms/queue/Export9"/>
-                <jms-queue name="Export10" entries="java:/jms/queue/Export10"/>
-                <jms-queue name="Retrieve1" entries="java:/jms/queue/Retrieve1"/>
-                <jms-queue name="Retrieve2" entries="java:/jms/queue/Retrieve2"/>
-                <jms-queue name="Retrieve3" entries="java:/jms/queue/Retrieve3"/>
-                <jms-queue name="Retrieve4" entries="java:/jms/queue/Retrieve4"/>
-                <jms-queue name="Retrieve5" entries="java:/jms/queue/Retrieve5"/>
-                <jms-queue name="Retrieve6" entries="java:/jms/queue/Retrieve6"/>
-                <jms-queue name="Retrieve7" entries="java:/jms/queue/Retrieve7"/>
-                <jms-queue name="Retrieve8" entries="java:/jms/queue/Retrieve8"/>
-                <jms-queue name="Retrieve9" entries="java:/jms/queue/Retrieve9"/>
-                <jms-queue name="Retrieve10" entries="java:/jms/queue/Retrieve10"/>
-                <jms-queue name="Retrieve11" entries="java:/jms/queue/Retrieve11"/>
-                <jms-queue name="Retrieve12" entries="java:/jms/queue/Retrieve12"/>
-                <jms-queue name="Retrieve13" entries="java:/jms/queue/Retrieve13"/>
-                <connection-factory name="InVmConnectionFactory" entries="java:/ConnectionFactory" connectors="in-vm"/>
-                <connection-factory name="RemoteConnectionFactory" entries="java:jboss/exported/jms/RemoteConnectionFactory" connectors="http-connector"/>
-                <pooled-connection-factory name="activemq-ra" entries="java:/JmsXA java:jboss/DefaultJMSConnectionFactory" connectors="in-vm" transaction="xa" scheduled-thread-pool-max-size="${env.WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_SCHEDULED_THREAD_POOL_MAX_SIZE:5}" thread-pool-max-size="${env.WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_THREAD_POOL_MAX_SIZE:30}" max-pool-size="${env.WILDFLY_JMS_SERVER_POOLED_CONNECTION_FACTORY_MAX_POOL_SIZE:20}"/>
-            </server>
         </subsystem>
         <subsystem xmlns="urn:wildfly:metrics:1.0" security-enabled="false" exposed-subsystems="*" prefix="${wildfly.metrics.prefix:wildfly}"/>
         <subsystem xmlns="urn:wildfly:microprofile-config-smallrye:1.0"/>
@@ -719,7 +608,7 @@
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
         <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
-            <secure-deployment name="dcm4chee-arc-ui2-5.23.3-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui2-5.24.0-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
                 <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
                 <public-client>true</public-client>
@@ -730,7 +619,7 @@
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
                 <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.23.3-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.24.0-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
                 <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
                 <bearer-only>true</bearer-only>
@@ -759,8 +648,6 @@
         <socket-binding name="http" port="${jboss.http.port:8080}"/>
         <socket-binding name="https" port="${jboss.https.port:8443}"/>
         <socket-binding name="redirect-https" port="${jboss.redirect.https.port:8443}"/>
-        <socket-binding name="iiop" interface="unsecure" port="3528"/>
-        <socket-binding name="iiop-ssl" interface="unsecure" port="3529"/>
         <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
         <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>
         <socket-binding name="txn-recovery-environment" port="4712"/>
