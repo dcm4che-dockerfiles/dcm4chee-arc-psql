@@ -450,17 +450,23 @@
         <subsystem xmlns="urn:jboss:domain:infinispan:13.0">
             <cache-container name="ejb" default-cache="passivation" marshaller="PROTOSTREAM" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
                 <local-cache name="passivation">
+                    <expiration interval="0"/>
                     <file-store passivation="true" purge="false"/>
                 </local-cache>
             </cache-container>
             <cache-container name="web" default-cache="passivation" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.web.infinispan">
                 <local-cache name="passivation">
+                    <expiration interval="0"/>
                     <file-store passivation="true" purge="false"/>
                 </local-cache>
-                <local-cache name="sso"/>
+                <local-cache name="sso">
+                    <expiration interval="0"/>
+                </local-cache>
             </cache-container>
             <cache-container name="server" default-cache="default" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.server">
-                <local-cache name="default"/>
+                <local-cache name="default">
+                    <expiration interval="0"/>
+                </local-cache>
             </cache-container>
             <cache-container name="hibernate" marshaller="JBOSS" modules="org.infinispan.hibernate-cache">
                 <local-cache name="entity">
@@ -471,7 +477,9 @@
                     <heap-memory size="10000"/>
                     <expiration max-idle="100000"/>
                 </local-cache>
-                <local-cache name="timestamps"/>
+                <local-cache name="timestamps">
+                    <expiration interval="0"/>
+                </local-cache>
                 <local-cache name="pending-puts">
                     <expiration max-idle="60000"/>
                 </local-cache>
