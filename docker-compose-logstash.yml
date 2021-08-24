@@ -67,7 +67,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:14.0.0
+    image: dcm4che/keycloak:15.0.2
     logging:
       driver: gelf
       options:
