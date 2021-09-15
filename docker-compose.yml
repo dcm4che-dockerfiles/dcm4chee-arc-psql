@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.4.57-24.0
+    image: dcm4che/slapd-dcm4chee:2.4.57-24.1
     ports:
       - "389:389"
       - "636:636"
@@ -19,7 +19,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.24.0
+    image: dcm4che/dcm4chee-arc-psql:5.24.1
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -45,3 +45,21 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
+#  ui:
+#    image: dcm4che/dcm4chee-arc-ui:5.24.1
+#    ports:
+#      - "18080:18080"
+#      - "18443:18443"
+#      - "19990:19990"
+#      - "19993:19993"
+#    env_file: docker-compose.env
+#    environment:
+#      DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
+#      HTTP_PORT: 18080
+#      HTTPS_PORT: 18443
+#      MANAGEMENT_HTTP_PORT: 19990
+#      MANAGEMENT_HTTPS_PORT: 19993
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#      - /etc/timezone:/etc/timezone:ro
+#      - /var/local/dcm4chee-arc/ui:/opt/wildfly/standalone
