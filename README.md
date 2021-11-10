@@ -89,7 +89,9 @@ Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connection
 #### `WILDFLY_CHOWN`
 
 This environment variable is used to set the ownership to the storage directory (optional, default is 
-`"/opt/wildfly/standalone /storage"`
+`"/opt/wildfly/standalone"`).
+
+If you set a custom `STORAGE_DIR` variable, such as `"/storage/fs1"`, remember to add the parent directory of `STORAGE_DIR`. Multiple directories are separated by spaces, e.g.: `"/opt/wildfly/standalone /storage"`.
 
 #### `WILDFLY_WAIT_FOR`
 
