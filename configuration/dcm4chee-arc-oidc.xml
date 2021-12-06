@@ -52,7 +52,7 @@
         <property name="disable-trust-manager" value="${env.DISABLE_TRUST_MANAGER:false}"/>
         <property name="allow-any-hostname" value="${env.ALLOW_ANY_HOSTNAME:true}"/>
         <property name="auth-user-role" value="${env.AUTH_USER_ROLE:user}"/>
-        <property name="super-user-role" value="${env.SUPER_USER_ROLE:admin}"/>
+        <property name="super-user-role" value="${env.SUPER_USER_ROLE:root}"/>
         <property name="proxy-user-role" value="${env.PROXY_USER_ROLE:user}"/>
     </system-properties>
 
