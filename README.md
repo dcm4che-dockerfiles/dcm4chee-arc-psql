@@ -156,7 +156,7 @@ User role required to access the UI and RESTful services of the Archive (optiona
 #### `SUPER_USER_ROLE`
 
 User role to identify super users, which have unrestricted access to all UI functions of the Archive, bypassing the
-verification of user permissions (optional, default is `admin`).
+verification of user permissions (optional, default is `root`).
 
 #### `PROXY_USER_ROLE`
 
