@@ -1,7 +1,7 @@
 version: "3"
 services:
   elasticsearch:
-    image: elasticsearch:7.12.1
+    image: elasticsearch:7.16.1
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       http.cors.enabled: "true"
@@ -21,7 +21,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:7.12.1
+    image: kibana:7.16.1
     logging:
       driver: json-file
       options:
@@ -34,7 +34,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   logstash:
-    image: dcm4che/logstash-dcm4chee:7.12.1-14
+    image: dcm4che/logstash-dcm4chee:7.16.1-14
     logging:
       driver: json-file
       options:
