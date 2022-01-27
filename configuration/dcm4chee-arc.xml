@@ -197,7 +197,7 @@
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true">
-                    <connection-url>jdbc:postgresql://${env.POSTGRES_HOST:db}:${env.POSTGRES_PORT:5432}/${env.POSTGRES_DB:pacs}${env.POSTGRES_JDBC_PARAMS:}</connection-url>
+                    <connection-url>jdbc:postgresql://${env.POSTGRES_HOST:db}:${env.POSTGRES_PORT:5432}/${env.POSTGRES_DB:pacsdb}${env.POSTGRES_JDBC_PARAMS:}</connection-url>
                     <driver>psql</driver>
                     <pool>
                         <max-pool-size>${env.WILDFLY_PACSDS_MAX_POOL_SIZE:50}</max-pool-size>
