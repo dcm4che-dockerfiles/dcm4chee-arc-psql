@@ -86,10 +86,25 @@ This environment variable is used to set the JAVA_OPTS during archive startup (o
 
 Specifies if reverse DNS lookup is enabled for incoming DICOM and HL7 connections (optional, default is `true`).
 
+#### `WILDFLY_STANDALONE`
+
+Specifies subdirectories of - typically host mounted - `/opt/wildfly/standalone/` which files and subdirectories get
+updated by newer versions from corresponding subdirectories of `/docker-entrypoint.d/` provided by the image on each
+container start. (optional, default is `configuration deployments`).
+
+#### `WILDFLY_STANDALONE_PURGE`
+
+Specifies subdirectories of `/opt/wildfly/standalone/` which files and subdirectories get purged on each container start
+before copying subdirectories specified by [WILDFLY_STANDALONE_PURGE](#wildfly_standalone)) from `/docker-entrypoint.d/`.
+Enables to replace also newer files in host directories by files with older timestamp from the image.
+
 #### `WILDFLY_CHOWN`
 
-This environment variable is used to set the ownership to the storage directory (optional, default is 
-`"/opt/wildfly/standalone /storage"`
+Force the container to mutate the ownership of specified space separated list of directories recursively to uid:gid `1023:1023`,
+which provides the required read/write access to the Wildfly process. Enables to let the container create the storage directory
+specified by LDAP docker container environment variable [STORAGE_DIR](https://github.com/dcm4che-dockerfiles/slapd-dcm4chee#storage_dir)
+on first start up. Directories and files below `/opt/wildfly` - and so default storage directory `/opt/wildfly/standalone/data/fs1` -
+get owned by the user and group of the Wildfly process by default, without the need to refer them by that environment variable.
 
 #### `WILDFLY_WAIT_FOR`
 
