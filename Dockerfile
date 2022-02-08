@@ -9,12 +9,14 @@ RUN cd $JBOSS_HOME \
     && curl -f http://maven.dcm4che.org/org/dcm4che/ecs-object-client-jboss-modules/3.0.0/ecs-object-client-jboss-modules-3.0.0.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/jdbc-jboss-modules-psql/42.2.18/jdbc-jboss-modules-psql-42.2.18.tar.gz | tar xz \
     && curl -f http://maven.dcm4che.org/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
+    && chown -R wildfly:wildfly $JBOSS_HOME/modules \
     && cd /docker-entrypoint.d/deployments \
     && curl -fO http://maven.dcm4che.org/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ui2/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ui2-${DCM4CHEE_ARC_VERSION}.war \
-    && curl -fO http://maven.dcm4che.org/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear
+    && curl -fO http://maven.dcm4che.org/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear \
+    && chown wildfly:wildfly *
 
 COPY setenv.sh /
-COPY configuration /docker-entrypoint.d/configuration
+COPY --chown=wildfly:wildfly configuration /docker-entrypoint.d/configuration
 
 # Default configuration: can be overridden at the docker command line
 ENV LDAP_URL=ldap://ldap:389 \

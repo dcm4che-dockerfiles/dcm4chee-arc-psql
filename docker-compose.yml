@@ -34,7 +34,7 @@ services:
     environment:
       WILDFLY_ADMIN_USER: admin
       WILDFLY_ADMIN_PASSWORD: admin
-      WILDFLY_CHOWN: /opt/wildfly/standalone /storage
+      WILDFLY_CHOWN: /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432
       JAVA_OPTS: -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,address=*:8787,server=y,suspend=n
     depends_on:

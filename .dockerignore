@@ -1,0 +1,7 @@
+.git
+.gitattributes
+.gitignore
+*.iml
+*.md
+*.env
+*.yml
