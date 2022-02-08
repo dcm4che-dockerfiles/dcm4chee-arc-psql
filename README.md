@@ -95,7 +95,7 @@ container start. (optional, default is `configuration deployments`).
 #### `WILDFLY_STANDALONE_PURGE`
 
 Specifies subdirectories of `/opt/wildfly/standalone/` which files and subdirectories get purged on each container start
-before copying subdirectories specified by [WILDFLY_STANDALONE_PURGE](#wildfly_standalone)) from `/docker-entrypoint.d/`.
+before copying subdirectories specified by [WILDFLY_STANDALONE](#wildfly_standalone) from `/docker-entrypoint.d/`.
 Enables to replace also newer files in host directories by files with older timestamp from the image.
 
 #### `WILDFLY_CHOWN`
