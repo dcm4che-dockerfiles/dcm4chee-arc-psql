@@ -321,18 +321,23 @@ Keycloak client ID for [securing the Wildfly Management API](https://docs.jboss.
 
 #### `WILDFLY_EXECUTER_MAX_THREADS`
 
-This environment variable sets the maximum threads allowed for the managed-executor-service in the Wildfly configuration
+Maximum threads allowed for the managed-executor-service in the Wildfly configuration
 (optional, default is `100`).
 
 #### `WILDFLY_PACSDS_MAX_POOL_SIZE`
 
-This environment variable sets the maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
+Maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 (optional, default is `50`).
 
 #### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
 
-Indicates if Wildfly Undertow servlet container should set headers to disable caching for secured pages.
+Controls if Wildfly Undertow servlet container should set headers to disable caching for secured pages
 (optional, default is `true`).
+
+#### `WILDFLY_RESOLVE_PEER_ADDRESS`
+
+Enables host DNS lookup of peer address by Wildfly Undertow servlet container
+(optional, default is `false`).
 
 ### [Logstash/GELF Logger](https://logging.paluch.biz/) configuration:
 
