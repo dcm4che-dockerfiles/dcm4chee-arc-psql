@@ -44,6 +44,11 @@ if using TLS (`LDAP_URL=ldaps://<host>:<port>`) (optional, default is `true`).
 
 Device name to lookup in LDAP for Audit Logging configuration (optional, default is `dcm4chee-arc`).
 
+#### `DCM4CHEE_ARC_URLS`
+
+Space separated list of URL(s) of Archive RESTful services deployed in this and other Archive docker container(s).
+E.g.: `http://dcm4chee-arc-1:8080/dcm4chee-arc http://dcm4chee-arc-2:8080/dcm4chee-arc` (optional, default is `/dcm4chee-arc`).
+
 #### `POSTGRES_HOST`
 
 Hostname/IP-Address of the PostgreSQL host. Required for using external PostgreSQL database to persist data.
