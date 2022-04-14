@@ -72,7 +72,7 @@
             </logger>
         </audit-log>
         <management-interfaces>
-            <http-interface security-realm="management-http-authentication" ssl-context="applicationSSC">
+            <http-interface http-authentication-factory="management-http-authentication" ssl-context="applicationSSC">
                 <http-upgrade enabled="true" sasl-authentication-factory="management-sasl-authentication"/>
                 <socket-binding http="management-http" https="management-https"/>
             </http-interface>
