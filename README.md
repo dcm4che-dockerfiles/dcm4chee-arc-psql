@@ -97,6 +97,12 @@ Specifies subdirectories of - typically host mounted - `/opt/wildfly/standalone/
 updated by newer versions from corresponding subdirectories of `/docker-entrypoint.d/` provided by the image on each
 container start. (optional, default is `configuration deployments`).
 
+#### `WILDFLY_STANDALONE_PRESERVE`
+
+Specifies a subset of subdirectories of `/opt/wildfly/standalone/` specified by [WILDFLY_STANDALONE](#wildfly_standalone),
+which files shall **not** be overwritten by newer versions from corresponding subdirectories of
+`/docker-entrypoint.d/` provided by the image on each container start.
+
 #### `WILDFLY_STANDALONE_PURGE`
 
 Specifies subdirectories of `/opt/wildfly/standalone/` which files and subdirectories get purged on each container start
