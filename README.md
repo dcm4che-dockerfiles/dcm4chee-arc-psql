@@ -343,7 +343,7 @@ Maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
 #### `WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES`
 
 Controls if Wildfly Undertow servlet container should set headers to disable caching for secured pages
-(optional, default is `true`).
+(optional, default is `false`).
 
 #### `WILDFLY_RESOLVE_PEER_ADDRESS`
 
