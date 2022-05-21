@@ -563,7 +563,7 @@
                     <http-invoker http-authentication-factory="application-http-authentication"/>
                 </host>
             </server>
-            <servlet-container name="default" disable-caching-for-secured-pages="${env.WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES:true}">
+            <servlet-container name="default" disable-caching-for-secured-pages="${env.WILDFLY_DISABLE_CACHING_FOR_SECURED_PAGES:false}">
                 <jsp-config/>
                 <websockets/>
             </servlet-container>
