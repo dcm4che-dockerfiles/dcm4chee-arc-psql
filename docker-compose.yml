@@ -10,25 +10,27 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:16.1.1
+    image: dcm4che/keycloak:18.0.0
     ports:
       - "8880:8880"
       - "8843:8843"
-      - "8990:8990"
-      - "8993:8993"
     env_file: docker-compose.env
     environment:
-      HTTP_PORT: 8880
-      HTTPS_PORT: 8843
-      MANAGEMENT_HTTP_PORT: 8990
-      MANAGEMENT_HTTPS_PORT: 8993
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: changeit
+      KC_HOSTNAME: gunter-nb.lan.j4care.com
+      KC_HTTP_RELATIVE_PATH: "/auth"
+      KC_HTTP_ENABLED: "true"
+      KC_HTTP_PORT: 8880
+      KC_HTTPS_PORT: 8843
+      KC_LOG: file
       KEYCLOAK_WAIT_FOR: ldap:389
     depends_on:
       - ldap
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/standalone
+      - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/data
   db:
     image: dcm4che/postgres-dcm4chee:14.2-26
     ports:
