@@ -603,7 +603,7 @@
             <client-config name="Standard-Client-Config"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
-        <subsystem xmlns="urn:jboss:domain:keycloak:1.1">
+        <subsystem xmlns="urn:jboss:domain:keycloak:1.2">
             <secure-deployment name="dcm4chee-arc-ui2-5.26.1-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
                 <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080/auth}</auth-server-url>
