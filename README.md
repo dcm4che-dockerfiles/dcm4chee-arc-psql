@@ -286,7 +286,7 @@ for possible formats. (optional, default is `method(GET) and path-suffix(studies
 ##### `AUTH_SERVER_URL`
 
 Base URL of the Keycloak server used for authenticating the client requests.
-Default value is `http://keycloak:8080/auth`.
+Default value is `http://keycloak:8080`.
 
 ##### `REALM_NAME`
 
