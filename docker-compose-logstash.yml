@@ -88,6 +88,9 @@ services:
       KC_HTTP_PORT: 8880
       KC_HTTPS_PORT: 8843
       KC_LOG: file
+      KIBANA_CLIENT_ID: kibana
+      KIBANA_CLIENT_SECRET: e95b57fc-ff4e-4ebc-8db3-94650b3fa67d
+      KIBANA_REDIRECT_URL: "https://gunter-nb.lan.j4care.com:8643/oauth2/callback/*"
       KEYCLOAK_WAIT_FOR: ldap:389 logstash:8514
     depends_on:
       - ldap
@@ -97,36 +100,32 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/data
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
-  keycloak-gatekeeper:
-    image: dcm4che/keycloak-gatekeeper:10.0.1
-    logging:
-      driver: gelf
-      options:
-        gelf-address: "udp://gunter-nb:12201"
-        tag: keycloak-gatekeeper
+  oauth2-proxy:
+    image: dcm4che/oauth2-proxy:7.3.0
     ports:
       - "8643:8643"
+    restart: on-failure
     environment:
-      PROXY_LISTEN: :8643
-      PROXY_REDIRECTION_URL: https://gunter-nb:8643
-      PROXY_UPSTREAM_URL: http://kibana:5601
-      PROXY_DISCOVERY_URL: https://gunter-nb:8843/auth/realms/dcm4che
-      PROXY_CLIENT_ID: kibana
-      PROXY_CLIENT_SECRET: 968956a3-582b-4f8c-9d09-249fc9f74c35
-      PROXY_ENCRYPTION_KEY: AgXa7xRcoClDEU0ZDSH4X0XhL5Qy2Z2j
-    command:
-      - "--openid-provider-timeout=120s"
-      - "--tls-cert=/etc/certs/cert.pem"
-      - "--tls-private-key=/etc/certs/key.pem"
-      - "--skip-openid-provider-tls-verify=true"
-      - "--enable-refresh-tokens=true"
-      - "--enable-token-header=false"
-      - "--enable-authorization-header=false"
-      - "--enable-authorization-cookies=false"
-      - "--resources=uri=/*|roles=auditlog"
+      OAUTH2_PROXY_HTTPS_ADDRESS: 0.0.0.0:8643
+      OAUTH2_PROXY_PROVIDER: keycloak-oidc
+      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+      OAUTH2_PROXY_UPSTREAMS: "http://kibana:5601"
+      OAUTH2_PROXY_OIDC_ISSUER_URL: "https://gunter-nb.lan.j4care.com:8843/auth/realms/dcm4che"
+      OAUTH2_PROXY_REDIRECT_URL: "https://gunter-nb.lan.j4care.com:8643/oauth2/callback"
+      OAUTH2_PROXY_ALLOWED_ROLE: auditlog
+      OAUTH2_PROXY_CLIENT_ID: kibana
+      OAUTH2_PROXY_CLIENT_SECRET: e95b57fc-ff4e-4ebc-8db3-94650b3fa67d
+      OAUTH2_PROXY_EMAIL_DOMAINS: "*"
+      OAUTH2_PROXY_OIDC_EMAIL_CLAIM: "preferred_username"
+      OAUTH2_PROXY_INSECURE_OIDC_ALLOW_UNVERIFIED_EMAIL: "true"
+      OAUTH2_PROXY_COOKIE_SECRET: T0F1dGhLaWJhbmFUZXN0cw==
+      OAUTH2_PROXY_SSL_INSECURE_SKIP_VERIFY: "true"
+      OAUTH2_PROXY_TLS_CERT_FILE: /etc/certs/cert.pem
+      OAUTH2_PROXY_TLS_KEY_FILE: /etc/certs/key.pem
+      OAUTH2_PROXY_CUSTOM_TEMPLATES_DIR: /templates
     depends_on:
-      - kibana
-      - keycloak
+      keycloak:
+        condition: service_started
   db:
     image: dcm4che/postgres-dcm4chee:14.2-26
     logging:
