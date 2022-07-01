@@ -46,7 +46,7 @@
         <property name="dcm4chee-arc.DeviceName" value="${env.ARCHIVE_DEVICE_NAME:dcm4chee-arc}"/>
         <property name="dcm4chee-arc-urls" value="${env.DCM4CHEE_ARC_URLS:/dcm4chee-arc}"/>
         <property name="org.dcm4che3.util.ReverseDNS" value="${env.REVERSE_DNS:true}"/>
-        <property name="auth-server-url" value="${env.AUTH_SERVER_URL:http://keycloak:8080}"/>
+        <property name="auth-server-url" value="${env.AUTH_SERVER_URL:https://keycloak:8443}"/>
         <property name="realm-name" value="${env.REALM_NAME:dcm4che}"/>
         <property name="ssl-required" value="${env.SSL_REQUIRED:external}"/>
         <property name="ui-client-id" value="${env.UI_CLIENT_ID:dcm4chee-arc-ui}"/>
@@ -589,7 +589,7 @@
         <subsystem xmlns="urn:jboss:domain:keycloak:1.2">
             <secure-deployment name="dcm4chee-arc-ui2-5.26.1-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080}</auth-server-url>
+                <auth-server-url>${env.AUTH_SERVER_URL:https://keycloak:8443}</auth-server-url>
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
                 <resource>${env.UI_CLIENT_ID:dcm4chee-arc-ui}</resource>
@@ -600,7 +600,7 @@
             </secure-deployment>
             <secure-deployment name="dcm4chee-arc-war-5.26.1-secure.war">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:http://keycloak:8080}</auth-server-url>
+                <auth-server-url>${env.AUTH_SERVER_URL:https://keycloak:8443}</auth-server-url>
                 <bearer-only>true</bearer-only>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
                 <resource>${env.RS_CLIENT_ID:dcm4chee-arc-rs}</resource>
