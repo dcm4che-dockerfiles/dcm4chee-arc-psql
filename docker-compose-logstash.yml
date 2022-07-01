@@ -70,7 +70,7 @@ services:
     image: dcm4che/keycloak:18.0.2
     ports:
       - "8843:8843"
-    env_file: docker-compose.env
+    env_file: docker-compose-logstash.env
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: changeit
@@ -79,7 +79,6 @@ services:
       KC_LOG: file
       KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_LEGACY_LOGOUT_REDIRECT_URI: "true"
       GELF_ENABLED: "true"
-      LOGSTASH_HOST: logstash
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
       KIBANA_REDIRECT_URL: https://gunter-nb:8643/oauth2/callback/*
