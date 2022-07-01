@@ -12,18 +12,15 @@ services:
   keycloak:
     image: dcm4che/keycloak:18.0.2
     ports:
-      - "8880:8880"
-      - "8843:8843"
+       - "8843:8843"
     env_file: docker-compose.env
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: changeit
-      KC_HOSTNAME: gunter-nb.lan.j4care.com
-      KC_HTTP_RELATIVE_PATH: "/auth"
-      KC_HTTP_ENABLED: "true"
-      KC_HTTP_PORT: 8880
+      KC_HOSTNAME: gunter-nb
       KC_HTTPS_PORT: 8843
       KC_LOG: file
+      KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_LEGACY_LOGOUT_REDIRECT_URI: "true"
       KEYCLOAK_WAIT_FOR: ldap:389
     depends_on:
       - ldap
