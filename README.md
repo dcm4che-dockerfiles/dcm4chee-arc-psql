@@ -293,8 +293,15 @@ for possible formats. (optional, default is `method(GET) and path-suffix(studies
 
 ##### `AUTH_SERVER_URL`
 
-Base URL of the Keycloak server used for authenticating the client requests.
+Backend Endpoint URL of the Keycloak server for direct communication between the archive application and Keycloak for
+authenticating client requests.
 Default value is `https://keycloak:8443`.
+
+##### `UI_AUTH_SERVER_URL`
+
+Frontend Endpoint URL of the Keycloak server used by the browser based Archive UI to access Keycloak. If there is a
+reverse proxy in front of Keycloak, the URL has to reflect hostname and port of the reverse proxy.
+Default value is `${AUTH_SERVER_URL}`.
 
 ##### `REALM_NAME`
 
