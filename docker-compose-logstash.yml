@@ -1,14 +1,14 @@
 version: "3"
 services:
   elasticsearch:
-    image: elasticsearch:7.17.0
+    image: elasticsearch:8.3.2
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       http.cors.enabled: "true"
       http.cors.allow-origin: "/.*/"
       http.cors.allow-headers: "X-Requested-With,Content-Length,Content-Type,Authorization"
       discovery.type: single-node
-      TAKE_FILE_OWNERSHIP: 1
+      xpack.security.enabled: "false"
     logging:
       driver: json-file
       options:
@@ -21,7 +21,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/elasticsearch:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:7.17.0
+    image: kibana:8.3.2
     logging:
       driver: json-file
       options:
@@ -34,7 +34,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   logstash:
-    image: dcm4che/logstash-dcm4chee:7.17.0-14
+    image: dcm4che/logstash-dcm4chee:8.3.2-14
     logging:
       driver: json-file
       options:
