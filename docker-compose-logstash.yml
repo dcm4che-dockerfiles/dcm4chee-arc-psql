@@ -65,7 +65,7 @@ services:
       - logstash
     volumes:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
-      - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
+      - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.dA
   db:
     image: dcm4che/postgres-dcm4chee:14.4-27
     logging:
