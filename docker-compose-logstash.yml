@@ -77,7 +77,7 @@ services:
       KC_HOSTNAME: gunter-nb
       KC_HTTPS_PORT: 8843
       KC_LOG: file,gelf
-      KC LOG_GELF_LABEL: WARN
+      KC_LOG_GELF_LABEL: WARN
       KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_LEGACY_LOGOUT_REDIRECT_URI: "true"
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
