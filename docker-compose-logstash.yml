@@ -107,7 +107,7 @@ services:
       OAUTH2_PROXY_UPSTREAMS: "http://kibana:5601"
       OAUTH2_PROXY_OIDC_ISSUER_URL: "https://gunter-nb:8843/realms/dcm4che"
       OAUTH2_PROXY_REDIRECT_URL: "https://gunter-nb:8643/oauth2/callback"
-      OAUTH2_PROXY_ALLOWED_ROLE: auditlog
+      OAUTH2_PROXY_ALLOWED_ROLES: auditlog
       OAUTH2_PROXY_CLIENT_ID: kibana
       OAUTH2_PROXY_CLIENT_SECRET: changeit
       OAUTH2_PROXY_EMAIL_DOMAINS: "*"
