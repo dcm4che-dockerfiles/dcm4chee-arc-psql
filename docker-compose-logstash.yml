@@ -67,7 +67,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:19.0.1
+    image: dcm4che/keycloak:19.0.2
     ports:
       - "8843:8843"
     env_file: docker-compose-logstash.env
@@ -79,6 +79,7 @@ services:
       KC_LOG: file,gelf
       KC_LOG_GELF_LABEL: WARN
       KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_LEGACY_LOGOUT_REDIRECT_URI: "true"
+      KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_SUPPRESS_LOGOUT_CONFIRMATION_SCREEN: "true"
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
       KIBANA_REDIRECT_URL: https://gunter-nb:8643/oauth2/callback/*
