@@ -619,7 +619,7 @@
             </secure-deployment>
             <secure-server name="wildfly-console">
                 <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:https://keycloak:8443}</auth-server-url>
+                <auth-server-url>${env.UI_AUTH_SERVER_URL:${env.AUTH_SERVER_URL:https://keycloak:8443}}</auth-server-url>
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
                 <resource>${env.WILDFLY_CONSOLE:wildfly-console}</resource>
