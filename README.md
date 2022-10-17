@@ -82,10 +82,17 @@ User's password to use to authenticate to PostgreSQL via file input (alternative
                       
 Optional JDBC [Connection Parameters](https://jdbc.postgresql.org/documentation/head/connect.html) (e.g.: `connectTimeout=30`).
 
+#### `JBOSS_JAVA_SIZING`
+
+This environment variable is used to set the initial and maximal Java heap size,
+the size of the allocated class metadata space that will trigger a garbage collection the first time it is exceeded and
+the maximum amount of native memory that can be allocated for class metadata (optional, default is 
+`"-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m"`).
+
 #### `JAVA_OPTS`
 
 This environment variable is used to set the JAVA_OPTS during archive startup (optional, default is 
-`"-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"`
+`"$JBOSS_JAVA_SIZING -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"`).
 
 #### `REVERSE_DNS`
 
@@ -102,12 +109,6 @@ container start. (optional, default is `configuration deployments`).
 Specifies a subset of subdirectories of `/opt/wildfly/standalone/` specified by [WILDFLY_STANDALONE](#wildfly_standalone),
 which files shall **not** be overwritten by newer versions from corresponding subdirectories of
 `/docker-entrypoint.d/` provided by the image on each container start.
-
-#### `WILDFLY_STANDALONE_PURGE`
-
-Specifies subdirectories of `/opt/wildfly/standalone/` which files and subdirectories get purged on each container start
-before copying subdirectories specified by [WILDFLY_STANDALONE](#wildfly_standalone) from `/docker-entrypoint.d/`.
-Enables to replace also newer files in host directories by files with older timestamp from the image.
 
 #### `WILDFLY_CHOWN`
 
@@ -201,12 +202,15 @@ User role required to access HTTP services over a proxy. (optional, default is `
 Path to keystore file with private key and certificate for HTTPS (optional, default is
 `/opt/wildfly/standalone/configuration/keystore/key.p12`, with sample key + certificate:
 ```
-Subject    - CN=PACS_J4C,O=J4CARE,C=AT
-Issuer     - CN=IHE Europe CA, O=IHE Europe, C=FR
-Valid From - Sun Apr 02 06:38:46 UTC 2017
-Valid To   - Fri Apr 02 06:38:46 UTC 2027
-MD5 : 7a:b3:f7:5d:cf:6e:84:34:be:5a:7a:12:95:fa:46:76
-SHA1 : a9:36:b3:b4:60:63:22:9e:f4:ae:41:d3:3b:97:ca:be:9b:a9:32:e9
+Owner: CN=dcm4che, O=dcm4che.org, C=AT
+Issuer: OU=Gazelle, CN=IHE Europe CA, O=IHE Europe, C=FR
+Serial number: 4b3
+Valid from: Fri Sep 30 11:24:50 CEST 2022 until: Thu Sep 30 11:24:50 CEST 2032
+Certificate fingerprints:
+	 SHA1: B4:F5:09:33:B8:56:F0:D5:65:E9:3E:3D:02:1B:9D:00:F8:F8:F4:BA
+	 SHA256: BD:60:1C:19:D4:ED:87:18:B3:EC:F6:53:52:91:00:C8:A2:70:21:0F:04:87:E6:B7:ED:15:23:A7:97:D8:28:AC
+Signature algorithm name: SHA512withRSA
+Subject Public Key Algorithm: 1024-bit RSA key (weak)
 ```
 provided by the docker image only for testing purpose).
 
@@ -256,12 +260,15 @@ Type (`JKS` or `PKCS12`) of the keystore specified by `TRUSTSTORE` (optional, de
 Path to keystore file with CA certificates imported to default Java truststore (optional, default is
 `/opt/wildfly/standalone/configuration/keystore/cacerts.p12`, with sample CA certificate:
 ```
-Subject    - CN=IHE Europe CA,O=IHE Europe,C=FR
-Issuer     - CN=IHE Europe CA,O=IHE Europe,C=FR
-Valid From - Fri Sep 28 11:19:29 UTC 2012
-Valid To   - Wed Sep 28 11:19:29 UTC 2022
-MD5 : 64:b6:1b:0f:8d:84:17:da:23:e4:e5:1c:56:ba:06:5d
-SHA1 : 54:e0:10:c6:4a:fe:2c:aa:20:3f:50:95:45:82:cb:53:55:6b:07:7f
+Owner: OU=Gazelle, CN=IHE Europe CA, O=IHE Europe, C=FR
+Issuer: OU=Gazelle, CN=IHE Europe CA, O=IHE Europe, C=FR
+Serial number: 1
+Valid from: Tue Nov 27 11:21:33 CET 2018 until: Mon Nov 27 11:21:33 CET 2028
+Certificate fingerprints:
+	 SHA1: 95:B3:01:BD:8B:97:46:D3:17:C4:E6:96:42:C9:84:FC:17:8D:E9:6F
+	 SHA256: 21:EB:CA:86:4A:08:E9:A2:D2:1F:6E:84:37:8D:60:BB:14:92:4D:1B:B0:DD:B0:DC:75:03:0C:2E:F3:B2:6E:DD
+Signature algorithm name: SHA512withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
 ```
 provided by the docker image only for testing purpose).
 
