@@ -53,11 +53,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
 #  ui:
-<<<<<<< HEAD
-#    image: dcm4che/dcm4chee-arc-ui:5.29.0
-=======
-#    image: dcm4che/dcm4chee-arc-ui:5.29.1-secure
->>>>>>> 772d420... increment version to 5.29.1
+#    image: dcm4che/dcm4chee-arc-ui:5.29.1
 #    ports:
 #      - "18080:18080"
 #      - "18443:18443"
