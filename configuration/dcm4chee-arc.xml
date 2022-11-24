@@ -553,6 +553,7 @@
                 <https-listener name="https" socket-binding="https" ssl-context="applicationSSC" enable-http2="true" resolve-peer-address="${env.WILDFLY_RESOLVE_PEER_ADDRESS:false}" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}" proxy-address-forwarding="${env.HTTP_PROXY_ADDRESS_FORWARDING:false}"/>
                 <host name="default-host" alias="localhost">
                     <location name="/" handler="welcome-content"/>
+                    <location name="/resources" handler="resources"/>
                     <filter-ref name="gzipFilter" predicate="${env.GZIP_FILTER_PREDICATE:method(GET) and path-suffix(studies,series,instances,metadata)}"/>
                     <http-invoker http-authentication-factory="application-http-authentication"/>
                 </host>
@@ -563,6 +564,7 @@
             </servlet-container>
             <handlers>
                 <file name="welcome-content" path="${jboss.home.dir}/welcome-content"/>
+                <file name="resources" path="${jboss.server.config.dir}/resources"/>
             </handlers>
             <application-security-domains>
                 <application-security-domain name="other" http-authentication-factory="keycloak-http-authentication"/>
