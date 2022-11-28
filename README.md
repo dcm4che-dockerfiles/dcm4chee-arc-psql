@@ -104,6 +104,19 @@ Specifies subdirectories of - typically host mounted - `/opt/wildfly/standalone/
 updated by newer versions from corresponding subdirectories of `/docker-entrypoint.d/` provided by the image on each
 container start. (optional, default is `configuration deployments`).
 
+#### `WILDFLY_CONFIGURATION_VERSION`
+
+If file `/opt/wildfly/standalone/configuration/VERSION` does not contain `$WILDFLY_CONFIGURATION_VERSION`,
+XML configuration files in `/opt/wildfly/standalone/configuration` will be replaced by versions from
+`/docker-entrypoint.d/configuration` provided by the image on first container start, even if the modification time of
+existing files is newer than the files from the docker image, backing up existing files as `XY.xml~`.
+File `/opt/wildfly/standalone/configuration/VERSION` will be created/updated to contain `$WILDFLY_CONFIGURATION_VERSION`
+to ensure that the configuration files does not get overwritten on next container start, as long
+`WILDFLY_CONFIGURATION_VERSION` is not set to a different value.
+
+By default, it is set to `$ARCHIVE_ARC_VERSION`, which ensures that the configuration files are replaced if the
+archive version provided by the image changes.
+
 #### `WILDFLY_STANDALONE_PRESERVE`
 
 Specifies a subset of subdirectories of `/opt/wildfly/standalone/` specified by [WILDFLY_STANDALONE](#wildfly_standalone),
