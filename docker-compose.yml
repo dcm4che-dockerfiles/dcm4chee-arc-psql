@@ -11,7 +11,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:20.0.1
+    image: dcm4che/keycloak:20.0.2
     ports:
        - "8843:8843"
     environment:
@@ -29,6 +29,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/data
+      - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   db:
     image: dcm4che/postgres-dcm4chee:14.5-29
