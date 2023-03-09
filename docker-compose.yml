@@ -61,6 +61,8 @@ services:
       - "19990:19990"
       - "19993:19993"
     environment:
+      WILDFLY_ADMIN_USER: admin
+      WILDFLY_ADMIN_PASSWORD: admin
       WILDFLY_DEPLOY_UI: only
       DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
       HTTP_PORT: 18080
