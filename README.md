@@ -174,6 +174,13 @@ HTTP port of Wildfly Administration Console (optional, default is `9990`).
 
 HTTPS port of Wildfly Administration Console (optional, default is `9993`).
 
+#### `WILDFLY_DEPLOY_UI`
+
+Controls deployment of the Archive UI. Enumerated values:
+- `true` ; deploys the Archive UI additionally to the Archive backend (= default)
+- `false` ; deploys the Archive backend without the Archive UI
+- `only` ; deploys only the Archive UI without the Archive backend (requires `DCM4CHEE_ARC_URLS`](#dcm4chee_arc_urls))
+
 #### `WILDFLY_ADMIN_OIDC` (Only effective by archive versions secured by Keycloak)
 
 Protect Wildfly Adminstration Console with Keycloak (optional, default is `true`).

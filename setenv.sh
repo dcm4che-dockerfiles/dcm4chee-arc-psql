@@ -35,6 +35,13 @@ file_env 'WILDFLY_ADMIN_PASSWORD'
 # Append '?' in the beginning of the string if POSTGRES_JDBC_PARAMS value isn't empty
 POSTGRES_JDBC_PARAMS=$(echo ${POSTGRES_JDBC_PARAMS} | sed '/^$/! s/^/?/')
 
+if [ "$WILDFLY_DEPLOY_UI" = 'false' ]; then
+	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure.ear"
+elif [ "$WILDFLY_DEPLOY_UI" = 'only' ]; then
+	UI="-ui"
+	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ui2-${DCM4CHEE_ARC_VERSION}-secure.war"
+fi
+
 if [ "$WILDFLY_ADMIN_OIDC" != 'false' ]; then
 	OIDC="-oidc"
 fi
@@ -43,7 +50,7 @@ if [ -n "$LOGSTASH_HOST" ]; then
 	LOGSTASH="-logstash"
 fi
 
-SYS_PROPS="-c dcm4chee-arc${OIDC}${LOGSTASH}.xml"
+SYS_PROPS="-c dcm4chee-arc${UI}${OIDC}${LOGSTASH}.xml"
 SYS_PROPS+=" -Djboss.management.http.port=${MANAGEMENT_HTTP_PORT:-9990}"
 SYS_PROPS+=" -Djboss.management.https.port=${MANAGEMENT_HTTPS_PORT:-9993}"
 SYS_PROPS+=" -Djboss.http.port=${HTTP_PORT:-8080}"
