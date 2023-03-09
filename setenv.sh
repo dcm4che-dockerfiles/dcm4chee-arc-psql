@@ -36,7 +36,7 @@ file_env 'WILDFLY_ADMIN_PASSWORD'
 POSTGRES_JDBC_PARAMS=$(echo ${POSTGRES_JDBC_PARAMS} | sed '/^$/! s/^/?/')
 
 if [ "$WILDFLY_DEPLOY_UI" = 'false' ]; then
-	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure.ear"
+	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear"
 elif [ "$WILDFLY_DEPLOY_UI" = 'only' ]; then
 	UI="-ui"
 	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ui2-${DCM4CHEE_ARC_VERSION}-secure.war"

@@ -78,7 +78,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
   ui:
-    image: dcm4che/dcm4chee-arc-psql:5.29.2-secure
+    image: dcm4che/dcm4chee-arc-psql:5.29.2-secure-ui
     ports:
       - "18080:18080"
       - "18443:18443"
