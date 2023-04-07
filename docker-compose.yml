@@ -11,13 +11,14 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   keycloak:
-    image: dcm4che/keycloak:21.0.0
+    image: dcm4che/keycloak:21.0.2
     ports:
        - "8843:8843"
     environment:
       ARCHIVE_HOST: gunter-nb
       ARCHIVE_HTTP_PORT: 18080
       ARCHIVE_HTTPS_PORT: 18443
+      ARCHIVE_MANAGEMENT_HTTPS_PORT: 19993
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: changeit
       KC_HOSTNAME: gunter-nb
