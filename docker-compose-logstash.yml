@@ -70,6 +70,17 @@ services:
     volumes:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
+  mariadb:
+    image: mariadb:10.11.4
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: keycloak
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: keycloak
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
     image: dcm4che/keycloak:21.0.2
     ports:
@@ -80,15 +91,21 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: changeit
       KC_HOSTNAME: gunter-nb
       KC_HTTPS_PORT: 8843
+      KC_DB: mariadb
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_URL_HOST: mariadb
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
       KC_LOG: file,gelf
       KC_LOG_GELF_LABEL: WARN
       KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_SUPPRESS_LOGOUT_CONFIRMATION_SCREEN: "true"
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
       KIBANA_REDIRECT_URL: https://gunter-nb:8643/oauth2/callback/*
-      KEYCLOAK_WAIT_FOR: ldap:389 logstash:8514
+      KEYCLOAK_WAIT_FOR: ldap:389 mariadb:3306 logstash:8514
     depends_on:
       - ldap
+      - mariadb
       - logstash
     volumes:
       - /etc/localtime:/etc/localtime:ro
@@ -170,7 +187,7 @@ services:
       UI_AUTH_SERVER_URL: https://gunter-nb:8843
       STORAGE_DIR: /storage/fs1
       WILDFLY_CHOWN: /storage
-      WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
+      WILDFLY_WAIT_FOR: ldap:389 db:5432 keycloak:8443 logstash:8514
       JAVA_OPTS: -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,address=*:8787,server=y,suspend=n
     depends_on:
       - ldap
