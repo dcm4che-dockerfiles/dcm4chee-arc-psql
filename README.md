@@ -139,9 +139,23 @@ Indicates to delay the start of the archive until specified TCP ports become acc
 
 Start cron daemon to execute scheduled commands (optional, default is `false`).
 
-#### `WILDFLY_LOG_RETENTION_DAYS`  (Only effective with `WILDFLY_CRON_ENABLED=true`)
+#### `WILDFLY_SERVER_LOG_RETENTION_DAYS`  (Only effective with `WILDFLY_CRON_ENABLED=true`)
 
 Delete `/opt/wildfly/standalone/log/server.log*` files older than specified number of days automatically (optional, default is `7`).
+
+#### `WILDFLY_AUDIT_LOG_RETENTION_DAYS`  (Only effective with `WILDFLY_CRON_ENABLED=true`)
+
+Delete `/opt/wildfly/standalone/log/audit-log.log*` files older than specified number of days automatically (optional, default is `7`).
+
+#### `WILDFLY_SERVER_LOG_SUFFIX`
+
+Suffix string for `/opt/wildfly/standalone/log/server.log*` files. The period of the rotation is automatically calculated
+based on the suffix (optional, default is `.yyyy-MM-dd`).
+
+#### `WILDFLY_AUDIT_LOG_SUFFIX`
+
+Suffix string for `/opt/wildfly/standalone/log/audit-log.log*` files. The period of the rotation is automatically calculated
+based on the suffix (optional, default is `.yyyy-MM-dd`).
 
 #### `HTTP_MAX_POST_SIZE`
 
