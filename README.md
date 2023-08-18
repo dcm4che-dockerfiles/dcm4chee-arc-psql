@@ -188,6 +188,16 @@ HTTP port of Wildfly Administration Console (optional, default is `9990`).
 
 HTTPS port of Wildfly Administration Console (optional, default is `9993`).
 
+#### `UI_MANAGEMENT_HTTP_PORT`
+
+HTTP port used by the browser based Archive UI to access the Wildfly Administration Console. 
+Have to be set different to `MANAGEMENT_HTTPSPORT`, if running behind a HTTP reverse proxy listing on a different port.
+
+#### `UI_MANAGEMENT_HTTPS_PORT`
+
+HTTPS port used by the browser based Archive UI to access the Wildfly Administration Console.
+Have to be set different to `MANAGEMENT_HTTPS_PORT`, if running behind a HTTPS/SSL reverse proxy listing on a different port.
+
 #### `WILDFLY_DEPLOY_UI`
 
 Controls deployment of the Archive UI. Enumerated values:

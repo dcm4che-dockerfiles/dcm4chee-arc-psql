@@ -52,3 +52,11 @@ SYS_PROPS+=" -Djboss.management.https.port=${MANAGEMENT_HTTPS_PORT:-9993}"
 SYS_PROPS+=" -Djboss.http.port=${HTTP_PORT:-8080}"
 SYS_PROPS+=" -Djboss.https.port=${HTTPS_PORT:-8443}"
 SYS_PROPS+=" -Djboss.redirect.https.port=${REDIRECT_HTTPS_PORT:-8443}"
+
+if [ -n "$UI_MANAGEMENT_HTTP_PORT" ]; then
+	SYS_PROPS+=" -Djboss.ui.management.http.port=${UI_MANAGEMENT_HTTP_PORT}"
+fi
+
+if [ -n "$UI_MANAGEMENT_HTTPS_PORT" ]; then
+	SYS_PROPS+=" -Djboss.ui.management.https.port=${UI_MANAGEMENT_HTTPS_PORT}"
+fi
