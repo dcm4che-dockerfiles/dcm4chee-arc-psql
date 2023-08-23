@@ -64,7 +64,7 @@
                 <json-formatter name="json-formatter"/>
             </formatters>
             <handlers>
-                <periodic-rotating-file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir" suffix="${env.WILDFLY_AUDIT_LOG_SUFFIX:.yyyy-MM-dd}/>
+                <periodic-rotating-file-handler name="file" formatter="json-formatter" path="audit-log.log" relative-to="jboss.server.data.dir" suffix="${env.WILDFLY_AUDIT_LOG_SUFFIX:.yyyy-MM-dd}"/>
             </handlers>
             <logger log-boot="true" log-read-only="false" enabled="false">
                 <handlers>
