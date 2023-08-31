@@ -71,7 +71,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:14.5-29
+    image: dcm4che/postgres-dcm4chee:15.3-31
     logging:
       driver: gelf
       options:
@@ -90,7 +90,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.31.0
+    image: dcm4che/dcm4chee-arc-psql:5.31.1
     logging:
       driver: gelf
       options:
@@ -115,7 +115,6 @@ services:
       POSTGRES_PASSWORD: pacs
       WILDFLY_CHOWN: /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 logstash:8514
-      JAVA_OPTS: -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,address=*:8787,server=y,suspend=n
     depends_on:
       - ldap
       - db
