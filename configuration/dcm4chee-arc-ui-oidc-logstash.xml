@@ -1,6 +1,6 @@
-<?xml version="1.0" ?>
+v<?xml version="1.0" encoding="UTF-8"?>
 
-<server xmlns="urn:jboss:domain:19.0">
+<server xmlns="urn:jboss:domain:20.0">
     <extensions>
         <extension module="org.jboss.as.clustering.infinispan"/>
         <extension module="org.jboss.as.connector"/>
@@ -23,6 +23,7 @@
         <extension module="org.jboss.as.weld"/>
         <extension module="org.wildfly.extension.batch.jberet"/>
         <extension module="org.wildfly.extension.bean-validation"/>
+        <extension module="org.wildfly.extension.clustering.ejb"/>
         <extension module="org.wildfly.extension.clustering.web"/>
         <extension module="org.wildfly.extension.core-management"/>
         <extension module="org.wildfly.extension.discovery"/>
@@ -34,11 +35,9 @@
         <extension module="org.wildfly.extension.metrics"/>
         <extension module="org.wildfly.extension.microprofile.config-smallrye"/>
         <extension module="org.wildfly.extension.microprofile.jwt-smallrye"/>
-        <extension module="org.wildfly.extension.microprofile.opentracing-smallrye"/>
         <extension module="org.wildfly.extension.request-controller"/>
         <extension module="org.wildfly.extension.security.manager"/>
         <extension module="org.wildfly.extension.undertow"/>
-        <extension module="org.keycloak.keycloak-adapter-subsystem"/>
     </extensions>
 
     <system-properties>
@@ -71,7 +70,7 @@
             </logger>
         </audit-log>
         <management-interfaces>
-            <http-interface http-authentication-factory="keycloak-mgmt-http-authentication" ssl-context="applicationSSC">
+            <http-interface http-authentication-factory="management-http-authentication" ssl-context="applicationSSC">
                 <http-upgrade enabled="true" sasl-authentication-factory="management-sasl-authentication"/>
                 <socket-binding http="management-http" https="management-https"/>
             </http-interface>
@@ -134,6 +133,7 @@
         <subsystem xmlns="urn:jboss:domain:batch-jberet:3.0">
             <default-job-repository name="in-memory"/>
             <default-thread-pool name="batch"/>
+            <security-domain name="ApplicationDomain"/>
             <job-repository name="in-memory">
                 <in-memory/>
             </job-repository>
@@ -147,7 +147,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:7.0">
             <datasources>
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE</connection-url>
+                    <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=${wildfly.h2.compatibility.mode:REGULAR}</connection-url>
                     <driver>h2</driver>
                     <security>
                         <user-name>sa</user-name>
@@ -165,7 +165,13 @@
             <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:discovery:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:distributable-web:2.0" default-session-management="default" default-single-sign-on-management="default">
+        <subsystem xmlns="urn:jboss:domain:distributable-ejb:1.0" default-bean-management="default">
+            <infinispan-bean-management name="default" max-active-beans="10000" cache-container="ejb" cache="passivation"/>
+            <local-client-mappings-registry/>
+            <infinispan-timer-management name="persistent" cache-container="ejb" cache="persistent" max-active-timers="10000"/>
+            <infinispan-timer-management name="transient" cache-container="ejb" cache="transient" max-active-timers="10000"/>
+        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:distributable-web:3.0" default-session-management="default" default-single-sign-on-management="default">
             <infinispan-session-management name="default" cache-container="web" granularity="SESSION">
                 <local-affinity/>
             </infinispan-session-management>
@@ -176,7 +182,7 @@
             <spec-descriptor-property-replacement>true</spec-descriptor-property-replacement>
             <concurrent>
                 <context-services>
-                    <context-service name="default" jndi-name="java:jboss/ee/concurrency/context/default" use-transaction-setup-provider="true"/>
+                    <context-service name="default" jndi-name="java:jboss/ee/concurrency/context/default"/>
                 </context-services>
                 <managed-thread-factories>
                     <managed-thread-factory name="default" jndi-name="java:jboss/ee/concurrency/factory/default" context-service="default"/>
@@ -191,7 +197,7 @@
             <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee-security:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:ejb3:9.0">
+        <subsystem xmlns="urn:jboss:domain:ejb3:10.0">
             <session-bean>
                 <stateless>
                     <bean-instance-pool-ref pool-name="slsb-strict-max-pool"/>
@@ -201,17 +207,14 @@
             </session-bean>
             <pools>
                 <bean-instance-pools>
-                    <strict-max-pool name="mdb-strict-max-pool" derive-size="from-cpu-count" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                     <strict-max-pool name="slsb-strict-max-pool" derive-size="from-worker-pools" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
+                    <strict-max-pool name="mdb-strict-max-pool" derive-size="from-cpu-count" instance-acquisition-timeout="5" instance-acquisition-timeout-unit="MINUTES"/>
                 </bean-instance-pools>
             </pools>
             <caches>
-                <cache name="simple"/>
-                <cache name="distributable" passivation-store-ref="infinispan" aliases="passivating clustered"/>
+                <simple-cache name="simple"/>
+                <distributable-cache name="distributable"/>
             </caches>
-            <passivation-stores>
-                <passivation-store name="infinispan" cache-container="ejb" max-size="10000"/>
-            </passivation-stores>
             <async thread-pool-name="default"/>
             <timer-service thread-pool-name="default" default-data-store="default-file-store">
                 <data-stores>
@@ -237,7 +240,7 @@
             <statistics enabled="${wildfly.ejb3.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
             <log-system-exceptions value="true"/>
         </subsystem>
-        <subsystem xmlns="urn:wildfly:elytron:15.1" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
+        <subsystem xmlns="urn:wildfly:elytron:18.0" final-providers="combined-providers" disallowed-providers="OracleUcrypto">
             <providers>
                 <aggregate-providers name="combined-providers">
                     <providers name="elytron"/>
@@ -250,20 +253,16 @@
                 <file-audit-log name="local-audit" path="audit.log" relative-to="jboss.server.log.dir" format="JSON"/>
             </audit-logging>
             <security-domains>
-                <security-domain name="ManagementDomain" default-realm="ManagementRealm" permission-mapper="default-permission-mapper">
-                    <realm name="ManagementRealm" role-decoder="groups-to-roles"/>
-                    <realm name="local" role-mapper="super-user-mapper"/>
-                </security-domain>
                 <security-domain name="ApplicationDomain" default-realm="ApplicationRealm" permission-mapper="default-permission-mapper">
                     <realm name="ApplicationRealm" role-decoder="groups-to-roles"/>
                     <realm name="local"/>
                 </security-domain>
-                <security-domain name="KeycloakDomain" default-realm="KeycloakOIDCRealm" permission-mapper="default-permission-mapper" security-event-listener="local-audit">
-                    <realm name="KeycloakOIDCRealm"/>
+                <security-domain name="ManagementDomain" default-realm="ManagementRealm" permission-mapper="default-permission-mapper">
+                    <realm name="ManagementRealm" role-decoder="groups-to-roles"/>
+                    <realm name="local" role-mapper="super-user-mapper"/>
                 </security-domain>
             </security-domains>
             <security-realms>
-                <custom-realm name="KeycloakOIDCRealm" module="org.keycloak.keycloak-wildfly-elytron-oidc-adapter" class-name="org.keycloak.adapters.elytron.KeycloakSecurityRealm"/>
                 <identity-realm name="local" identity="$local"/>
                 <properties-realm name="ApplicationRealm">
                     <users-properties path="application-users.properties" relative-to="jboss.server.config.dir" digest-realm-name="ApplicationRealm"/>
@@ -286,7 +285,6 @@
                     </permission-mapping>
                 </simple-permission-mapper>
                 <constant-realm-mapper name="local" realm-name="local"/>
-                <constant-realm-mapper name="keycloak-oidc-realm-mapper" realm-name="KeycloakOIDCRealm"/>
                 <simple-role-decoder name="groups-to-roles" attribute="groups"/>
                 <constant-role-mapper name="super-user-mapper">
                     <role name="SuperUser"/>
@@ -297,19 +295,12 @@
                     <permission class-name="org.wildfly.security.auth.permission.LoginPermission"/>
                 </permission-set>
                 <permission-set name="default-permissions">
-                    <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
                     <permission class-name="org.wildfly.transaction.client.RemoteTransactionPermission" module="org.wildfly.transaction.client"/>
                     <permission class-name="org.jboss.ejb.client.RemoteEJBPermission" module="org.jboss.ejb-client"/>
+                    <permission class-name="org.wildfly.extension.batch.jberet.deployment.BatchPermission" module="org.wildfly.extension.batch.jberet" target-name="*"/>
                 </permission-set>
             </permission-sets>
             <http>
-                <http-authentication-factory name="management-http-authentication" security-domain="ManagementDomain" http-server-mechanism-factory="global">
-                    <mechanism-configuration>
-                        <mechanism mechanism-name="DIGEST">
-                            <mechanism-realm realm-name="ManagementRealm"/>
-                        </mechanism>
-                    </mechanism-configuration>
-                </http-authentication-factory>
                 <http-authentication-factory name="application-http-authentication" security-domain="ApplicationDomain" http-server-mechanism-factory="global">
                     <mechanism-configuration>
                         <mechanism mechanism-name="BASIC">
@@ -317,41 +308,29 @@
                         </mechanism>
                     </mechanism-configuration>
                 </http-authentication-factory>
-                <http-authentication-factory name="keycloak-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="keycloak-http-server-mechanism-factory">
+                <http-authentication-factory name="management-http-authentication" security-domain="ManagementDomain" http-server-mechanism-factory="global">
                     <mechanism-configuration>
-                        <mechanism mechanism-name="KEYCLOAK">
-                            <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
-                        </mechanism>
-                    </mechanism-configuration>
-                </http-authentication-factory>
-                <http-authentication-factory name="keycloak-mgmt-http-authentication" security-domain="KeycloakDomain" http-server-mechanism-factory="wildfly-management">
-                    <mechanism-configuration>
-                        <mechanism mechanism-name="KEYCLOAK">
-                            <mechanism-realm realm-name="KeycloakOIDCRealm" realm-mapper="keycloak-oidc-realm-mapper"/>
-                        </mechanism>
-                    </mechanism-configuration>
-                </http-authentication-factory>
-                <aggregate-http-server-mechanism-factory name="keycloak-http-server-mechanism-factory">
-                    <http-server-mechanism-factory name="keycloak-oidc-http-server-mechanism-factory"/>
-                    <http-server-mechanism-factory name="global"/>
-                </aggregate-http-server-mechanism-factory>
-                <provider-http-server-mechanism-factory name="global"/>
-                <service-loader-http-server-mechanism-factory name="keycloak-oidc-http-server-mechanism-factory" module="org.keycloak.keycloak-wildfly-elytron-oidc-adapter"/>
-            </http>
-            <sasl>
-                <sasl-authentication-factory name="management-sasl-authentication" sasl-server-factory="configured" security-domain="ManagementDomain">
-                    <mechanism-configuration>
-                        <mechanism mechanism-name="JBOSS-LOCAL-USER" realm-mapper="local"/>
-                        <mechanism mechanism-name="DIGEST-MD5">
+                        <mechanism mechanism-name="DIGEST">
                             <mechanism-realm realm-name="ManagementRealm"/>
                         </mechanism>
                     </mechanism-configuration>
-                </sasl-authentication-factory>
+                </http-authentication-factory>
+                <provider-http-server-mechanism-factory name="global"/>
+            </http>
+            <sasl>
                 <sasl-authentication-factory name="application-sasl-authentication" sasl-server-factory="configured" security-domain="ApplicationDomain">
                     <mechanism-configuration>
                         <mechanism mechanism-name="JBOSS-LOCAL-USER" realm-mapper="local"/>
                         <mechanism mechanism-name="DIGEST-MD5">
                             <mechanism-realm realm-name="ApplicationRealm"/>
+                        </mechanism>
+                    </mechanism-configuration>
+                </sasl-authentication-factory>
+                <sasl-authentication-factory name="management-sasl-authentication" sasl-server-factory="configured" security-domain="ManagementDomain">
+                    <mechanism-configuration>
+                        <mechanism mechanism-name="JBOSS-LOCAL-USER" realm-mapper="local"/>
+                        <mechanism mechanism-name="DIGEST-MD5">
+                            <mechanism-realm realm-name="ManagementRealm"/>
                         </mechanism>
                     </mechanism-configuration>
                 </sasl-authentication-factory>
@@ -385,30 +364,45 @@
                     <server-ssl-context name="applicationSSC" cipher-suite-filter="${env.CIPHER_SUITE_FILTER:DEFAULT}" protocols="${env.TLS_PROTOCOLS:TLSv1.2}" key-manager="applicationKM"/>
                 </server-ssl-contexts>
             </tls>
+            <policy name="jacc">
+                <jacc-policy/>
+            </policy>
         </subsystem>
-        <subsystem xmlns="urn:wildfly:elytron-oidc-client:1.0"/>
+        <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0">
+            <secure-deployment name="dcm4chee-arc-ui2-5.31.1-secure.war">
+                <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
+                <public-client>true</public-client>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <client-id>${env.UI_CLIENT_ID:dcm4chee-arc-ui}</client-id>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
+            </secure-deployment>
+            <secure-server name="wildfly-console">
+                <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
+                <public-client>true</public-client>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <client-id>${env.WILDFLY_CONSOLE:wildfly-console}</client-id>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
+            </secure-server>
+            <secure-deployment name="wildfly-management">
+                <provider-url>${env.UI_AUTH_SERVER_URL:${env.AUTH_SERVER_URL:https://keycloak:8443}}/realms/${env.REALM_NAME:dcm4che}</provider-url>
+                <bearer-only>true</bearer-only>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <client-id>${env.WILDFLY_MANAGEMENT:wildfly-management}</client-id>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
+                <principal-attribute>preferred_username</principal-attribute>
+            </secure-deployment>
+        </subsystem>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
-        <subsystem xmlns="urn:jboss:domain:infinispan:13.0">
-            <cache-container name="ejb" default-cache="passivation" marshaller="PROTOSTREAM" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
-                <local-cache name="passivation">
-                    <expiration interval="0"/>
-                    <file-store passivation="true" purge="false"/>
-                </local-cache>
-            </cache-container>
-            <cache-container name="web" default-cache="passivation" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.web.infinispan">
-                <local-cache name="passivation">
-                    <expiration interval="0"/>
-                    <file-store passivation="true" purge="false"/>
-                </local-cache>
-                <local-cache name="sso">
-                    <expiration interval="0"/>
-                </local-cache>
-            </cache-container>
-            <cache-container name="server" default-cache="default" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.server">
-                <local-cache name="default">
-                    <expiration interval="0"/>
-                </local-cache>
-            </cache-container>
+        <subsystem xmlns="urn:jboss:domain:infinispan:14.0">
             <cache-container name="hibernate" marshaller="JBOSS" modules="org.infinispan.hibernate-cache">
                 <local-cache name="entity">
                     <heap-memory size="10000"/>
@@ -425,13 +419,39 @@
                     <expiration max-idle="60000"/>
                 </local-cache>
             </cache-container>
+            <cache-container name="ejb" default-cache="passivation" marshaller="PROTOSTREAM" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
+                <local-cache name="passivation">
+                    <expiration interval="0"/>
+                    <file-store passivation="true"/>
+                </local-cache>
+                <local-cache name="persistent">
+                    <locking isolation="REPEATABLE_READ"/>
+                    <transaction mode="BATCH"/>
+                    <expiration interval="0"/>
+                    <file-store preload="true"/>
+                </local-cache>
+                <local-cache name="transient">
+                    <locking isolation="REPEATABLE_READ"/>
+                    <transaction mode="BATCH"/>
+                    <expiration interval="0"/>
+                    <file-store passivation="true" purge="true"/>
+                </local-cache>
+            </cache-container>
+            <cache-container name="web" default-cache="passivation" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.web.infinispan">
+                <local-cache name="passivation">
+                    <expiration interval="0"/>
+                    <file-store passivation="true"/>
+                </local-cache>
+                <local-cache name="sso">
+                    <expiration interval="0"/>
+                </local-cache>
+            </cache-container>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:io:3.0">
             <worker name="default"/>
-            <buffer-pool name="default"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:jaxrs:2.0"/>
-        <subsystem xmlns="urn:jboss:domain:jca:5.0">
+        <subsystem xmlns="urn:jboss:domain:jaxrs:3.0"/>
+        <subsystem xmlns="urn:jboss:domain:jca:6.0">
             <archive-validation enabled="true" fail-on-error="true" fail-on-warn="false"/>
             <bean-validation enabled="true"/>
             <default-workmanager>
@@ -468,20 +488,15 @@
         <subsystem xmlns="urn:wildfly:metrics:1.0" security-enabled="false" exposed-subsystems="*" prefix="${wildfly.metrics.prefix:wildfly}"/>
         <subsystem xmlns="urn:wildfly:microprofile-config-smallrye:2.0"/>
         <subsystem xmlns="urn:wildfly:microprofile-jwt-smallrye:1.0"/>
-        <subsystem xmlns="urn:wildfly:microprofile-opentracing-smallrye:3.0" default-tracer="jaeger">
-            <jaeger-tracer name="jaeger">
-                <sampler-configuration sampler-type="const" sampler-param="0.0"/>
-            </jaeger-tracer>
-        </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">
             <remote-naming/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:remoting:4.0">
+        <subsystem xmlns="urn:jboss:domain:remoting:5.0">
             <http-connector name="http-remoting-connector" connector-ref="default" sasl-authentication-factory="application-sasl-authentication"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:request-controller:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:resource-adapters:6.1"/>
+        <subsystem xmlns="urn:jboss:domain:resource-adapters:7.0"/>
         <subsystem xmlns="urn:jboss:domain:sar:1.0"/>
         <subsystem xmlns="urn:jboss:domain:security-manager:1.0">
             <deployment-permissions>
@@ -500,7 +515,8 @@
             <coordinator-environment statistics-enabled="${wildfly.transactions.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
             <object-store path="tx-object-store" relative-to="jboss.server.data.dir"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:undertow:12.0" default-server="default-server" default-virtual-host="default-host" default-servlet-container="default" default-security-domain="other" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}">
+        <subsystem xmlns="urn:jboss:domain:undertow:14.0" default-virtual-host="default-host" default-servlet-container="default" default-server="default-server" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}" default-security-domain="other">
+            <byte-buffer-pool name="default"/>
             <buffer-cache name="default"/>
             <server name="default-server">
                 <http-listener name="default" socket-binding="http" redirect-socket="redirect-https" enable-http2="true" resolve-peer-address="${env.WILDFLY_RESOLVE_PEER_ADDRESS:false}" max-post-size="${env.HTTP_MAX_POST_SIZE:10000000000}" proxy-address-forwarding="${env.HTTP_PROXY_ADDRESS_FORWARDING:false}"/>
@@ -520,7 +536,7 @@
                 <file name="resources" path="${jboss.server.config.dir}/resources"/>
             </handlers>
             <application-security-domains>
-                <application-security-domain name="other" http-authentication-factory="keycloak-http-authentication"/>
+                <application-security-domain name="other" security-domain="ApplicationDomain"/>
             </application-security-domains>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:webservices:2.0" statistics-enabled="${wildfly.webservices.statistics-enabled:${wildfly.statistics-enabled:false}}">
@@ -533,43 +549,7 @@
             </endpoint-config>
             <client-config name="Standard-Client-Config"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:weld:4.0"/>
-        <subsystem xmlns="urn:jboss:domain:keycloak:1.2">
-            <secure-deployment name="dcm4chee-arc-ui2-5.31.0-secure.war">
-                <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:https://keycloak:8443}</auth-server-url>
-                <public-client>true</public-client>
-                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
-                <resource>${env.UI_CLIENT_ID:dcm4chee-arc-ui}</resource>
-                <truststore>${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
-                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
-            </secure-deployment>
-            <secure-server name="wildfly-console">
-                <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.UI_AUTH_SERVER_URL:${env.AUTH_SERVER_URL:https://keycloak:8443}}</auth-server-url>
-                <public-client>true</public-client>
-                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
-                <resource>${env.WILDFLY_CONSOLE:wildfly-console}</resource>
-                <truststore>${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
-                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
-            </secure-server>
-            <secure-deployment name="wildfly-management">
-                <realm>${env.REALM_NAME:dcm4che}</realm>
-                <auth-server-url>${env.AUTH_SERVER_URL:https://keycloak:8443}</auth-server-url>
-                <bearer-only>true</bearer-only>
-                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
-                <resource>${env.WILDFLY_MANAGEMENT:wildfly-management}</resource>
-                <truststore>${env.TRUSTSTORE}</truststore>
-                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
-                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
-                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
-                <principal-attribute>preferred_username</principal-attribute>
-            </secure-deployment>
-        </subsystem>
+        <subsystem xmlns="urn:jboss:domain:weld:5.0"/>
     </profile>
     <interfaces>
         <interface name="management">
@@ -577,9 +557,6 @@
         </interface>
         <interface name="public">
             <inet-address value="${jboss.bind.address:127.0.0.1}"/>
-        </interface>
-        <interface name="unsecure">
-            <inet-address value="${jboss.bind.address.unsecure:127.0.0.1}"/>
         </interface>
     </interfaces>
     <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">

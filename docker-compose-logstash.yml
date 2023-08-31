@@ -82,7 +82,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:21.1.2
+    image: dcm4che/keycloak:22.0.1
     ports:
       - "8843:8843"
     environment:
@@ -98,7 +98,6 @@ services:
       KC_DB_PASSWORD: keycloak
       KC_LOG: file,gelf
       KC_LOG_GELF_LABEL: WARN
-      KC_SPI_LOGIN_PROTOCOL_OPENID_CONNECT_SUPPRESS_LOGOUT_CONFIRMATION_SCREEN: "true"
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
       KIBANA_REDIRECT_URL: https://gunter-nb:8643/oauth2/callback/*
@@ -111,6 +110,8 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/keycloak:/opt/keycloak/data
+      - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
+      - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   oauth2-proxy:
     image: dcm4che/oauth2-proxy:7.3.0
     logging:
@@ -143,7 +144,7 @@ services:
       - kibana
       - keycloak
   db:
-    image: dcm4che/postgres-dcm4chee:14.5-29
+    image: dcm4che/postgres-dcm4chee:15.3-31
     logging:
       driver: gelf
       options:
@@ -162,7 +163,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.31.0-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.31.1-secure-ui
     logging:
       driver: gelf
       options:
@@ -187,7 +188,7 @@ services:
       UI_AUTH_SERVER_URL: https://gunter-nb:8843
       WILDFLY_CHOWN: /storage
       WILDFLY_WAIT_FOR: ldap:389 db:5432 keycloak:8843 logstash:8514
-      JAVA_OPTS: -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -agentlib:jdwp=transport=dt_socket,address=*:8787,server=y,suspend=n
+      JAVA_OPTS: -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,address=*:8787,server=y,suspend=n
     depends_on:
       - ldap
       - keycloak
