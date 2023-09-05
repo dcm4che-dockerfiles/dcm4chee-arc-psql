@@ -51,7 +51,7 @@ services:
       - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   db:
-    image: dcm4che/postgres-dcm4chee:15.3-31
+    image: dcm4che/postgres-dcm4chee:15.4-31
     ports:
       - "5432:5432"
     environment:
