@@ -11,7 +11,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:15.3-31
+    image: dcm4che/postgres-dcm4chee:15.4-31
     ports:
       - "5432:5432"
     environment:
