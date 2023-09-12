@@ -333,7 +333,7 @@ Comma separated list of enabled TLS protocols (`SSLv2`, `SSLv3`, `TLSv1`, `TLSv1
 #### `CIPHER_SUITE_FILTER`
 
 The filter to apply to specify the enabled cipher suites for TLSv1.2 and below. See
-[javadoc](https://wildfly-security.github.io/wildfly-elytron/1.1.x/org/wildfly/security/ssl/CipherSuiteSelector.html#fromString-java.lang.String-)
+[javadoc](https://wildfly-security.github.io/wildfly-elytron/documentation/api/upstream/org/wildfly/security/ssl/CipherSuiteSelector.html#fromString(java.lang.String))
 for possible values. (optional, default is `DEFAULT`).
 
 ##### `GZIP_FILTER_PREDICATE`
