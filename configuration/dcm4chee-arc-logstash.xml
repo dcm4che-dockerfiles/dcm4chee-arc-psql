@@ -198,7 +198,7 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="true" use-ccm="${env.WILDFLY_PACSDS_USE_CCM:true}">
+                <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}" use-ccm="${env.WILDFLY_PACSDS_USE_CCM:true}">
                     <connection-url>jdbc:postgresql://${env.POSTGRES_HOST:db}:${env.POSTGRES_PORT:5432}/${env.POSTGRES_DB:pacsdb}${env.POSTGRES_JDBC_PARAMS:}</connection-url>
                     <driver>psql</driver>
                     <pool>
