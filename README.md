@@ -401,6 +401,11 @@ Keycloak client ID for [securing the Wildfly Management API](https://docs.jboss.
 Maximum threads allowed for the managed-executor-service in the Wildfly configuration
 (optional, default is `100`).
 
+#### `WILDFLY_PACSDS_USE_CCM`
+
+Enable the use of a cached connection manager
+(optional, default is `true`).
+
 #### `WILDFLY_PACSDS_MAX_POOL_SIZE`
 
 Maximum pool size allowed for the PacsDS datasource in the Wildfly configuration
