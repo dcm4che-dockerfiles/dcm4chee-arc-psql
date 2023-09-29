@@ -76,6 +76,7 @@ services:
       - "12575:12575"
     environment:
       WILDFLY_DEPLOY_UI: "false"
+      WILDFLY_PACSDS_USE_CCM: "false"
       POSTGRES_DB: pacsdb
       POSTGRES_USER: pacs
       POSTGRES_PASSWORD: pacs
@@ -103,6 +104,7 @@ services:
       - "8888:8888"
     environment:
       WILDFLY_DEPLOY_UI: only
+      WILDFLY_PACSDS_USE_CCM: "false"
       DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
       AUTH_SERVER_URL: https://keycloak:8843
       UI_AUTH_SERVER_URL: https://gunter-nb:8843

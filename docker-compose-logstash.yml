@@ -180,6 +180,7 @@ services:
       - "2575:2575"
       - "12575:12575"
     environment:
+      WILDFLY_PACSDS_USE_CCM: "false"
       LOGSTASH_HOST: logstash
       POSTGRES_DB: pacsdb
       POSTGRES_USER: pacs
