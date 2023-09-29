@@ -109,6 +109,7 @@ services:
     environment:
       WILDFLY_ADMIN_USER: admin
       WILDFLY_ADMIN_PASSWORD: admin
+      WILDFLY_PACSDS_USE_CCM: "false"
       LOGSTASH_HOST: logstash
       POSTGRES_DB: pacsdb
       POSTGRES_USER: pacs

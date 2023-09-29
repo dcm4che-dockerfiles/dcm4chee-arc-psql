@@ -38,6 +38,7 @@ services:
       WILDFLY_ADMIN_USER: admin
       WILDFLY_ADMIN_PASSWORD: admin
       WILDFLY_DEPLOY_UI: "false"
+      WILDFLY_PACSDS_USE_CCM: "false"
       POSTGRES_DB: pacsdb
       POSTGRES_USER: pacs
       POSTGRES_PASSWORD: pacs
@@ -65,6 +66,7 @@ services:
       WILDFLY_ADMIN_USER: admin
       WILDFLY_ADMIN_PASSWORD: admin
       WILDFLY_DEPLOY_UI: only
+      WILDFLY_PACSDS_USE_CCM: "false"
       DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
       HTTP_PORT: 18080
       HTTPS_PORT: 18443
