@@ -62,6 +62,7 @@ services:
       - "636:636"
     environment:
       ARCHIVE_HOST: gunter-nb
+      STORAGE_DIR: /storage/fs1
       SYSLOG_HOST: logstash
       SYSLOG_PORT: 8514
       SYSLOG_PROTOCOL: TLS
