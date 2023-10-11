@@ -7,6 +7,7 @@ services:
       - "636:636"
     environment:
       ARCHIVE_HOST: gunter-nb
+      STORAGE_DIR: /storage/fs1
     volumes:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
