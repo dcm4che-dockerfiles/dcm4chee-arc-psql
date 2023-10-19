@@ -151,6 +151,9 @@
             <logger category="org.dcm4chee.arc.procedure">
                 <level name="INFO"/>
             </logger>
+            <logger category="org.dcm4chee.arc.storage">
+                <level name="INFO"/>
+            </logger>
             <root-logger>
                 <level name="INFO"/>
                 <handlers>
