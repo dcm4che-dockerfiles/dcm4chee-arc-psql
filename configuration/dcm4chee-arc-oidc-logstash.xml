@@ -432,7 +432,7 @@
             </policy>
         </subsystem>
         <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0">
-            <secure-deployment name="dcm4chee-arc-ui2-5.31.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui2-5.31.2-secure.war">
                 <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
@@ -442,7 +442,7 @@
                 <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
                 <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
             </secure-deployment>
-            <secure-deployment name="dcm4chee-arc-war-5.31.1-secure.war">
+            <secure-deployment name="dcm4chee-arc-war-5.31.2-secure.war">
                 <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
                 <bearer-only>true</bearer-only>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
