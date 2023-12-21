@@ -51,7 +51,7 @@ v<?xml version="1.0" encoding="UTF-8"?>
         <property name="ui-client-id" value="${env.UI_CLIENT_ID:dcm4chee-arc-ui}"/>
         <property name="disable-trust-manager" value="${env.DISABLE_TRUST_MANAGER:false}"/>
         <property name="allow-any-hostname" value="${env.ALLOW_ANY_HOSTNAME:true}"/>
-        <property name="auth-user-role" value="${env.AUTH_USER_ROLE:user}"/>
+        <property name="auth-user-role" value="${env.AUTH_USER_ROLE:auth}"/>
         <property name="super-user-role" value="${env.SUPER_USER_ROLE:root}"/>
     </system-properties>
 
