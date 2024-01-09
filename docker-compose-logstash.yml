@@ -114,7 +114,7 @@ services:
       - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   oauth2-proxy:
-    image: dcm4che/oauth2-proxy:7.3.0
+    image: dcm4che/oauth2-proxy:7.5.1
     logging:
       driver: gelf
       options:
