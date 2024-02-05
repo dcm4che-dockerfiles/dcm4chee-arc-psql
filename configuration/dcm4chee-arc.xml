@@ -102,7 +102,7 @@
             <logger category="org.hibernate.SQL">
                 <level name="INFO"/>
             </logger>
-            <logger category="org.hibernate.type">
+            <logger category="org.hibernate.orm.jdbc.bind">
                 <level name="INFO"/>
             </logger>
             <logger category="org.jclouds">
