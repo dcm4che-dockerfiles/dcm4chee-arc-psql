@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:amazoncorretto-ffmpeg-30.0.1
+FROM dcm4che/wildfly:amazoncorretto-ffmpeg-31.0.0
 
 ENV DCM4CHEE_ARC_VERSION 5.31.3
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
