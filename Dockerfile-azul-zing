@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:amazoncorretto-ffmpeg-31.0.1
+FROM dcm4che/wildfly:azul-zing-ffmpeg-31.0.1
 
 ENV DCM4CHEE_ARC_VERSION 5.32.0
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
@@ -11,7 +11,7 @@ RUN cd $JBOSS_HOME \
     && chown -R wildfly:wildfly $JBOSS_HOME/modules \
     && cd /docker-entrypoint.d/deployments \
     && curl -fO https://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ui2/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ui2-${DCM4CHEE_ARC_VERSION}-secure.war \
-    && curl -fO https://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear \
+    && curl -fO https://www.dcm4che.org/maven2/org/dcm4che/dcm4chee-arc/dcm4chee-arc-ear/${DCM4CHEE_ARC_VERSION}/dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql-secure.ear \
     && chown wildfly:wildfly *
 
 COPY setenv.sh /
