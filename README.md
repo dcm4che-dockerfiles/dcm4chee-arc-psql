@@ -284,7 +284,7 @@ Type (`JKS` or `PKCS12`) of the keystore specified by `KEYSTORE` (optional, defa
 #### `TRUSTSTORE`
 
 Path to keystore file with trusted certificates for TLS (optional, default is the default Java truststore
-`/usr/local/openjdk-11/lib/security/cacerts`). s.o. [EXTRA_CACERTS](#extra_cacerts).
+`$JAVA_HOME/lib/security/cacerts`). s.o. [EXTRA_CACERTS](#extra_cacerts).
 
 #### `TRUSTSTORE_PASSWORD`
 
