@@ -28,7 +28,6 @@ services:
        - "8843:8843"
     environment:
       ARCHIVE_HOST: gunter-nb
-      ARCHIVE_MANAGEMENT_HOST: gunter-nb
       ARCHIVE_HTTP_PORT: 18080
       ARCHIVE_HTTPS_PORT: 18443
       ARCHIVE_MANAGEMENT_HTTPS_PORT: 19993
