@@ -64,3 +64,7 @@ fi
 if [ -n "$UI_MANAGEMENT_HTTPS_PORT" ]; then
 	SYS_PROPS+=" -Djboss.ui.management.https.port=${UI_MANAGEMENT_HTTPS_PORT}"
 fi
+
+if [ -n "$UI_MANAGEMENT_HOST" ]; then
+	SYS_PROPS+=" -Djboss.ui.management.host=${UI_MANAGEMENT_HOST}"
+fi

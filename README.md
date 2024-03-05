@@ -198,6 +198,12 @@ Have to be set different to `MANAGEMENT_HTTPSPORT`, if running behind a HTTP rev
 HTTPS port used by the browser based Archive UI to access the Wildfly Administration Console.
 Have to be set different to `MANAGEMENT_HTTPS_PORT`, if running behind a HTTPS/SSL reverse proxy listing on a different port.
 
+#### `UI_MANAGEMENT_HOST`
+
+host used by the browser based Archive UI in URL to access the Wildfly Administration Console.
+Only necessary, if running behind a HTTPS/SSL reverse proxy which uses different virtual hosts
+for forwarding HTTP requests to the Wildfly Administration Console than to the Wildfly
+
 #### `WILDFLY_DEPLOY_UI`
 
 Controls deployment of the Archive UI. Enumerated values:
