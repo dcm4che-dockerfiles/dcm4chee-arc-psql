@@ -331,6 +331,12 @@ Password used to protect the integrity of the keystore specified by `EXTRA_CACER
 Password used to protect the integrity of the keystore specified by `EXTRA_CACERTS` via file input
 (alternative to `EXTRA_CACERTS_PASSWORD`).
 
+#### `NEED_CLIENT_AUTH`
+
+Enables mutual TLS authentication for incoming HTTP connections: request HTTPS clients to provide a certificate and
+reject the connection if that is not signed by a trusted certificate (see [`TRUSTSTORE`](#truststore))
+(optional, default is `false`). environment
+
 #### `TLS_PROTOCOLS`
 
 Comma separated list of enabled TLS protocols (`SSLv2`, `SSLv3`, `TLSv1`, `TLSv1.1`, `TLSv1.2`, `TLSv1.3`)
