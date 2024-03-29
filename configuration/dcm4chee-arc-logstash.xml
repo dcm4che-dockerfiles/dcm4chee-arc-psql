@@ -417,14 +417,22 @@
                         <implementation type="${env.KEYSTORE_TYPE}"/>
                         <file path="${env.KEYSTORE}"/>
                     </key-store>
+                    <key-store name="applicationTS">
+                        <credential-reference clear-text="${env.TRUSTSTORE_PASSWORD}"/>
+                        <implementation type="${env.TRUSTSTORE_TYPE}"/>
+                        <file path="${env.TRUSTSTORE}"/>
+                    </key-store>
                 </key-stores>
                 <key-managers>
                     <key-manager name="applicationKM" algorithm="SunX509" key-store="applicationKS">
                         <credential-reference clear-text="${env.KEY_PASSWORD}"/>
                     </key-manager>
                 </key-managers>
+                <trust-managers>
+                    <trust-manager name="applicationTM" key-store="applicationTS"/>
+                </trust-managers>
                 <server-ssl-contexts>
-                    <server-ssl-context name="applicationSSC" cipher-suite-filter="${env.CIPHER_SUITE_FILTER:DEFAULT}" protocols="${env.TLS_PROTOCOLS:TLSv1.2}" key-manager="applicationKM"/>
+                    <server-ssl-context name="applicationSSC" need-client-auth="${env.NEED_CLIENT_AUTH:false}" cipher-suite-filter="${env.CIPHER_SUITE_FILTER:DEFAULT}" protocols="${env.TLS_PROTOCOLS:TLSv1.2}" key-manager="applicationKM" trust-manager="applicationTM" />
                 </server-ssl-contexts>
             </tls>
             <policy name="jacc">
