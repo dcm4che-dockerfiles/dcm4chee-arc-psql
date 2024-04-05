@@ -145,7 +145,7 @@ services:
       - kibana
       - keycloak
   db:
-    image: dcm4che/postgres-dcm4chee:15.5-32
+    image: dcm4che/postgres-dcm4chee:16.2-32
     logging:
       driver: gelf
       options:
