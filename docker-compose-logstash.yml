@@ -72,7 +72,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   db:
-    image: dcm4che/postgres-dcm4chee:15.5-32
+    image: dcm4che/postgres-dcm4chee:16.2-32
     logging:
       driver: gelf
       options:
