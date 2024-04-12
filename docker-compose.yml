@@ -30,7 +30,7 @@ services:
       ARCHIVE_HOST: gunter-nb
       ARCHIVE_HTTP_PORT: 18080
       ARCHIVE_HTTPS_PORT: 18443
-      ARCHIVE_MANAGEMENT_HTTPS_PORT: 19993
+      WILDFLY_CONSOLE_REDIRECT_URL: https://gunter-nb:19993/console/*
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: changeit
       KC_HOSTNAME: gunter-nb
