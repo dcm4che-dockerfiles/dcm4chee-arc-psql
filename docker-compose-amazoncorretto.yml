@@ -23,7 +23,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:amazoncorretto-24.0.1
+    image: dcm4che/keycloak:amazoncorretto-24.0.2
     ports:
        - "8843:8843"
     environment:
