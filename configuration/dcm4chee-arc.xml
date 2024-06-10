@@ -176,7 +176,8 @@
                 <datasource jndi-name="java:jboss/datasources/ExampleDS" pool-name="ExampleDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
                     <connection-url>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=${wildfly.h2.compatibility.mode:REGULAR}</connection-url>
                     <driver>h2</driver>
-                    <security user-name="sa" password="sa"/>                </datasource>
+                    <security user-name="sa" password="sa"/>
+                </datasource>
                 <datasource jndi-name="java:/PacsDS" pool-name="pacsds" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}" use-ccm="${env.WILDFLY_PACSDS_USE_CCM:true}">
                     <connection-url>jdbc:postgresql://${env.POSTGRES_HOST:db}:${env.POSTGRES_PORT:5432}/${env.POSTGRES_DB:pacsdb}${env.POSTGRES_JDBC_PARAMS:}</connection-url>
                     <driver>psql</driver>
