@@ -157,6 +157,11 @@ based on the suffix (optional, default is `.yyyy-MM-dd`).
 Suffix string for `/opt/wildfly/standalone/log/audit-log.log*` files. The period of the rotation is automatically calculated
 based on the suffix (optional, default is `.yyyy-MM-dd`).
 
+#### `WILDFLY_SERVER_LOG_PATTERN`
+
+Pattern for formatter `PATTERN` for system log messages to `/opt/wildfly/standalone/log/server.log*` files.
+(optional, default is `%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n`).
+
 #### `HTTP_MAX_POST_SIZE`
 
 The maximum size of a HTTP POST request that will be accepted, in bytes. (optional, default is `10000000000`).
