@@ -154,8 +154,8 @@ based on the suffix (optional, default is `.yyyy-MM-dd`).
 
 #### `WILDFLY_AUDIT_LOG_SUFFIX`
 
-Suffix string for `/opt/wildfly/standalone/log/audit-log.log*` files. The period of the rotation is automatically calculated
-based on the suffix (optional, default is `.yyyy-MM-dd`).
+Suffix string for `/opt/wildfly/standalone/log/audit.log*` and `/opt/wildfly/standalone/log/audit-log.log*` files.
+The period of the rotation is automatically calculated based on the suffix (optional, default is `.yyyy-MM-dd`).
 
 #### `WILDFLY_SERVER_LOG_PATTERN`
 
