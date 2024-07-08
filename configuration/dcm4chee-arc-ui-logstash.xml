@@ -246,7 +246,7 @@
                 <provider-loader name="openssl" module="org.wildfly.openssl"/>
             </providers>
             <audit-logging>
-                <file-audit-log name="local-audit" path="audit.log" relative-to="jboss.server.log.dir" format="JSON"/>
+                <periodic-rotating-file-audit-log name="local-audit" path="audit.log" relative-to="jboss.server.log.dir" suffix="${env.WILDFLY_AUDIT_LOG_SUFFIX:.yyyy-MM-dd}" />
             </audit-logging>
             <security-domains>
                 <security-domain name="ApplicationDomain" default-realm="ApplicationRealm" permission-mapper="default-permission-mapper">
