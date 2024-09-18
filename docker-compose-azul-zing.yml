@@ -23,7 +23,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:azul-zing-25.0.2
+    image: dcm4che/keycloak:azul-zing-25.0.5
     ports:
        - "8843:8843"
     environment:
@@ -33,7 +33,8 @@ services:
       WILDFLY_CONSOLE_REDIRECT_URL: https://gunter-nb:19993/console/*
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: changeit
-      KC_HOSTNAME: gunter-nb
+      KC_HOSTNAME: https://gunter-nb:8843
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: 'true'
       KC_HTTPS_PORT: 8843
       KC_DB: mariadb
       KC_DB_URL_DATABASE: keycloak
