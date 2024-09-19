@@ -98,6 +98,9 @@
             <logger category="org.jboss.as.config">
                 <level name="DEBUG"/>
             </logger>
+            <logger category="org.wildfly.security.http.oidc">
+                <level name="INFO"/>
+            </logger>
             <logger category="sun.rmi">
                 <level name="WARN"/>
             </logger>
