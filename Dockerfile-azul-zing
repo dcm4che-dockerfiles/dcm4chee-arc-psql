@@ -1,4 +1,4 @@
-FROM dcm4che/wildfly:azul-zing-ffmpeg-32.0.1
+FROM dcm4che/wildfly:azul-zing-ffmpeg-33.0.2
 
 ENV DCM4CHEE_ARC_VERSION 5.33.0
 ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
