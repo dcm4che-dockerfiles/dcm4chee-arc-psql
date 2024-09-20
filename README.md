@@ -250,13 +250,13 @@ Path to keystore file with private key and certificate for HTTPS (optional, defa
 ```
 Owner: CN=dcm4che, O=dcm4che.org, C=AT
 Issuer: OU=Gazelle, CN=IHE Europe CA, O=IHE Europe, C=FR
-Serial number: 4b3
-Valid from: Fri Sep 30 11:24:50 CEST 2022 until: Thu Sep 30 11:24:50 CEST 2032
+Serial number: 626
+Valid from: Wed Sep 18 16:54:44 CEST 2024 until: Mon Sep 18 16:54:44 CEST 2034
 Certificate fingerprints:
-	 SHA1: B4:F5:09:33:B8:56:F0:D5:65:E9:3E:3D:02:1B:9D:00:F8:F8:F4:BA
-	 SHA256: BD:60:1C:19:D4:ED:87:18:B3:EC:F6:53:52:91:00:C8:A2:70:21:0F:04:87:E6:B7:ED:15:23:A7:97:D8:28:AC
+	 SHA1: C6:E1:8E:52:3D:BB:32:9B:AA:7E:6A:DF:54:5E:15:99:A9:1B:A8:43
+	 SHA256: 0C:0E:09:6A:D8:6B:9F:8C:E2:9C:60:C3:4C:E8:29:CB:64:67:08:7F:41:5B:79:12:AA:A2:45:18:CE:82:B6:96
 Signature algorithm name: SHA512withRSA
-Subject Public Key Algorithm: 1024-bit RSA key (weak)
+Subject Public Key Algorithm: 2048-bit RSA key
 ```
 provided by the docker image only for testing purpose).
 
