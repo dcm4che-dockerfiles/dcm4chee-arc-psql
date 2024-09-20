@@ -1,7 +1,7 @@
 FROM dcm4che/wildfly:ffmpeg-33.0.2
 
-ENV DCM4CHEE_ARC_VERSION 5.33.0
-ENV DCM4CHE_VERSION ${DCM4CHEE_ARC_VERSION}
+ENV DCM4CHEE_ARC_VERSION=5.33.0
+ENV DCM4CHE_VERSION=${DCM4CHEE_ARC_VERSION}
 
 RUN cd $JBOSS_HOME \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
