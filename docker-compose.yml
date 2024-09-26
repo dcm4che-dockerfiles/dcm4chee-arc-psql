@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.6.7-33.0
+    image: dcm4che/slapd-dcm4chee:2.6.7-33.1
     ports:
       - "389:389"
       - "636:636"
@@ -65,7 +65,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.33.0-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.33.1-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -97,7 +97,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
   ui:
-    image: dcm4che/dcm4chee-arc-psql:5.33.0-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.33.1-secure-ui
     ports:
       - "18080:18080"
       - "18443:18443"
