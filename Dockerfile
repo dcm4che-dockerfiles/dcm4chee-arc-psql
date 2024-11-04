@@ -1,9 +1,16 @@
-FROM dcm4che/wildfly:ffmpeg-33.0.2
+FROM dcm4che/wildfly:34.0.0
 
 ENV DCM4CHEE_ARC_VERSION=5.33.1
 ENV DCM4CHE_VERSION=${DCM4CHEE_ARC_VERSION}
 
-RUN cd $JBOSS_HOME \
+RUN set -eux \
+    && if [ "$(uname -m)" = "x86_64" ]; then arch=amd64; else arch=arm64; fi \
+    && mkdir ffmpeg && cd ffmpeg \
+    && curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-${arch}-static.tar.xz | tar xJ \
+    && mv $(ls) /opt/ffmpeg \
+    && cd .. && rmdir ffmpeg \
+    && ln -s /opt/ffmpeg/ffmpeg /usr/bin/ffmpeg \
+    && cd $JBOSS_HOME \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/2.5.0/jclouds-jboss-modules-2.5.0.tar.gz | tar xz \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules-psql/42.7.3/jdbc-jboss-modules-psql-42.7.3.tar.gz | tar xz \
