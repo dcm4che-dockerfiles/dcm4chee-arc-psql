@@ -12,7 +12,7 @@ RUN set -eux \
     && ln -s /opt/ffmpeg/ffmpeg /usr/bin/ffmpeg \
     && cd $JBOSS_HOME \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jai_imageio-jboss-modules/1.2-pre-dr-b04/jai_imageio-jboss-modules-1.2-pre-dr-b04.tar.gz | tar xz \
-    && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/2.5.0/jclouds-jboss-modules-2.5.0.tar.gz | tar xz \
+    && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jclouds-jboss-modules/2.6.0/jclouds-jboss-modules-2.6.0.tar.gz | tar xz \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/jdbc-jboss-modules-psql/42.7.3/jdbc-jboss-modules-psql-42.7.3.tar.gz | tar xz \
     && curl -f https://www.dcm4che.org/maven2/org/dcm4che/dcm4che-jboss-modules/$DCM4CHE_VERSION/dcm4che-jboss-modules-${DCM4CHE_VERSION}.tar.gz | tar xz \
     && chown -R wildfly:wildfly $JBOSS_HOME/modules \
