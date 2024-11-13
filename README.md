@@ -135,18 +135,6 @@ get owned by the user and group of the Wildfly process by default, without the n
 
 Indicates to delay the start of the archive until specified TCP ports become accessible. Format: `<host>:<port> ...`, e.g.: `ldap:389 db:5432`.
 
-#### `WILDFLY_CRON_ENABLED`
-
-Start cron daemon to execute scheduled commands (optional, default is `false`).
-
-#### `WILDFLY_SERVER_LOG_RETENTION_DAYS`  (Only effective with `WILDFLY_CRON_ENABLED=true`)
-
-Delete `/opt/wildfly/standalone/log/server.log*` files older than specified number of days automatically (optional, default is `7`).
-
-#### `WILDFLY_AUDIT_LOG_RETENTION_DAYS`  (Only effective with `WILDFLY_CRON_ENABLED=true`)
-
-Delete `/opt/wildfly/standalone/log/audit-log.log*` files older than specified number of days automatically (optional, default is `7`).
-
 #### `WILDFLY_SERVER_LOG_SUFFIX`
 
 Suffix string for `/opt/wildfly/standalone/log/server.log*` files. The period of the rotation is automatically calculated
