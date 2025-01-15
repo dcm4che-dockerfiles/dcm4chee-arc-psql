@@ -34,7 +34,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   logstash:
-    image: dcm4che/logstash-dcm4chee:8.15.1-17
+    image: dcm4che/logstash-dcm4chee:8.15.1-18
     logging:
       driver: json-file
       options:
