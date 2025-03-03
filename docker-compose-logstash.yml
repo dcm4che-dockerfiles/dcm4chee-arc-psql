@@ -99,7 +99,7 @@ services:
       KC_DB_URL_HOST: mariadb
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: keycloak
-      KC_LOG: file,gelf
+      KC_LOG: file
       KC_LOG_GELF_LABEL: WARN
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
@@ -116,7 +116,7 @@ services:
       - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   oauth2-proxy:
-    image: dcm4che/oauth2-proxy:7.6.1
+    image: dcm4che/oauth2-proxy:7.7.1
     logging:
       driver: gelf
       options:
