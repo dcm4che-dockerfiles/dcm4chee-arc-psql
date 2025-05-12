@@ -1,7 +1,7 @@
 version: "3"
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.6.7-33.1
+    image: dcm4che/slapd-dcm4chee:2.6.7-34.0
     ports:
       - "389:389"
       - "636:636"
@@ -55,7 +55,7 @@ services:
       - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   db:
-    image: dcm4che/postgres-dcm4chee:17.1-33
+    image: dcm4che/postgres-dcm4chee:17.4-34
     ports:
       - "5432:5432"
     environment:
@@ -67,7 +67,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.33.1-secure
+    image: dcm4che/dcm4chee-arc-psql:5.34.0-secure
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -99,7 +99,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
   ui:
-    image: dcm4che/dcm4chee-arc-psql:5.33.1-secure
+    image: dcm4che/dcm4chee-arc-psql:5.34.0-secure
     ports:
       - "18080:18080"
       - "18443:18443"
