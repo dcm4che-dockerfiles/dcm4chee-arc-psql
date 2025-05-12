@@ -419,6 +419,7 @@
                 <jacc-policy/>
             </policy>
         </subsystem>
+<<<<<<< HEAD
         <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0"/>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
         <subsystem xmlns="urn:jboss:domain:infinispan:15.0">
