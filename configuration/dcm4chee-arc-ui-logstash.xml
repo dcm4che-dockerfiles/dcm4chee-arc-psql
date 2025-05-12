@@ -391,7 +391,7 @@
             </secure-deployment>
         </subsystem>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
-        <subsystem xmlns="urn:jboss:domain:infinispan:14.0">
+        <subsystem xmlns="urn:jboss:domain:infinispan:15.0">
             <cache-container name="hibernate" marshaller="JBOSS" modules="org.infinispan.hibernate-cache">
                 <local-cache name="entity">
                     <heap-memory size="10000"/>
@@ -439,7 +439,7 @@
         <subsystem xmlns="urn:jboss:domain:io:4.0" default-worker="default">
             <worker name="default"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:jaxrs:3.0"/>
+        <subsystem xmlns="urn:jboss:domain:jaxrs:4.0"/>
         <subsystem xmlns="urn:jboss:domain:jca:6.0">
             <archive-validation enabled="true" fail-on-error="true" fail-on-warn="false"/>
             <bean-validation enabled="true"/>
@@ -481,7 +481,7 @@
             <remote-naming/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:pojo:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:remoting:7.0">
+        <subsystem xmlns="urn:jboss:domain:remoting:8.0">
             <endpoint worker="default"/>
             <http-connector name="http-remoting-connector" connector-ref="default" sasl-authentication-factory="application-sasl-authentication"/>
         </subsystem>
@@ -505,7 +505,7 @@
             <coordinator-environment statistics-enabled="${wildfly.transactions.statistics-enabled:${wildfly.statistics-enabled:false}}"/>
             <object-store path="tx-object-store" relative-to="jboss.server.data.dir"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:undertow:14.0" default-virtual-host="default-host" default-servlet-container="default" default-server="default-server" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}" default-security-domain="other">
+        <subsystem xmlns="urn:jboss:domain:undertow:community:14.0" default-virtual-host="default-host" default-servlet-container="default" default-server="default-server" statistics-enabled="${wildfly.undertow.statistics-enabled:${wildfly.statistics-enabled:false}}" default-security-domain="other">
             <byte-buffer-pool name="default"/>
             <buffer-cache name="default"/>
             <server name="default-server">
