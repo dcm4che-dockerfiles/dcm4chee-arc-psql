@@ -23,14 +23,11 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:26.0.6
+    image: dcm4che/keycloak:25.0.6
     ports:
        - "8843:8843"
     environment:
-      CUSTOMIZE_THEMES: "false"
-      ARCHIVE_HOST: gunter-nb
-      ARCHIVE_HTTP_PORT: 18080
-      ARCHIVE_HTTPS_PORT: 18443
+      ARCHIVE_WEB_ORIGIN: https://gunter-nb:18443
       WILDFLY_CONSOLE_REDIRECT_URL: https://gunter-nb:19993/console/*
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: changeit
@@ -108,7 +105,7 @@ services:
     environment:
       WILDFLY_DEPLOY_UI: only
       WILDFLY_PACSDS_USE_CCM: "false"
-      DCM4CHEE_ARC_URLS: http://gunter-nb:8080/dcm4chee-arc
+      DCM4CHEE_ARC_URLS: https://gunter-nb:8443/dcm4chee-arc
       AUTH_SERVER_URL: https://keycloak:8843
       UI_AUTH_SERVER_URL: https://gunter-nb:8843
       HTTP_PORT: 18080

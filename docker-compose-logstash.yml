@@ -82,11 +82,11 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:26.0.6
+    image: dcm4che/keycloak:25.0.6
     ports:
       - "8843:8843"
     environment:
-      ARCHIVE_HOST: gunter-nb
+      ARCHIVE_WEB_ORIGIN: https://gunter-nb:8443
       WILDFLY_CONSOLE_REDIRECT_URL: https://gunter-nb:9993/console/*
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: changeit
@@ -99,7 +99,6 @@ services:
       KC_DB_USERNAME: keycloak
       KC_DB_PASSWORD: keycloak
       KC_LOG: file
-      KC_LOG_GELF_LABEL: WARN
       KIBANA_CLIENT_ID: kibana
       KIBANA_CLIENT_SECRET: changeit
       KIBANA_REDIRECT_URL: https://gunter-nb:8643/oauth2/callback/*
