@@ -135,6 +135,11 @@ get owned by the user and group of the Wildfly process by default, without the n
 
 Indicates to delay the start of the archive until specified TCP ports become accessible. Format: `<host>:<port> ...`, e.g.: `ldap:389 db:5432`.
 
+#### `WILDFLY_START_DELAY`
+
+Indicates to delay the start of the archive for a specified amount of time in seconds after TCP ports specified by `WILDFLY_WAIT_FOR` become accessible.
+By default, the archive is started as soon all TCP ports specified by `WILDFLY_WAIT_FOR` become accessible without further delay.
+
 #### `WILDFLY_SERVER_LOG_SUFFIX`
 
 Suffix string for `/opt/wildfly/standalone/log/server.log*` files. The period of the rotation is automatically calculated
