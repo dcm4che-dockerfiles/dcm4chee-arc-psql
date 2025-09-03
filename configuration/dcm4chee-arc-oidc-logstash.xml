@@ -72,7 +72,7 @@
             </logger>
         </audit-log>
         <management-interfaces>
-            <http-interface http-authentication-factory="management-http-authentication" ssl-context="applicationSSC">
+            <http-interface http-authentication-factory="management-http-authentication" console-enabled="true" ssl-context="applicationSSC">
                 <http-upgrade enabled="true" sasl-authentication-factory="management-sasl-authentication"/>
                 <socket-binding http="management-http" https="management-https"/>
             </http-interface>
@@ -228,17 +228,23 @@
             <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:discovery:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:distributable-ejb:1.0" default-bean-management="default">
-            <infinispan-bean-management name="default" max-active-beans="10000" cache-container="ejb" cache="passivation"/>
+        <subsystem xmlns="urn:jboss:domain:distributable-ejb:2.0">
+            <bean-management default="default">
+                <infinispan-bean-management name="default" max-active-beans="10000" cache-container="ejb" cache="passivation"/>
+            </bean-management>
             <local-client-mappings-registry/>
             <infinispan-timer-management name="persistent" cache-container="ejb" cache="persistent" max-active-timers="10000"/>
             <infinispan-timer-management name="transient" cache-container="ejb" cache="transient" max-active-timers="10000"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:distributable-web:4.0" default-session-management="default" default-single-sign-on-management="default">
-            <infinispan-session-management name="default" cache-container="web" granularity="SESSION">
-                <local-affinity/>
-            </infinispan-session-management>
-            <infinispan-single-sign-on-management name="default" cache-container="web" cache="sso"/>
+        <subsystem xmlns="urn:jboss:domain:distributable-web:5.0">
+            <session-management default="default">
+                <infinispan-session-management name="default" cache-container="web" granularity="SESSION">
+                    <local-affinity/>
+                </infinispan-session-management>
+            </session-management>
+            <single-sign-on-management default="default">
+                <infinispan-single-sign-on-management name="default" cache-container="web" cache="sso"/>
+            </single-sign-on-management>
             <local-routing/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee:6.0">
@@ -484,7 +490,7 @@
         </subsystem>
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
         <subsystem xmlns="urn:jboss:domain:infinispan:15.0">
-            <cache-container name="hibernate" marshaller="JBOSS" modules="org.infinispan.hibernate-cache">
+            <cache-container name="hibernate" modules="org.infinispan.hibernate-cache" marshaller="JBOSS">
                 <local-cache name="entity">
                     <heap-memory size="10000"/>
                     <expiration max-idle="100000"/>
@@ -500,7 +506,7 @@
                     <expiration max-idle="60000"/>
                 </local-cache>
             </cache-container>
-            <cache-container name="ejb" default-cache="passivation" marshaller="PROTOSTREAM" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan">
+            <cache-container name="ejb" default-cache="passivation" aliases="sfsb" modules="org.wildfly.clustering.ejb.infinispan" marshaller="PROTOSTREAM">
                 <local-cache name="passivation">
                     <expiration interval="0"/>
                     <file-store passivation="true"/>
@@ -518,7 +524,7 @@
                     <file-store passivation="true" purge="true"/>
                 </local-cache>
             </cache-container>
-            <cache-container name="web" default-cache="passivation" marshaller="PROTOSTREAM" modules="org.wildfly.clustering.web.infinispan">
+            <cache-container name="web" default-cache="passivation" modules="org.wildfly.clustering.web.infinispan" marshaller="PROTOSTREAM">
                 <local-cache name="passivation">
                     <expiration interval="0"/>
                     <file-store passivation="true"/>
