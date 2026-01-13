@@ -376,7 +376,7 @@
             </policy>
         </subsystem>
         <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0">
-            <secure-deployment name="dcm4chee-arc-ui2-5.34.2-secure.war">
+            <secure-deployment name="dcm4chee-arc-ui2-5.34.3-secure.war">
                 <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
                 <public-client>true</public-client>
                 <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
