@@ -228,7 +228,7 @@
             <deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000" runtime-failure-causes-rollback="${jboss.deployment.scanner.rollback.on.failure:false}"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:discovery:1.0"/>
-        <subsystem xmlns="urn:jboss:domain:distributable-ejb:2.0">
+        <subsystem xmlns="urn:jboss:domain:distributable-ejb:community:2.0">
             <bean-management default="default">
                 <infinispan-bean-management name="default" max-active-beans="10000" cache-container="ejb" cache="passivation"/>
             </bean-management>
@@ -236,7 +236,7 @@
             <infinispan-timer-management name="persistent" cache-container="ejb" cache="persistent" max-active-timers="10000"/>
             <infinispan-timer-management name="transient" cache-container="ejb" cache="transient" max-active-timers="10000"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:distributable-web:5.0">
+        <subsystem xmlns="urn:jboss:domain:distributable-web:community:5.0">
             <session-management default="default">
                 <infinispan-session-management name="default" cache-container="web" granularity="SESSION">
                     <local-affinity/>
@@ -537,7 +537,7 @@
         <subsystem xmlns="urn:jboss:domain:io:4.0" default-worker="default">
             <worker name="default"/>
         </subsystem>
-        <subsystem xmlns="urn:jboss:domain:jaxrs:4.0"/>
+        <subsystem xmlns="urn:jboss:domain:jaxrs:5.0"/>
         <subsystem xmlns="urn:jboss:domain:jca:6.0">
             <archive-validation enabled="true" fail-on-error="true" fail-on-warn="false"/>
             <bean-validation enabled="true"/>
