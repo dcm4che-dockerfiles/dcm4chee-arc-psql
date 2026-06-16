@@ -44,6 +44,11 @@ if using TLS (`LDAP_URL=ldaps://<host>:<port>`) (optional, default is `true`).
 
 Device name to lookup in LDAP for Audit Logging configuration (optional, default is `dcm4chee-arc`).
 
+#### `ARCHIVE_VERSION`
+
+Software Version of the Archive stored in LDAP configuration for the archive Device
+(optional, default is the version specified in the maven pom.xml file on building the Archive application)
+
 #### `DCM4CHEE_ARC_URLS`
 
 Space separated list of URL(s) of Archive RESTful services deployed in this and other Archive docker container(s).
