@@ -91,8 +91,15 @@
                 <level name="${env.GELF_LEVEL:WARN}" />
                 <properties>
                     <property name="host" value="${env.LOGSTASH_HOST:logstash}" />
+                    <property name="port" value="${env.LOGSTASH_PORT:12201}" />
+                    <property name="version" value="${env.GELF_VERSION:1.0}" />
+                    <property name="originHost" value="${env.GELF_ORIGIN_HOST}" />
                     <property name="extractStackTrace" value="${env.GELF_EXTRACT_STACK_TRACE:true}" />
                     <property name="filterStackTrace" value="${env.GELF_FILTER_STACK_TRACE:true}" />
+                    <property name="includeLocation" value="${env.GELF_INCLUDE_LOCATION:true}" />
+                    <property name="includeLogMessageParameters" value="${env.GELF_INCLUDE_LOG_MESSAGE_PARAMETERS:true}" />
+                    <property name="maximumMessageSize" value="${env.GELF_MAXIMUM_MESSAGE_SIZE:8192}" />
+                    <property name="timestampPattern" value="${env.GELF_TIMESTAMP_PATTERN:yyyy-MM-dd HH:mm:ss,SSS}" />
                     <property name="facility" value="${env.GELF_FACILITY:wildfly}" />
                 </properties>
             </custom-handler>
