@@ -433,6 +433,18 @@ Enables host DNS lookup of peer address by Wildfly Undertow servlet container
 
 Hostname/IP-Address of the Logstash host. Required for emitting system logs to [Logstash](https://www.elastic.co/products/logstash).
 
+#### `LOGSTASH_PORT`
+
+Port of the Logstash. (optional, default is `12201`).
+
+#### `GELF_VERSION`
+
+GELF Version `1.0` or `1.1`, (optional, default `1.0`).
+
+#### `GELF_ORIGIN_HOST`
+
+Originating Hostname, (optional, default FQDN Hostname).
+
 #### `GELF_FACILITY`
 
 Name of the Facility (optional, default is `wildfly`).
@@ -448,6 +460,23 @@ Indicates if the Stack-Trace shall be sent in the StackTrace field (optional, de
 #### `GELF_FILTER_STACK_TRACE`
 
 Indicates if Stack-Trace filtering shall be performed (optional, default is `true`).
+
+#### `GELF_INCLUDE_LOCATION`
+
+Indicates if the source code location shall be included (optional, default is `true`).
+
+#### `GELF_INCLUDE_LOG_MESSAGE_PARAMETERS`
+
+Indicates if message parameters from the log event shall be included (optional, default is `true`).
+
+#### `GELF_MAXIMUM_MESSAGE_SIZE`
+
+Maximum message size (in bytes). If the message size is exceeded, the appender will submit the message in multiple chunks.
+(optional, default is `8192`).
+
+#### `GELF_TIMESTAMP_PATTERN`
+
+Date/time pattern for the Time field (optional, default is `yyyy-MM-dd HH:mm:ss,SSS`).
 
 ## Deploy additional application(s)
 
