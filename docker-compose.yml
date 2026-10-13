@@ -1,6 +1,6 @@
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.6.14-35.2
+    image: dcm4che/slapd-dcm4chee:2.6.15-35.2
     ports:
       - "389:389"
       - "636:636"
