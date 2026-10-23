@@ -435,7 +435,7 @@
                 <jacc-policy/>
             </policy>
         </subsystem>
-        <subsystem xmlns="urn:wildfly:elytron-oidc-client:2.0">
+        <subsystem xmlns="urn:wildfly:elytron-oidc-client:community:2.0">
             <secure-deployment name="dcm4chee-arc-ui2-5.35.2-secure.war">
                 <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
                 <public-client>true</public-client>
