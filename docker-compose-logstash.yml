@@ -1,6 +1,6 @@
 services:
   elasticsearch:
-    image: elasticsearch:8.15.1
+    image: elasticsearch:8.19.23
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       http.cors.enabled: "true"
@@ -20,7 +20,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/esdatadir:/usr/share/elasticsearch/data
   kibana:
-    image: kibana:8.15.1
+    image: kibana:8.19.23
     logging:
       driver: json-file
       options:
@@ -33,7 +33,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
   logstash:
-    image: dcm4che/logstash-dcm4chee:8.15.1-18
+    image: dcm4che/logstash-dcm4chee:8.19.23-21
     logging:
       driver: json-file
       options:
