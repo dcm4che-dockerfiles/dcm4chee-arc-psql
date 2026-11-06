@@ -1,6 +1,6 @@
 services:
   ldap:
-    image: dcm4che/slapd-dcm4chee:2.6.15-35.2
+    image: dcm4che/slapd-dcm4chee:2.6.15-36.0
     ports:
       - "389:389"
       - "636:636"
@@ -51,7 +51,7 @@ services:
       - /var/local/dcm4chee-arc/keycloak-quarkus:/opt/keycloak/lib/quarkus
       - /var/local/dcm4chee-arc/keycloak-themes:/opt/keycloak/themes
   db:
-    image: dcm4che/postgres-dcm4chee:17.11-35
+    image: dcm4che/postgres-dcm4chee:18.6-36
     ports:
       - "5432:5432"
     environment:
@@ -61,9 +61,9 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
-      - /var/local/dcm4chee-arc/db:/var/lib/postgresql/data
+      - /var/local/dcm4chee-arc/psql-18:/var/lib/postgresql/18/docker
   arc:
-    image: dcm4che/dcm4chee-arc-psql:5.35.2-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.36.0-secure-ui
     ports:
       - "8080:8080"
       - "8443:8443"
@@ -95,7 +95,7 @@ services:
       - /var/local/dcm4chee-arc/wildfly:/opt/wildfly/standalone
       - /var/local/dcm4chee-arc/storage:/storage
   ui:
-    image: dcm4che/dcm4chee-arc-psql:5.35.2-secure-ui
+    image: dcm4che/dcm4chee-arc-psql:5.36.0-secure-ui
     ports:
       - "18080:18080"
       - "18443:18443"
