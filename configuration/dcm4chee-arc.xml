@@ -425,7 +425,32 @@
                 <jacc-policy/>
             </policy>
         </subsystem>
+<<<<<<< HEAD
         <subsystem xmlns="urn:wildfly:elytron-oidc-client:community:2.0"/>
+=======
+        <subsystem xmlns="urn:wildfly:elytron-oidc-client:community:2.0">
+            <secure-deployment name="dcm4chee-arc-ui2-5.36.0-secure.war">
+                <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
+                <public-client>true</public-client>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <client-id>${env.UI_CLIENT_ID:dcm4chee-arc-ui}</client-id>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
+            </secure-deployment>
+            <secure-deployment name="dcm4chee-arc-war-5.36.0-secure.war">
+                <provider-url>${env.AUTH_SERVER_URL:https://keycloak:8443}/realms/${env.REALM_NAME:dcm4che}</provider-url>
+                <bearer-only>true</bearer-only>
+                <ssl-required>${env.SSL_REQUIRED:external}</ssl-required>
+                <client-id>${env.RS_CLIENT_ID:dcm4chee-arc-rs}</client-id>
+                <truststore>${env.TRUSTSTORE}</truststore>
+                <truststore-password>${env.TRUSTSTORE_PASSWORD}</truststore-password>
+                <allow-any-hostname>${env.ALLOW_ANY_HOSTNAME:true}</allow-any-hostname>
+                <disable-trust-manager>${env.DISABLE_TRUST_MANAGER:false}</disable-trust-manager>
+            </secure-deployment>
+        </subsystem>
+>>>>>>> 2a27c03 (Increment version to 5.36.0)
         <subsystem xmlns="urn:wildfly:health:1.0" security-enabled="false"/>
         <subsystem xmlns="urn:jboss:domain:infinispan:17.0">
             <cache-container name="hibernate" modules="org.infinispan.hibernate-cache" marshaller="JBOSS">
