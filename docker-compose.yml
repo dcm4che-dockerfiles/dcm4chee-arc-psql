@@ -12,7 +12,7 @@ services:
       - /var/local/dcm4chee-arc/ldap:/var/lib/openldap/openldap-data
       - /var/local/dcm4chee-arc/slapd.d:/etc/openldap/slapd.d
   mariadb:
-    image: mariadb:10.11.4
+    image: mariadb:13.0.2
     environment:
       MYSQL_ROOT_PASSWORD: secret
       MYSQL_DATABASE: keycloak
@@ -23,7 +23,7 @@ services:
       - /etc/timezone:/etc/timezone:ro
       - /var/local/dcm4chee-arc/mysql:/var/lib/mysql
   keycloak:
-    image: dcm4che/keycloak:25.0.6
+    image: dcm4che/keycloak:26.8.2
     ports:
        - "8843:8843"
     environment:
