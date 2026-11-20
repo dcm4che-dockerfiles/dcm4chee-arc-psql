@@ -33,7 +33,7 @@ file_env 'WILDFLY_ADMIN_USER'
 file_env 'WILDFLY_ADMIN_PASSWORD'
 
 # Append '?' in the beginning of the string if POSTGRES_JDBC_PARAMS value isn't empty
-POSTGRES_JDBC_PARAMS=$(echo ${POSTGRES_JDBC_PARAMS} | sed '/^$/! s/^/?/')
+export POSTGRES_JDBC_PARAMS=$(echo ${POSTGRES_JDBC_PARAMS} | sed '/^$/! s/^/?/')
 
 if [ "$WILDFLY_DEPLOY_UI" = 'false' ]; then
 	WILDFLY_DEPLOYMENTS="dcm4chee-arc-ear-${DCM4CHEE_ARC_VERSION}-psql.ear"
